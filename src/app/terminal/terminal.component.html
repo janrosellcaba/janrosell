@@ -1,0 +1,82 @@
+<div class="terminal-page-wrapper">
+  <div class="page-nav-controls">
+    <button class="nav-button theme-toggle-page" (click)="toggleTerminalTheme()"
+      [attr.aria-label]="navCtrl_themeToggle_ariaLabel">
+      <span class="material-symbols-outlined icon-sun"
+        [style.display]="currentTheme === 'light' ? 'none' : 'inline-block'">light_mode</span>
+      <span class="material-symbols-outlined icon-moon"
+        [style.display]="currentTheme === 'dark' ? 'none' : 'inline-block'">dark_mode</span>
+    </button>
+    <button class="nav-button home-button-page" (click)="navigateToHome()" [attr.aria-label]="navCtrl_home_ariaLabel">
+      <span class="material-symbols-outlined">home</span>
+    </button>
+  </div>
+
+  <div class="terminal-page-container">
+    <div class="terminal-window">
+      <div class="terminal-titlebar">
+        <div class="titlebar-placeholder"></div>
+        <div class="titlebar-title">{{ terminalTitle }}</div> <!-- Recorda que terminalTitle ara és 'user' -->
+        <div class="titlebar-placeholder"></div>
+      </div>
+
+      <div class="terminal-content" (click)="focusInput()">
+        <div class="commands-container" #commandsContainer>
+          @for (cmd of commandsDisplay; track cmd.id) {
+            @if (cmd.isHelpIntro) {
+              <div class="command-output help-intro">Type 'help' to see all available commands.</div>
+            } @else {
+              @if(cmd.showPrompt) {
+                <div class="command-line">
+                  <span class="prompt">
+                    <span class="prompt-user-display">{{ promptUser }}</span><!--
+                    --><span class="prompt-symbol-display">{{ promptSymbol }}</span>
+                    <!-- NO HI HA PROMPT-SPACER AQUÍ -->
+                  </span>
+                  <!-- L'espai entre prompt i input es gestionarà amb CSS -->
+                  <span class="command-input-text">{{ cmd.input }}</span>
+                </div>
+              }
+              @if (cmd.output) {
+                <div class="command-output">{{ cmd.output }}</div>
+              }
+              @if (cmd.isLink && cmd.linkUrl && cmd.linkText) {
+                <div class="command-output link">
+                  <a [href]="cmd.linkUrl" target="_blank" rel="noopener noreferrer">{{ cmd.linkText }}</a>
+                </div>
+              }
+              @if (cmd.isHelpCommands) {
+                <div class="command-output help-grid">
+                  @for(helpCmd of getHelpCommandsList(); track helpCmd) {
+                    <span class="help-command">{{ helpCmd }}</span>
+                  }
+                </div>
+              }
+            }
+          }
+          <!-- Línia d'entrada actual -->
+          <div class="command-line current-input-line">
+            <span class="prompt">
+              <span class="prompt-user-display">{{ promptUser }}</span><!--
+              --><span class="prompt-symbol-display">{{ promptSymbol }}</span>
+              <!-- NO HI HA PROMPT-SPACER AQUÍ -->
+            </span>
+            <input
+              #commandInputRef
+              type="text"
+              class="command-input-field"
+              [(ngModel)]="commandInput"
+              (keyup.enter)="onInput()"
+              (keydown.tab)="$event.preventDefault()"
+              autofocus
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
