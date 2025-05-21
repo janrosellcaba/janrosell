@@ -309,8 +309,7 @@ $breakpoint-xl: 1200px;
     transform: translateX(-50%);
     z-index: 10;
     opacity: 0;
-    user-select: none;
-    pointer-events: none;
+    cursor: pointer;
 
     @media (min-width: $breakpoint-md) {
         bottom: 2rem;

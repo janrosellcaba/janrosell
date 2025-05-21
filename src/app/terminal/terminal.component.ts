@@ -60,7 +60,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
       ['email', (): CommandFunctionResult => ({ type: 'link', url: 'mailto:jan@janrosell.com', text: 'jan@janrosell.com' })],
       ['location', "Barcelona, Catalonia, Spain."],
       ['birthday', "July 29th, 2004."],
-      ['languages', "Catalan (Native)\nSpanish (Native)\nEnglish (C1)"],
+      ['languages', "Catalan (Native)\nEnglish (C1)\nSpanish (Native)"],
 
       // --- Professional i Acadèmic ---
       ['studies', "Currently pursuing a Bachelor's Degree in Computer Science Engineering at FIB, UPC. Specializing in Software Engineering."],
