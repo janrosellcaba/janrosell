@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   aboutMe_paragraph2_field = "Project Management";
   aboutMe_paragraph2_part2 = "provides a complementary perspective to technical training, especially in aligning technology with strategic outcomes and efficient collaboration.";
 
-  aboutMe_formenteraMention = "Born and based in Barcelona, with a mindset shaped by both engineering rigor and a practical drive to create meaningful, lasting solutions.";
+  aboutMe_formenteraMention = "Born and based in Barcelona, with three years spent living in Ireland, bringing a mindset shaped by engineering rigor and a hands-on drive to craft meaningful, lasting solutions.";
 
 
   // Technologies Section
@@ -59,10 +59,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   tech_category1_title = "Backend & Data";
   tech_category1_skills = [
     "C, C++",
-    "Python (FastAPI)",
+    "Python",
     "Java",
     "R",
-    "SQL (PostgreSQL, MySQL, Oracle)",
+    "SQL (PostgreSQL, Oracle)",
     "RESTful API Design",
     "Data Structures & Algorithms",
     "UML"
@@ -86,11 +86,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     "Git, GitHub, GitLab",
     "Linux & Shell Scripting",
     "Docker",
-    "Yocto Project",
+    "Yocto",
     "Agile Methodologies (Scrum)",
-    "Analytical Problem-Solving"
+    "Analytical Problem-Solving",
+    "English (C1), Catalan & Spanish (Native)",
   ];
-
 
   // Experience & Education Section
   expEdu_title = "Experience_&_Education";
