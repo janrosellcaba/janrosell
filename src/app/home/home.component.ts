@@ -96,18 +96,32 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   expEdu_title = "Experience_&_Education";
   expEdu_items = [
     {
+      id: 0,
+      title: "Co-founder & CEO",
+      organization: "Express My Health",
+      date: "Feb 2025 - Present",
+      detailsType: "list",
+      details: [
+        "Lead the technical vision, architecture and development of a secure assistive communication platform.",
+        "Drive strategic decisions, product design and innovation aligned with user needs and clinical feedback.",
+        "Coordinate client meetings, user testing, and partner collaboration to ensure real-world validation and impact.",
+        "Oversee a cross-functional team, define agile processes and ensure scalable, maintainable codebases across services."
+      ],
+      transitionDelay: "0s"
+    },
+    {
       id: 1,
       title: "Software Developer",
       organization: "Lanaccess Telecom",
       date: "Feb 2025 - Present",
       detailsType: "list",
       details: [
-        "Design and develop low-code software applications to optimize business processes.",
-        "Gather and analyze client requirements to create effective technical solutions.",
-        "Work collaboratively in Agile teams to deliver high-quality software iteratively.",
-        "Maintain and improve existing applications ensuring scalability and reliability."
+        "Develop a full-featured web interface for real-time video visualization and device configuration using modern frontend technologies.",
+        "Design and implement backend components including database schemas, API integrations and system logic.",
+        "Take full ownership of the frontend architecture, UI/UX, and client-side logic for complex workflows.",
+        "Integrate intelligent modules into production systems, including people-counting and analytics features."
       ],
-      transitionDelay: "0s"
+      transitionDelay: "0.1s"
     },
     {
       id: 2,
@@ -121,7 +135,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         "Participated in academic projects involving design and implementation of complex systems.",
         "Continually expanding technical knowledge and practical skills through coursework and self-study."
       ],
-      transitionDelay: "0.1s"
+      transitionDelay: "0.2s"
     },
     {
       id: 3,
@@ -135,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         "Organize and participate in events related to technology and security policy.",
         "Facilitate communication between students and EU institutions."
       ],
-      transitionDelay: "0.2s"
+      transitionDelay: "0.3s"
     },
     {
       id: 4,
@@ -149,7 +163,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         "Collaborate with teams to improve support workflows and user experience.",
         "Contribute to reports and presentations on technology trends in security."
       ],
-      transitionDelay: "0.3s"
+      transitionDelay: "0.4s"
     }
   ];
 
