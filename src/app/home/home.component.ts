@@ -130,10 +130,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       date: "Sep 2022 - Est. June 2026",
       detailsType: "list",
       details: [
-        "Specializing in Software Engineering with courses in AI, cybersecurity, and distributed systems.",
-        "Strong foundation in data structures, algorithms, and software development best practices.",
-        "Participated in academic projects involving design and implementation of complex systems.",
-        "Continually expanding technical knowledge and practical skills through coursework and self-study."
+        "Specializing in Software Engineering with a strong foundation in AI, cybersecurity and software development and architecture."
       ],
       transitionDelay: "0.2s"
     },
@@ -144,10 +141,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       date: "Feb 2024 - Jun 2025",
       detailsType: "list",
       details: [
-        "Promote awareness of EU career opportunities among students and recent graduates.",
-        "Conduct research on cybersecurity trends and technological innovation in Europe.",
-        "Organize and participate in events related to technology and security policy.",
-        "Facilitate communication between students and EU institutions."
+        "Promote EU career opportunities to university community through events and student outreach."
       ],
       transitionDelay: "0.3s"
     },
@@ -158,10 +152,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       date: "Feb 2024 - Feb 2025",
       detailsType: "list",
       details: [
-        "Provide technical support for alumni projects and initiatives.",
-        "Analyze cybersecurity challenges and their implications for modern technology.",
-        "Collaborate with teams to improve support workflows and user experience.",
-        "Contribute to reports and presentations on technology trends in security."
+        "Provided technical support and contributed to analysis and organization of events."
       ],
       transitionDelay: "0.4s"
     }
