@@ -123,9 +123,12 @@
   <section class="content-section" id="contact">
     <h2 class="contact-heading reveal-on-scroll">{{ contact_heading_line1 }}<br>{{ contact_heading_line2 }}</h2>
     <p class="contact-subheading reveal-on-scroll">{{ contact_subheading }}</p>
+
     <a [href]="'mailto:' + contact_email" class="contact-email-link reveal-on-scroll">
-      {{ contact_email }}
+      jan&#64;janrosell.com
+      <!-- {{ contact_email }} -->
     </a>
+    
     <div class="contact-socials reveal-on-scroll" style="transition-delay: 0.1s;">
       <a [attr.href]="contact_social_github_url" target="_blank" rel="noopener noreferrer">{{ contact_social_github
         }}</a>
