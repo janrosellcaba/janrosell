@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, Renderer2, Inject, HostListener, PLATFORM_ID } from '@angular/core';
-import { DOCUMENT, CommonModule, isPlatformBrowser } from '@angular/common'; // Importat CommonModule
+import { Component, OnInit, OnDestroy, AfterViewInit, Renderer2, Inject, HostListener, PLATFORM_ID, DOCUMENT } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common'; // Importat CommonModule
 import { Router, RouterOutlet } from '@angular/router';
 import { AnalyticsService } from './analytics.service';
 

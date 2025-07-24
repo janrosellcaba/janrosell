@@ -4,7 +4,8 @@
     [attr.aria-expanded]="isNavOverlayOpen" aria-controls="navOverlay">
     <span class="nav-toggle-icon"></span>
   </button>
-  <button class="nav-button theme-toggle" (click)="toggleTheme()" [attr.aria-label]="navCtrl_themeToggle_ariaLabel">
+  <button class="nav-button theme-toggle" (click)="toggleTheme()" [attr.aria-label]="navCtrl_themeToggle_ariaLabel"
+    [attr.aria-pressed]="currentTheme === 'dark'">
     <span class="material-symbols-outlined icon-sun">light_mode</span>
     <span class="material-symbols-outlined icon-moon">dark_mode</span>
   </button>
@@ -39,8 +40,9 @@
       {{ intro_subtitle_institution1 }}.
       <span class="comment-like">{{ intro_subtitle_comment }}</span>
     </p>
-    <div class="scroll-down-indicator reveal-on-scroll" style="transition-delay: 0.6s;" (click)="scrollToSection('about-me')">
-      <span class="material-symbols-outlined" >south</span>
+    <div class="scroll-down-indicator reveal-on-scroll" style="transition-delay: 0.6s;"
+      (click)="scrollToSection('about-me')">
+      <span class="material-symbols-outlined">south</span>
     </div>
   </section>
 
@@ -48,7 +50,8 @@
     <div class="content-wrapper">
       <h2 class="about-me-heading reveal-on-scroll">{{ aboutMe_heading }}</h2>
       <div class="about-me-text reveal-on-scroll">
-        <p>{{ aboutMe_paragraph1_part1 }} <strong>{{ aboutMe_paragraph1_institution }}</strong> {{
+        <p>As <strong>{{ aboutMe_paragraph0_institution }}</strong> {{ aboutMe_paragraph0_part0 }}, a {{
+          aboutMe_paragraph1_part1 }} <strong>{{ aboutMe_paragraph1_institution }}</strong> {{
           aboutMe_paragraph1_part2 }} <strong>{{ aboutMe_paragraph1_role }}</strong> {{ intro_subtitle_at }} {{
           aboutMe_paragraph1_company }}{{ aboutMe_paragraph1_part3 }}</p>
         <p>{{ aboutMe_paragraph2_part1 }} <strong>{{ aboutMe_paragraph2_field }}</strong> {{ aboutMe_paragraph2_part2 }}
@@ -135,3 +138,38 @@
 <footer class="site-footer">
   <p>© {{ currentYear }} {{ footer_text_part1 }}</p>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jan Rosell Caba",
+  "jobTitle": "Co-founder & CEO",
+  "url": "https://www.janrosell.com",
+  "image": "https://www.janrosell.com/image.png",
+  "sameAs": [
+    "https://www.linkedin.com/in/janrosell/",
+    "https://github.com/janrosellcaba"
+  ],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Universitat Politècnica de Catalunya (UPC) - Facultat d'Informàtica de Barcelona (FIB)"
+  },
+  "worksFor": [
+    {
+      "@type": "Organization",
+      "name": "Express My Health"
+    },
+    {
+      "@type": "Organization",
+      "name": "Lanaccess"
+    }
+  ],
+  "knowsAbout": ["Software Engineering", "Angular", "Python", "C++", "Artificial Intelligence", "Cybersecurity", "Project Management"],
+  "description": "Software Developer and Computer Science Engineering Student passionate about technology. Co-founder & CEO of Express My Health.",
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Express My Health"
+  }
+}
+</script>

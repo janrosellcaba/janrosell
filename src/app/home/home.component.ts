@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, Renderer2, Inject, HostListener, PLATFORM_ID, ElementRef } from '@angular/core';
-import { DOCUMENT, CommonModule, isPlatformBrowser } from '@angular/common'; // Importat CommonModule
+import { Component, OnInit, OnDestroy, AfterViewInit, Renderer2, Inject, HostListener, PLATFORM_ID, ElementRef, DOCUMENT } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common'; // Importat CommonModule
 import { Router, RouterOutlet } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -28,10 +29,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   // Intro Section
   intro_name_jan = "Jan";
   intro_name_rosell = "Rosell";
-  intro_subtitle_highlight1 = "Software Developer";
+  intro_subtitle_highlight1 = "Co-founder & CEO";
   intro_subtitle_at = "at";
-  intro_subtitle_company1 = "Lanaccess";
-  intro_subtitle_and = "&";
+  intro_subtitle_company1 = "Express My Health";
+  intro_subtitle_and = "and";
   intro_subtitle_highlight2 = "Computer Science Engineering Student";
   intro_subtitle_institution1 = "FIB, UPC";
   intro_subtitle_comment = "Exploring modern computing to deliver thoughtful software solutions with purpose and precision.";
@@ -39,12 +40,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   // About Me Section
   aboutMe_heading = "About Jan";
 
+  aboutMe_paragraph0_part0 = "at Express My Health";
+  aboutMe_paragraph0_institution = "Co-founder & CEO";
+
   aboutMe_paragraph1_part1 = "Computer Science Engineering student at";
   aboutMe_paragraph1_institution = "FIB (UPC)";
-  aboutMe_paragraph1_part2 = "and";
+  aboutMe_paragraph1_part2 = "and a";
   aboutMe_paragraph1_role = "Software Developer";
   aboutMe_paragraph1_company = "Lanaccess";
-  aboutMe_paragraph1_part3 = ", focused on building robust, well-designed software systems. Driven by curiosity, with a particular interest in understanding complex systems and solving challenging problems.";
+  aboutMe_paragraph1_part3 = ", I am focused on building robust, well-designed software systems. Driven by curiosity, with a particular interest in understanding complex systems and solving challenging problems.";
 
   aboutMe_paragraph2_part1 = "A growing interest in";
   aboutMe_paragraph2_field = "Project Management";
@@ -190,36 +194,32 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
     private elRef: ElementRef,
+    private titleService: Title,
+    private metaService: Meta,
   ) {
-    this.isBrowser = isPlatformBrowser(this.platformId); // Comprovació si estem al navegador
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   ngOnInit(): void {
-    if (this.isBrowser) { // Només executa lògica de client al navegador
+    this.titleService.setTitle('Jan Rosell - Co-founder & CEO at Express my Health | Software Developer');
+
+    this.metaService.updateTag({
+      name: 'description',
+      content: 'Personal portfolio of Jan Rosell, Co-founder & CEO at Express my Health, Software Developer, and Computer Science Engineering student at UPC-FIB. Discover my projects, experience, and skills in Angular, Python, and C++.'
+    });
+    if (this.isBrowser) {
+      // Tota la lògica que depèn del navegador va aquí dins
       this.initializeTheme();
       this.setupPrefersColorSchemeListener();
     }
   }
 
-  // ngAfterViewInit(): void {
-  //   if (this.isBrowser) {
-  //     this.initializeScrollAnimations();
-  //     // Assegurem que s'actualitza després que el tema inicial s'apliqui
-  //     this.updateHighlightBackgroundColorRGB();
-  //   }
-  // }
-
   ngAfterViewInit(): void {
     if (this.isBrowser) {
-      // En comptes de cridar directament:
-      // this.initializeScrollAnimations();
-
-      // Prova amb un petit retard per assegurar que el DOM està completament llest.
-      // Això és un "hack", però pot ajudar a diagnosticar si és un problema de timing.
+      // L'IntersectionObserver també ha d'estar protegit
       setTimeout(() => {
         this.initializeScrollAnimations();
-        // this.updateHighlightBackgroundColorRGB(); // També pots moure aquesta aquí si sospites d'ella
-      }, 100); // Prova amb 100ms, o fins i tot una mica més per a la prova
+      }, 100);
     }
   }
 
@@ -250,23 +250,23 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   applyTheme(theme: 'light' | 'dark'): void {
-    this.currentTheme = theme;
-    if (theme === 'dark') {
-      this.renderer.addClass(this.document.body, 'dark-theme');
-    } else {
-      this.renderer.removeClass(this.document.body, 'dark-theme');
+    if (this.isBrowser) {
+      this.currentTheme = theme;
+      if (theme === 'dark') {
+        this.renderer.addClass(this.document.body, 'dark-theme');
+      } else {
+        this.renderer.removeClass(this.document.body, 'dark-theme');
+      }
     }
-    // Crida DESPRÉS d'aplicar la classe del tema
-    // this.updateHighlightBackgroundColorRGB();
   }
 
   toggleTheme(): void {
-    const newTheme = this.document.body.classList.contains('dark-theme') ? 'light' : 'dark';
-    this.applyTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    if (this.isBrowser) {
+      const newTheme = this.document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+      this.applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
   }
-
-
 
   setupPrefersColorSchemeListener(): void {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

@@ -1,8 +1,9 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, HostListener, OnInit, OnDestroy, Renderer2, Inject } from '@angular/core';
-import { DOCUMENT, CommonModule } from '@angular/common';
+import { Component, ViewChild, ElementRef, AfterViewInit, HostListener, OnInit, OnDestroy, Renderer2, Inject, DOCUMENT, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router'; // RouterLink ja estava a la teva plantilla, l'afegeixo als imports per si de cas
 import { Subscription } from 'rxjs'; // Encara que no s'utilitza ara, és bona pràctica tenir-la si hi ha subscripcions
+import { Meta, Title } from '@angular/platform-browser';
 
 // Tipus per a la sortida de les funcions de comanda
 type CommandFunctionResult = { type: 'link'; url: string; text: string } | void | string;
@@ -42,6 +43,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   navCtrl_home_ariaLabel = "Go to Home page";
   navCtrl_themeToggle_ariaLabel = "Change theme";
+  private isBrowser: boolean; // Declara la propietat
 
   currentTheme: 'light' | 'dark' = 'light';
   private prefersDarkSchemeListener: ((this: MediaQueryList, ev: MediaQueryListEvent) => any) | null = null;
@@ -50,8 +52,12 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private titleService: Title,
+    private metaService: Meta,
   ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.availableCommands = new Map<string, string | CommandHandlerFunction>([
       // --- Informació Personal Bàsica ---
       ['name', "Jan Rosell"],
@@ -65,7 +71,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
       // --- Professional i Acadèmic ---
       ['studies', "Currently pursuing a Bachelor's Degree in Computer Science Engineering at FIB, UPC. Specializing in Software Engineering."],
       ['education', () => this.showEducationDetails()], // !!!
-      ['job', "Software Developer at Lanaccess."],
+      ['job', "CEO at Express My Health & Software Developer at Lanaccess."],
       ['experience', () => this.showExperienceSummary()], // !!!
       ['cv', (): CommandFunctionResult => ({ type: 'link', url: 'src/assets/Jan_Rosell_CV.pdf', text: 'Download CV (PDF)' })], // !!!
       ['resume', "A dedicated developer with experience in full-stack development, project managing, and a keen interest in embedded systems. Quick learner, team player, and problem solver. For more details, type 'cv' or 'experience'."],
@@ -104,14 +110,24 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Interactive Terminal - Jan Rosell');
+
+    this.metaService.updateTag({
+      name: 'description',
+      content: 'Explore my skills, experience, and projects through this interactive terminal. A unique feature of Jan Rosell\'s portfolio, built with Angular.'
+    });
     this.commandsDisplay.push({ id: Date.now(), input: '', isHelpIntro: true, showPrompt: false });
-    this.initializeTerminalTheme();
-    this.setupPrefersColorSchemeListenerForTerminal();
+    if (isPlatformBrowser(this.platformId)) { // Utilitza la dependència injectada
+      this.initializeTerminalTheme();
+      this.setupPrefersColorSchemeListenerForTerminal();
+    }
   }
 
   ngAfterViewInit(): void {
-    this.focusInput();
-    this.scrollToBottom();
+    if (this.isBrowser) { // Afegeix la comprovació aquí
+      this.focusInput();
+      this.scrollToBottom();
+    }
   }
 
   initializeTerminalTheme(): void {
@@ -131,19 +147,22 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   applyThemeToBody(theme: 'light' | 'dark'): void {
-    this.currentTheme = theme;
-    if (theme === 'dark') {
-      this.renderer.addClass(this.document.body, 'dark-theme');
-    } else {
-      this.renderer.removeClass(this.document.body, 'dark-theme');
+    if (isPlatformBrowser(this.platformId)) { // Afegeix la comprovació
+      this.currentTheme = theme;
+      if (theme === 'dark') {
+        this.renderer.addClass(this.document.body, 'dark-theme');
+      } else {
+        this.renderer.removeClass(this.document.body, 'dark-theme');
+      }
     }
-    // updateTerminalHighlightColors(); // Si tens aquesta funció i és necessària
   }
 
   toggleTerminalTheme(): void {
-    const newTheme = this.document.body.classList.contains('dark-theme') ? 'light' : 'dark';
-    this.applyThemeToBody(newTheme);
-    localStorage.setItem('theme', newTheme);
+    if (isPlatformBrowser(this.platformId)) { // Afegeix la comprovació
+      const newTheme = this.document.body.classList.contains('dark-theme') ? 'light' : 'dark';
+      this.applyThemeToBody(newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
   }
 
   setupPrefersColorSchemeListenerForTerminal(): void {
@@ -339,17 +358,21 @@ For more detailed experience, please see my LinkedIn profile (type 'linkedin') o
   // --- Fi Funcions Helper ---
 
   private scrollToBottom(): void {
-    requestAnimationFrame(() => {
-      if (this.commandsContainer) {
-        this.commandsContainer.nativeElement.scrollTop = this.commandsContainer.nativeElement.scrollHeight;
-      }
-    });
+    if (this.isBrowser) { // Comprovació addicional per seguretat
+      requestAnimationFrame(() => {
+        if (this.commandsContainer) {
+          this.commandsContainer.nativeElement.scrollTop = this.commandsContainer.nativeElement.scrollHeight;
+        }
+      });
+    }
   }
 
   public focusInput(): void {
-    requestAnimationFrame(() => {
-      this.commandInputRef?.nativeElement?.focus();
-    });
+    if (this.isBrowser) { // Afegeix la comprovació aquí també
+      requestAnimationFrame(() => {
+        this.commandInputRef?.nativeElement?.focus();
+      });
+    }
   }
 
   navigateToHome(): void {
