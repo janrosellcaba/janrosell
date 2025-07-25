@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy, AfterViewInit, Renderer2, Inject, HostLis
 import { CommonModule, isPlatformBrowser } from '@angular/common'; // Importat CommonModule
 import { Router, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
+import { map, Observable, shareReplay } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -56,9 +58,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   aboutMe_formenteraMention = "Born and based in Barcelona, with three years spent living in Ireland, bringing a mindset shaped by engineering rigor and a hands-on drive to craft meaningful, lasting solutions.";
 
-
+  
   // Technologies Section
-  tech_mainTitle = "Technologies";
+  public tech_mainTitle$: Observable<string>;
   tech_subtitle = "The tools and languages I use to build and innovate in the digital world.";
   tech_category1_title = "Backend & Data";
   tech_category1_skills = [
@@ -196,8 +198,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private elRef: ElementRef,
     private titleService: Title,
     private metaService: Meta,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+     const isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+      .pipe(
+        map(result => result.matches),
+        shareReplay() // Caches the last value for new subscribers
+      );
+
+    // Use the result of the breakpoint check to map to our desired strings
+    this.tech_mainTitle$ = isHandset$.pipe(
+      map(isHandset => isHandset ? 'Techs' : 'Technologies')
+    );
   }
 
   ngOnInit(): void {
