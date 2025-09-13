@@ -836,3 +836,21 @@ $breakpoint-xl: 1200px;
         }
     }
 }
+
+.blog-link {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    color: var(--text-secondary); /* Subtler color */
+    
+    &:hover {
+        color: var(--text-highlight-blue) !important; /* Ensure hover color applies */
+    }
+
+    @media (min-width: $breakpoint-md) {
+        font-size: 1rem;
+    }
+}

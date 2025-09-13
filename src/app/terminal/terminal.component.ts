@@ -25,7 +25,7 @@ interface CommandOutput {
 @Component({
   selector: 'app-terminal',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Afegit RouterLink
+  imports: [CommonModule, FormsModule, RouterLink], // Afegit RouterLink
   templateUrl: './terminal.component.html',
   styleUrls: ['./terminal.component.scss']
 })
@@ -42,6 +42,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   promptSymbol: string = '$';
 
   navCtrl_home_ariaLabel = "Go to Home page";
+  navCtrl_blog_ariaLabel = "Go to Blog";
   navCtrl_themeToggle_ariaLabel = "Change theme";
   private isBrowser: boolean; // Declara la propietat
 

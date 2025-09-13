@@ -10,10 +10,13 @@
     <span class="material-symbols-outlined icon-moon">dark_mode</span>
   </button>
 
+
   <button class="nav-button terminal-toggle" (click)="navigateToTerminal()"
     [attr.aria-label]="navCtrl_terminal_ariaLabel">
     <span class="material-symbols-outlined">terminal</span>
   </button>
+  
+  <a routerLink="/blog" class="nav-button blog-link" [attr.aria-label]="navCtrl_blog_ariaLabel">Blog</a>
 </div>
 
 <nav class="nav-overlay" id="navOverlay" [class.open]="isNavOverlayOpen" (click)="onNavOverlayClick($event)">
@@ -128,7 +131,7 @@
       jan&#64;janrosell.com
       <!-- {{ contact_email }} -->
     </a>
-    
+
     <div class="contact-socials reveal-on-scroll" style="transition-delay: 0.1s;">
       <a [attr.href]="contact_social_github_url" target="_blank" rel="noopener noreferrer">{{ contact_social_github
         }}</a>

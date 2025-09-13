@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Renderer2, Inject, HostListener, PLATFORM_ID, ElementRef, DOCUMENT } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common'; // Importat CommonModule
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { map, Observable, shareReplay } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -9,7 +9,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   // --- Variables de Text ---
   // Nav Controls
   navCtrl_terminal_ariaLabel = "Open Terminal";
+  navCtrl_blog_ariaLabel = "Go to Blog";
   navCtrl_themeToggle_ariaLabel = "Change theme";
   navCtrl_navToggle_ariaLabel = "Navigation menu";
 

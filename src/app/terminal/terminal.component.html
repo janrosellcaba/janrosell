@@ -1,5 +1,6 @@
 <div class="terminal-page-wrapper">
   <div class="page-nav-controls">
+    <a routerLink="/blog" class="nav-button blog-link" [attr.aria-label]="navCtrl_blog_ariaLabel">Blog</a>
     <button class="nav-button theme-toggle-page" (click)="toggleTerminalTheme()"
       [attr.aria-label]="navCtrl_themeToggle_ariaLabel">
       <span class="material-symbols-outlined icon-sun"
@@ -7,6 +8,8 @@
       <span class="material-symbols-outlined icon-moon"
         [style.display]="currentTheme === 'dark' ? 'none' : 'inline-block'">dark_mode</span>
     </button>
+
+
     <button class="nav-button home-button-page" (click)="navigateToHome()" [attr.aria-label]="navCtrl_home_ariaLabel">
       <span class="material-symbols-outlined">home</span>
     </button>
