@@ -4,47 +4,122 @@ export interface Post {
   title: string;
   date: string;
   slug: string;
-  content: string; // Content in Markdown format
+  content: string;
   summary: string;
+  readingTime: number;
 }
+
+/**
+ * THE DEFINITIVE SOLUTION
+ * This new helper function reliably removes leading whitespace from a block of text.
+ * It works by taking the indentation of the first line of content as the "base"
+ * and removing that same amount of space from every subsequent line.
+ * This ensures the Markdown parser sees your text with zero indentation,
+ * allowing it to correctly identify paragraphs, headings, and lists.
+ */
+function correctIndentation(text: string): string {
+  // Split the text into lines
+  const lines = text.split('\n');
+
+  // Remove the very first line if it's empty (due to the opening backtick `)
+  if (lines[0].trim() === '') {
+    lines.shift();
+  }
+
+  if (lines.length === 0) {
+    return '';
+  }
+
+  // Determine the indentation from the first line of actual content
+  const indent = lines[0].match(/^\s*/)?.[0] ?? '';
+
+  if (indent.length > 0) {
+    // Remove the same indentation from all lines
+    return lines.map(line => line.startsWith(indent) ? line.slice(indent.length) : line).join('\n');
+  }
+
+  return text; // Return original text if there's no indentation
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
-  private posts: Post[] = [
+  private postsData = [
     {
-      title: "Why Angular for My Portfolio? A Developer's Choice",
-      date: '2025-09-15',
-      slug: 'why-angular-for-my-portfolio',
-      summary: 'A deep dive into the technical reasons behind choosing Angular for my personal website, focusing on its powerful features for a scalable and maintainable single-page application.',
+      title: "Hello, World!",
+      date: '2025-10-04',
+      slug: 'hello-world',
+      summary: " Booting up my new blog. An introduction to my corner of the internet, where I'll be sharing my journey in tech, from the classroom at UPC to the startup grind at Express my Health.",
       content: `
-### The Decision Framework
-When building a personal portfolio, the choice of frontend framework is more than just a technical decision—it's a statement. It showcases your expertise, your design philosophy, and your approach to software engineering. I considered several options, including React and Vue, but ultimately chose Angular for its robust and opinionated nature.
+        If you're reading this, you've found your way to my new corner of the internet. Welcome! My name is **Jan Rosell**, and this website is my digital home — a place to document my work, share my ideas, and connect with others who are passionate about building technology with purpose.
 
-### 1. Structure and Scalability with TypeScript
-Angular's use of TypeScript is a massive advantage. Static typing helps catch errors early in the development process and makes the code more self-documenting. For a project I intend to maintain and expand (like adding this blog!), TypeScript provides the confidence that my codebase will remain clean and scalable.
+        <br />
 
-### 2. A Comprehensive, All-in-One Ecosystem
-Angular is a full-fledged platform, not just a library. It comes with a powerful CLI, a built-in router, an HTTP client, and state management solutions. This integrated ecosystem means less time spent configuring third-party libraries and more time focusing on building features. Everything is designed to work together seamlessly.
+        For a while now, I've been operating in three parallel worlds. In one, I'm a **Computer Science student** at UPC, diving deep into the theory of complex systems. In another, I'm a **Software Developer** at Lanaccess, applying that knowledge to build robust, real-world products. And in the third, I'm the **Co-founder and CEO** of Express My Health, a startup driven by a mission to solve communication barriers in the health world.
+        
+        <br />
 
-### 3. Opinionated Architecture for Consistency
-The "opinionated" nature of Angular is often debated, but I see it as a strength. It enforces a consistent project structure and coding style, which is invaluable for long-term maintenance. Components, services, and modules have clear roles, making the application easier to understand and refactor.
+        This website is my attempt to unify those worlds. It's more than just a portfolio; it's a reflection of my core philosophy:
 
-### 4. Powerful Features for a Modern Web Experience
-My portfolio leverages several of Angular's advanced features:
-- **Server-Side Rendering (SSR) with Angular Universal:** Crucial for SEO and faster initial load times.
-- **Standalone Components:** Simplifying the architecture by reducing the need for NgModules.
-- **Reactive Forms and Animations:** Allowing for complex, interactive user experiences like the terminal feature.
+        > **Building solutions, not just software.**
+        
+        <br />
 
-### Conclusion
-Choosing Angular was a strategic decision. It provided the structure, tooling, and advanced features necessary to build a portfolio that is not only visually appealing but also robust, maintainable, and ready for future expansion. It's a testament to my belief in building things the right way, with purpose and precision.
-      `
-    }
+        You'll notice the site has two distinct sides. The [**homepage**](https://janrosell.com/) is the clean, professional front door. It’s the summary of my skills and experience, designed to give you a clear picture of what I do.
+        
+        <br />
+
+        But if you're like me, you're probably more curious about *how* things work. That's why I built the interactive [**terminal**](https://janrosell.com/terminal). It’s the workshop behind the showroom. It’s a playful, more detailed space where you can dig deeper, run a few commands, and get a feel for my personality beyond a formal CV. It represents the hands-on, problem-solving drive that sits at the heart of everything I build.
+        
+        <br />
+
+        This blog is the next step on that journey. Here, I plan to share what I'm learning as I navigate the intersection of academia, corporate tech, and the startup grind. You can expect to see:
+
+        &nbsp; -   **Technical Deep Dives:** Exploring challenges I'm solving at Express my Health and Lanaccess.
+
+        &nbsp; -   **Startup Stories:** The unfiltered reality of building a company from the ground up while still in university.
+        
+        &nbsp; -   **Productivity & Growth:** How I manage my time, what I'm reading, and the lessons I'm learning along the way.
+
+        <br />
+
+        My goal is to create a space for **fellow builders, curious students, and aspiring founders. A place to share the journey, learn from each other, and navigate the exciting chaos of building new things.**
+
+        <br />
+
+        So, have a look around. Explore the homepage, play with the terminal, and feel free to reach out.
+
+        <br />
+
+        Let's build something great.
+
+        <br />
+
+        — Jan`
+    },
   ];
 
+  private posts: Post[] = [];
+
+  constructor() {
+    this.posts = this.postsData.map(post => {
+      // The new, correct function is applied here.
+      const content = correctIndentation(post.content);
+
+      const wordsPerMinute = 200;
+      // Note: we calculate reading time on the corrected content.
+      const text = content.replace(/<[^>]*>/g, '');
+      const wordCount = text.split(/\s+/).length;
+      const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+      return { ...post, content, readingTime };
+    });
+  }
+
   getPosts(): Post[] {
-    return this.posts;
+    return this.posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
   getPostBySlug(slug: string): Post | undefined {

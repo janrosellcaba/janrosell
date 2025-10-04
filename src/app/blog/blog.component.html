@@ -1,23 +1,13 @@
-<!-- src/app/blog/blog.component.html -->
-
-<div class="page-nav-controls">
-  <button class="nav-button terminal-toggle" (click)="navigateToTerminal()"
-  [attr.aria-label]="navCtrl_terminal_ariaLabel">
-  <span class="material-symbols-outlined">terminal</span>
-</button>
-<button class="nav-button theme-toggle" (click)="toggleTheme()" [attr.aria-label]="navCtrl_themeToggle_ariaLabel"
-[attr.aria-pressed]="currentTheme === 'dark'">
-<span class="material-symbols-outlined icon-sun">light_mode</span>
-<span class="material-symbols-outlined icon-moon">dark_mode</span>
-</button>
-<button class="nav-button home-button-page" (click)="navigateToHome()" [attr.aria-label]="navCtrl_home_ariaLabel">
-  <span class="material-symbols-outlined">home</span>
-</button>
-</div>
+<app-page-nav></app-page-nav>
 
 <div class="blog-container">
   <header class="blog-header">
-    <h1 class="blog-main-title">The Prompt</h1>
+    <div class="blog-main-title-wrapper">
+      <h1 class="blog-main-title">The Journal</h1>
+      @if (posts.length > 0) {
+        <p class="post-count">{{ posts.length }} post{{ posts.length !== 1 ? 's' : '' }}, more coming soon...</p>
+      }
+    </div>
     <p class="blog-subtitle">Thoughts on software, technology, and everything in between.</p>
   </header>
 
@@ -29,10 +19,13 @@
           <p class="post-card-summary">{{ post.summary }}</p>
           <div class="post-card-footer">
             <time [attr.datetime]="post.date" class="post-card-date">{{ post.date | date: 'longDate' }}</time>
-            <span class="post-card-readmore">Read More &rarr;</span>
+            <span class="post-card-meta">{{ post.readingTime }} min read</span>
+            <!-- <span class="post-card-readmore">Read More &rarr;</span> -->
           </div>
         </article>
       </a>
+    } @empty {
+      <p class="no-posts-message">No blog posts published yet. Stay tuned!</p>
     }
   </main>
 

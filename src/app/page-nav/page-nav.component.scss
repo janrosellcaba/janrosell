@@ -1,0 +1,49 @@
+:host {
+  display: block;
+}
+
+.page-nav-controls {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1001;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-direction: row-reverse; // This remains, as it works with the new DOM order
+
+  @media (min-width: 768px) {
+    top: 2.2rem;
+    right: 2.2rem;
+    gap: 0.8rem;
+  }
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  text-decoration: none; // --- ADDED THIS LINE --- to remove the underline from the <a> tag.
+
+  .material-symbols-outlined {
+    font-size: 22px;
+    vertical-align: middle;
+  }
+
+  &:hover {
+    color: var(--text-highlight-blue);
+  }
+
+  @media (min-width: 768px) {
+    padding: 0.5rem;
+    .material-symbols-outlined {
+      font-size: 24px;
+    }
+  }
+}

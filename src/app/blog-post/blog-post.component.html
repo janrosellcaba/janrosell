@@ -1,31 +1,22 @@
-<!-- src/app/blog-post/blog-post.component.html -->
+<div class="reading-progress-bar" [style.width.%]="readingProgress"></div>
 
-<div class="page-nav-controls">
-  <button class="nav-button home-button-page" (click)="navigateToHome()" [attr.aria-label]="navCtrl_home_ariaLabel">
-    <span class="material-symbols-outlined">home</span>
-  </button>
-  <button class="nav-button terminal-toggle" (click)="navigateToTerminal()"
-    [attr.aria-label]="navCtrl_terminal_ariaLabel">
-    <span class="material-symbols-outlined">terminal</span>
-  </button>
-  <button class="nav-button theme-toggle" (click)="toggleTheme()" [attr.aria-label]="navCtrl_themeToggle_ariaLabel"
-    [attr.aria-pressed]="currentTheme === 'dark'">
-    <span class="material-symbols-outlined icon-sun">light_mode</span>
-    <span class="material-symbols-outlined icon-moon">dark_mode</span>
-  </button>
-</div>
+<app-page-nav></app-page-nav>
 
 <div class="post-container">
   @if(post) {
     <article class="post-content">
+      <a routerLink="/blog" class="back-to-blog">&larr; Back to all posts</a>
       <header class="post-header">
         <h1 class="post-title">{{ post.title }}</h1>
-        <p class="post-meta">Published on <time [attr.datetime]="post.date">{{ post.date | date: 'longDate' }}</time></p>
-        <a routerLink="/blog" class="back-to-blog">&larr; Back to all posts</a>
+        <p class="post-meta">
+          Published on <time [attr.datetime]="post.date">{{ post.date | date: 'longDate' }}</time>
+          <span class="meta-separator">&bull;</span>
+          <span>{{ post.readingTime }} min read</span>
+        </p>
       </header>
       <div class="post-body" [innerHTML]="postContent"></div>
     </article>
   } @else {
-    <p>Post not found.</p>
+    <p class="no-posts-message">Post not found.</p>
   }
 </div>

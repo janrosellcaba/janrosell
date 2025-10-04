@@ -5,115 +5,192 @@
   min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.page-nav-controls {
+.reading-progress-bar {
   position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 1001;
-}
-
-.nav-button {
-  background: none;
-  border: none;
-  padding: 0.4rem;
-  cursor: pointer;
-  color: var(--text-primary);
-  &:hover {
-    color: var(--text-highlight-blue);
-  }
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--text-highlight-blue);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
 }
 
 .post-container {
-  max-width: 800px;
+  max-width: 720px;
   margin: 0 auto;
-  padding-top: 4rem;
-  font-family: var(--font-body);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+
+  @media (max-width: 576px) {
+    padding-top: 4rem;
+  }
+}
+
+.post-content {
+  width: 100%;
+}
+
+.back-to-blog {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text-highlight-blue);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 2.5rem;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateX(-4px);
+  }
 }
 
 .post-header {
-  border-bottom: 1px solid var(--accent-line-code);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border-experience-card);
   padding-bottom: 2rem;
-  text-align: center;
 }
 
 .post-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 7vw, 3.5rem);
-  color: var(--text-primary);
-  line-height: 1.2;
+  font-size: clamp(2.2rem, 7vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
 }
 
 .post-meta {
   font-family: var(--font-mono);
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.back-to-blog {
-  display: inline-block;
-  margin-top: 1.5rem;
-  color: var(--text-highlight-blue);
-  text-decoration: none;
-  font-weight: 700;
-  &:hover {
-    text-decoration: underline;
-  }
+.meta-separator {
+  color: var(--accent-line-code);
 }
 
+/* --- START: NEW & IMPROVED ARTICLE STYLES --- */
 .post-body {
-  line-height: 1.8;
+  font-family: var(--font-body);
   font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
 
+  @media (max-width: 576px) {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* NEW: Typography Hierarchy for Headings */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
+    line-height: 1.4;
+    margin-top: 2.5em;
+    margin-bottom: 1.2em;
     color: var(--text-primary);
-    margin-top: 2em;
-    margin-bottom: 1em;
   }
 
-  h3 {
-    font-size: 1.5rem;
-    color: var(--text-highlight-blue);
+  h1 { font-size: 2.2em; }
+  h2 { font-size: 1.8em; }
+  h3 { font-size: 1.4em; }
+
+  /* NEW: VS Code-style border under main headings */
+  h1, h2 {
+    border-bottom: 1px solid var(--border-experience-card);
+    padding-bottom: 0.4em;
   }
 
+  /* ADJUSTED: More space after paragraphs */
   p {
     margin-bottom: 1.5em;
   }
 
+  /* ADJUSTED: Keep link styles consistent */
   a {
     color: var(--text-highlight-blue);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
     &:hover {
-      text-decoration: underline;
+      color: var(--text-primary);
     }
   }
 
-  code {
+  /* ADJUSTED: Better spacing for lists */
+  ul, ol {
+    margin-bottom: 1.5em;
+    padding-left: 2em; /* More indentation */
+  }
+
+  li {
+    margin-bottom: 0.75em; /* Space between list items */
+  }
+
+  /* NEW: Blockquote Styling (like in VS Code) */
+  blockquote {
+    margin: 0 0 1.5em 0;
+    padding: 0.5em 1.2em;
+    border-left: 4px solid var(--accent-line-code);
+    background-color: var(--bg-experience-card);
+    color: var(--text-secondary);
+    font-style: italic;
+
+    p {
+      margin-bottom: 0; /* Remove extra margin for paragraphs inside a blockquote */
+    }
+  }
+
+  /* NEW: Styling for Horizontal Rules (--- in Markdown) */
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-experience-card);
+    margin: 3em 0;
+  }
+
+  /* ADJUSTED: Inline code styles remain the same */
+  :not(pre) > code {
     font-family: var(--font-mono);
     background-color: var(--text-highlight-blue-bg);
-    padding: 0.1em 0.3em;
+    color: var(--text-highlight-blue);
+    padding: 0.2em 0.4em;
     border-radius: 4px;
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
 
-  pre {
-    background-color: #2d2d2d;
-    color: #f2f2f2;
-    padding: 1em;
-    border-radius: 6px;
-    overflow-x: auto;
-    code {
-      background-color: transparent;
-      padding: 0;
+  /* --- Styles for Copy Code Button --- */
+  ::ng-deep .code-block-wrapper {
+    position: relative;
+    margin-top: 2em; /* NEW: Add space above code blocks */
+    margin-bottom: 2em;
+  }
+
+  ::ng-deep .copy-code-button {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background-color: #3e4451;
+    color: #abb2bf;
+    border: 1px solid #5c6370;
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out, background-color 0.2s;
+
+    &:hover {
+      background-color: #4a505c;
     }
   }
 
-  ul {
-    list-style-type: disc;
-    padding-left: 2rem;
-    margin-bottom: 1.5em;
+  ::ng-deep .code-block-wrapper:hover .copy-code-button {
+    opacity: 1;
   }
 }

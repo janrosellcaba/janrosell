@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
+  <url>
+    <loc>https://www.janrosell.com/</loc>
+    <lastmod>2025-09-22</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://www.janrosell.com/terminal</loc>
+    <lastmod>2025-09-22</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://www.janrosell.com/blog</loc>
+    <lastmod>2025-09-22</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://www.janrosell.com/blog/why-i-built-a-terminal-for-my-portfolio</loc>
+    <lastmod>2025-09-22</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.janrosell.com/blog/value-of-a-side-project</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.janrosell.com/blog/why-angular-for-my-portfolio</loc>
+    <lastmod>2025-09-15</lastmod>
+    <priority>0.85</priority>
+  </url>
+</urlset>

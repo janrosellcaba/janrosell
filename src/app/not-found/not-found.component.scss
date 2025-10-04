@@ -1,0 +1,62 @@
+:host {
+  display: block;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.not-found-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.content {
+  font-family: var(--font-body);
+}
+
+.status-code {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 25vw, 12rem);
+  color: var(--text-highlight-blue);
+  line-height: 1;
+  margin: 0;
+  text-shadow: 4px 4px 0px var(--accent-line-code);
+}
+
+.message {
+  font-family: var(--font-mono);
+  font-size: clamp(1.2rem, 5vw, 2rem);
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.suggestion {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  max-width: 40ch;
+  color: var(--text-secondary);
+}
+
+.home-link {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 0.75em 1.5em;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-highlight-blue);
+  text-decoration: none;
+  border: 1px solid var(--accent-line-code);
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: var(--text-highlight-blue);
+    color: var(--bg-main);
+  }
+}

@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   intro_subtitle_company1 = "Express My Health";
   intro_subtitle_and = "and";
   intro_subtitle_highlight2 = "Computer Science Engineering Student";
-  intro_subtitle_institution1 = "FIB, UPC";
+  intro_subtitle_institution1 = "UPC";
   intro_subtitle_comment = "Exploring modern computing to deliver thoughtful software solutions with purpose and precision.";
 
   // About Me Section
@@ -216,7 +216,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Jan Rosell - Co-founder & CEO at Express my Health | Software Developer');
+    this.titleService.setTitle('Home - Jan Rosell');
 
     this.metaService.updateTag({
       name: 'description',

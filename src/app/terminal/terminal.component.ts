@@ -77,7 +77,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
       ['cv', (): CommandFunctionResult => ({ type: 'link', url: 'src/assets/Jan_Rosell_CV.pdf', text: 'Download CV (PDF)' })], // !!!
       ['resume', "A dedicated developer with experience in full-stack development, project managing, and a keen interest in embedded systems. Quick learner, team player, and problem solver. For more details, type 'cv' or 'experience'."],
       ['linkedin', (): CommandFunctionResult => ({ type: 'link', url: 'https://www.linkedin.com/in/janrosell/', text: 'linkedin.com/in/janrosell' })],
-      ['github', (): CommandFunctionResult => ({ type: 'link', url: 'https://github.com/janrosellcaba', text: 'github.com/janrosell03' })],
+      ['github', (): CommandFunctionResult => ({ type: 'link', url: 'https://github.com/janrosellcaba', text: 'github.com/janrosellcaba' })],
 
       // --- Tecnologies i Habilitats ---
       ['skills', () => this.showSkillsList()],
@@ -111,7 +111,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Interactive Terminal - Jan Rosell');
+    this.titleService.setTitle('The Terminal - Jan Rosell');
 
     this.metaService.updateTag({
       name: 'description',
@@ -298,8 +298,9 @@ For more detailed experience, please see my LinkedIn profile (type 'linkedin') o
 
   private showProjectsList(): string {
     const projects = [
-      { name: "Personal Portfolio (this website!)", description: "Built with Angular, showcasing my skills and projects. You are here!", linkCmd: "N/A" },
+      { name: "Express My Health", description: "An assistive communication platform.", linkCmd: "N/A" },
       { name: "Lanaccess Development Projects", description: "Contributing to an important software solution at Lanaccess. (Details are confidential)", linkCmd: "N/A" },
+      { name: "Personal Portfolio (this website!)", description: "Built with Angular, showcasing my skills and projects. You are here!", linkCmd: "N/A" },
       { name: "University Projects (FIB, UPC)", description: "Various academic projects involving algorithms, data structures, AI, and software engineering principles.", linkCmd: "N/A" },
     ];
     let output = "Featured Projects:\n";

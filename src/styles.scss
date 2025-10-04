@@ -1,5 +1,9 @@
 /* styles.scss - VERSIÓ DEFINITIVA RECOMANADA */
 
+// Import the theme for the syntax highlighter
+@import "highlight.js/styles/github-dark.css";
+
+
 // -----------------------------------------------------------------------------
 // 1. DEFINICIÓ DE VARIABLES CSS GLOBALS PER A LIGHT I DARK THEMES
 // -----------------------------------------------------------------------------
@@ -14,6 +18,8 @@
   --bg-experience-card-light: #FFFFFF; // Original: #FFFFFF, Prova: #E9E9E9
   --bg-section-alt-light: #F0F4F8; // Color alternatiu per a seccions
   --bg-formentera-mention-light: rgba(37, 99, 235, 0.03);
+  --bg-code-block-light: #2d2d2d; // Light theme code block background
+  --text-code-block-light: #f2f2f2; // Light theme code block text color
 
   --border-skill-card-light: rgba(37, 99, 235, 0.25); // Original: var(--accent-line-code-light)
   --border-experience-card-light: rgba(37, 99, 235, 0.25); // Original: var(--accent-line-code-light)
@@ -40,6 +46,8 @@
   --bg-experience-card-dark: #1F2937; // Original: #1F2937, Prova: #2F2F2F
   --bg-section-alt-dark: #161E2E; // Color alternatiu per a seccions en fosc
   --bg-formentera-mention-dark: rgba(96, 165, 250, 0.03);
+  --bg-code-block-dark: #1e1e1e; // Dark theme code block background
+  --text-code-block-dark: #d4d4d4; // Dark theme code block text color
 
   --border-skill-card-dark: #374151; // Original: #374151
   --border-experience-card-dark: #374151; // Original: #374151
@@ -76,6 +84,8 @@
   --bg-experience-card: var(--bg-experience-card-light);
   --bg-section-alt: var(--bg-section-alt-light);
   --bg-formentera-mention: var(--bg-formentera-mention-light);
+  --bg-code-block: var(--bg-code-block-light);
+  --text-code-block: var(--text-code-block-light);
 
   --border-skill-card: var(--border-skill-card-light);
   --border-experience-card: var(--border-experience-card-light);
@@ -104,6 +114,8 @@ body.dark-theme {
   --bg-experience-card: var(--bg-experience-card-dark);
   --bg-section-alt: var(--bg-section-alt-dark);
   --bg-formentera-mention: var(--bg-formentera-mention-dark);
+  --bg-code-block: var(--bg-code-block-dark);
+  --text-code-block: var(--text-code-block-dark);
 
   --border-skill-card: var(--border-skill-card-dark);
   --border-experience-card: var(--border-experience-card-dark);
@@ -146,6 +158,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Custom selection style
+::selection {
+  background-color: var(--text-highlight-blue);
+  color: var(--bg-main);
+}
+::-moz-selection {
+  background-color: var(--text-highlight-blue);
+  color: var(--bg-main);
 }
 
 // -----------------------------------------------------------------------------
@@ -205,4 +227,14 @@ body.dark-theme .theme-toggle .icon-sun {
     color: var(--text-code-comment);
     margin-left: 0.5em;
   }
+}
+
+// --- Syntax Highlighting Styles ---
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1.25em 1.5em;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
 }

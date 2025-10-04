@@ -102,11 +102,23 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--text-secondary);
+  margin-top: 1rem;
+  flex-wrap: wrap; // Allow wrapping on small screens
+  gap: 0.5rem; // Add gap for spacing
+}
+
+.post-card-date {
+  opacity: 0.9;
+}
+
+.post-card-meta, .post-card-readmore {
+  color: var(--text-highlight-blue);
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .post-card-readmore {
-  color: var(--text-highlight-blue);
-  font-weight: 700;
+  transition: color 0.3s ease;
 }
 
 .site-footer {
