@@ -160,7 +160,7 @@ export class BlogPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.metaService.updateTag({ name: 'description', content: 'Personal portfolio of Jan Rosell, Co-founder & CEO at Express my Health, Software Developer, and Computer Science Engineering student at UPC.' });
+    this.metaService.updateTag({ name: 'description', content: 'Personal portfolio of Jan Rosell, Co-founder & CTO at Express my Health, Software Developer, and Computer Science Engineering student at UPC.' });
     if (this.isBrowser) {
       this.removeArticleSchema();
     }

@@ -72,7 +72,7 @@ export class TerminalComponent implements OnInit, AfterViewInit, OnDestroy {
       // --- Professional i Acadèmic ---
       ['studies', "Currently pursuing a Bachelor's Degree in Computer Science Engineering at FIB, UPC. Specializing in Software Engineering."],
       ['education', () => this.showEducationDetails()], // !!!
-      ['job', "CEO at Express My Health & Software Developer at Lanaccess."],
+      ['job', "CTO at Express My Health & Software Developer at Lanaccess."],
       ['experience', () => this.showExperienceSummary()], // !!!
       ['cv', (): CommandFunctionResult => ({ type: 'link', url: 'src/assets/Jan_Rosell_CV.pdf', text: 'Download CV (PDF)' })], // !!!
       ['resume', "A dedicated developer with experience in full-stack development, project managing, and a keen interest in embedded systems. Quick learner, team player, and problem solver. For more details, type 'cv' or 'experience'."],

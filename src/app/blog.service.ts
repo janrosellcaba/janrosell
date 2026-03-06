@@ -57,7 +57,7 @@ export class BlogService {
 
         <br />
 
-        For a while now, I've been operating in three parallel worlds. In one, I'm a **Computer Science student** at UPC, diving deep into the theory of complex systems. In another, I'm a **Software Developer** at Lanaccess, applying that knowledge to build robust, real-world products. And in the third, I'm the **Co-founder and CEO** of Express My Health, a startup driven by a mission to solve communication barriers in the health world.
+        For a while now, I've been operating in three parallel worlds. In one, I'm a **Computer Science student** at UPC, diving deep into the theory of complex systems. In another, I'm a **Software Developer** at Lanaccess, applying that knowledge to build robust, real-world products. And in the third, I'm the **Co-founder and CTO** of Express My Health, a startup driven by a mission to solve communication barriers in the health world.
         
         <br />
 
@@ -105,7 +105,7 @@ export class BlogService {
       slug: 'optimism-and-hard-work',
       summary: "My secret to handling stress: stay positive and never give up.",
       content: `
-        People often ask me how I manage to juggle a Computer Science degree, a job at Lanaccess, and the intensity of building Express My Health as a CEO—all while keeping a smile on my face.
+        People often ask me how I manage to juggle a Computer Science degree, a job at Lanaccess, and the intensity of building Express My Health as a CTO—all while keeping a smile on my face.
 
         <br />
 

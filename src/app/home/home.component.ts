@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   // Intro Section
   intro_name_jan = "Jan";
   intro_name_rosell = "Rosell";
-  intro_subtitle_highlight1 = "Co-founder & CEO";
+  intro_subtitle_highlight1 = "Co-founder & CTO";
   intro_subtitle_at = "at";
   intro_subtitle_company1 = "Express My Health";
   intro_subtitle_and = "and";
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   aboutMe_heading = "About Jan";
 
   aboutMe_paragraph0_part0 = "at Express My Health";
-  aboutMe_paragraph0_institution = "Co-founder & CEO";
+  aboutMe_paragraph0_institution = "Co-founder & CTO";
 
   aboutMe_paragraph1_part1 = "Computer Science Engineering student at";
   aboutMe_paragraph1_institution = "FIB (UPC)";
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   aboutMe_formenteraMention = "Born and based in Barcelona, with three years spent living in Ireland, bringing a mindset shaped by engineering rigor and a hands-on drive to craft meaningful, lasting solutions.";
 
-  
+
   // Technologies Section
   public tech_mainTitle$: Observable<string>;
   tech_subtitle = "The tools and languages I use to build and innovate in the digital world.";
@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   expEdu_items = [
     {
       id: 0,
-      title: "Co-founder & CEO",
+      title: "Co-founder & CTO",
       organization: "Express My Health",
       date: "Feb 2025 - Present",
       detailsType: "list",
@@ -203,7 +203,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private breakpointObserver: BreakpointObserver
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
-     const isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+    const isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
       .pipe(
         map(result => result.matches),
         shareReplay() // Caches the last value for new subscribers
@@ -220,7 +220,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.metaService.updateTag({
       name: 'description',
-      content: 'Personal portfolio of Jan Rosell, Co-founder & CEO at Express my Health, Software Developer, and Computer Science Engineering student at UPC-FIB. Discover my projects, experience, and skills in Angular, Python, and C++.'
+      content: 'Personal portfolio of Jan Rosell, Co-founder & CTO at Express my Health, Software Developer, and Computer Science Engineering student at UPC-FIB. Discover my projects, experience, and skills in Angular, Python, and C++.'
     });
     if (this.isBrowser) {
       // Tota la lògica que depèn del navegador va aquí dins
