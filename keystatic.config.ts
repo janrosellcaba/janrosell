@@ -1,9 +1,14 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-	storage: {
-		kind: 'local',
-	},
+	// Local dev writes files directly; production (e.g. Vercel) reads/writes
+	// through the GitHub API so the deployed admin can see and create posts.
+	storage: import.meta.env.DEV
+		? { kind: 'local' }
+		: {
+				kind: 'github',
+				repo: { owner: 'janrosellcaba', name: 'janrosell' },
+			},
 	ui: {
 		brand: { name: 'Jan Rosell' },
 	},

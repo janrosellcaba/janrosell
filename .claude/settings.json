@@ -62,7 +62,9 @@
       "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('./node_modules/@astrojs/vercel/package.json'\\).exports, null, 1\\)\\)\")",
       "Bash(node -e \"const e=require\\('./node_modules/@vercel/analytics/package.json'\\).exports; console.log\\(JSON.stringify\\(Object.keys\\(e\\)\\)\\)\")",
       "Bash(node -e \"const e=require\\('./node_modules/@vercel/analytics/package.json'\\).exports; console.log\\(JSON.stringify\\(e['./astro'], null, 1\\)\\)\")",
-      "Bash(timeout 300 pnpm build)"
+      "Bash(timeout 300 pnpm build)",
+      "Bash(curl -s -o /dev/null -w 'keystatic admin: %{http_code}\\\\n' http://localhost:4321/keystatic)",
+      "Bash(timeout 200 pnpm build)"
     ],
     "additionalDirectories": [
       "/home/jan/janrosell2/public",
