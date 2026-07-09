@@ -48,7 +48,17 @@
       "WebFetch(domain:keystatic.com)",
       "WebFetch(domain:docs.astro.build)",
       "Bash(timeout 300 pnpm astro add react markdoc node --yes)",
-      "Bash(pnpm add *)"
+      "Bash(pnpm add *)",
+      "Bash(curl -s http://localhost:4321/blog/hello-world)",
+      "Bash(curl -s http://localhost:4321/blog)",
+      "Bash(rm -rf /tmp/kschrome)",
+      "Bash(chromium --headless=new --no-sandbox --hide-scrollbars --window-size=1400,1000 --user-data-dir=/tmp/kschrome --remote-debugging-port=9223 --remote-allow-origins=* about:blank)",
+      "Bash(echo \"pid $!\")",
+      "Bash(curl -s http://localhost:9223/json/version)",
+      "Bash(curl -s -o /tmp/np.html -w '%{http_code}' http://localhost:4321/blog/test-post-from-keystatic)",
+      "Bash(echo \"status: $\\(curl -s -o /tmp/np.html -w '%{http_code}' http://localhost:4321/blog/test-post-from-keystatic\\)\")",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' http://localhost:4321/)",
+      "Bash(echo \"dev server: $\\(curl -s -o /dev/null -w '%{http_code}' http://localhost:4321/\\)\")"
     ],
     "additionalDirectories": [
       "/home/jan/janrosell2/public",
