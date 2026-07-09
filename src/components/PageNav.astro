@@ -1,0 +1,114 @@
+---
+interface Props {
+	items?: Array<'home' | 'theme' | 'terminal' | 'blog'>;
+}
+
+const { items = ['home', 'theme', 'terminal'] } = Astro.props;
+---
+
+<div class="page-nav-controls">
+	{
+		items.map((item) => {
+			if (item === 'home') {
+				return (
+					<a href="/" class="nav-button" aria-label="Go to Home page">
+						<span class="material-symbols-outlined">home</span>
+					</a>
+				);
+			}
+			if (item === 'theme') {
+				return (
+					<button class="nav-button theme-toggle" aria-label="Change theme">
+						<span class="material-symbols-outlined icon-sun">light_mode</span>
+						<span class="material-symbols-outlined icon-moon">dark_mode</span>
+					</button>
+				);
+			}
+			if (item === 'terminal') {
+				return (
+					<a href="/terminal" class="nav-button" aria-label="Open Terminal">
+						<span class="material-symbols-outlined">terminal</span>
+					</a>
+				);
+			}
+			return (
+				<a href="/blog" class="nav-button blog-link" aria-label="Go to Blog">
+					Blog
+				</a>
+			);
+		})
+	}
+</div>
+
+<style>
+	.page-nav-controls {
+		position: fixed;
+		top: 1.5rem;
+		right: 1.5rem;
+		z-index: 1001;
+		display: flex;
+		gap: 0.6rem;
+		align-items: center;
+		flex-direction: row-reverse;
+	}
+
+	@media (min-width: 768px) {
+		.page-nav-controls {
+			top: 2.2rem;
+			right: 2.2rem;
+			gap: 0.8rem;
+		}
+	}
+
+	.nav-button {
+		background: none;
+		border: none;
+		padding: 0.4rem;
+		cursor: pointer;
+		color: var(--text-primary);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: color 0.3s ease;
+		text-decoration: none;
+	}
+
+	.nav-button .material-symbols-outlined {
+		font-size: 22px;
+		vertical-align: middle;
+		transition: color 0.3s ease;
+	}
+
+	.nav-button:hover {
+		color: var(--text-highlight-blue);
+	}
+
+	@media (min-width: 768px) {
+		.nav-button {
+			padding: 0.5rem;
+		}
+		.nav-button .material-symbols-outlined {
+			font-size: 24px;
+		}
+	}
+
+	.blog-link {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.9rem;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		text-decoration-thickness: 1px;
+		color: var(--text-secondary);
+	}
+
+	.blog-link:hover {
+		color: var(--text-highlight-blue) !important;
+	}
+
+	@media (min-width: 768px) {
+		.blog-link {
+			font-size: 1rem;
+		}
+	}
+</style>

@@ -1,0 +1,200 @@
+:root {
+	/* --- Light theme --- */
+	--bg-main-light: #f9fafb;
+	--bg-noise-texture-light: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23CFD8DC' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	--bg-about-me-light: linear-gradient(135deg, #eff4f9 0%, #e6edf3 100%);
+	--bg-contact-light: #f5f7fa;
+	--bg-technologies-light: #ffffff;
+	--bg-skill-card-light: #ffffff;
+	--bg-experience-card-light: #ffffff;
+	--bg-section-alt-light: #f0f4f8;
+	--bg-formentera-mention-light: rgba(37, 99, 235, 0.03);
+
+	--border-skill-card-light: rgba(37, 99, 235, 0.25);
+	--border-experience-card-light: rgba(37, 99, 235, 0.25);
+
+	--shadow-experience-card-light: 0 4px 10px rgba(37, 99, 235, 0.05);
+	--shadow-experience-card-hover-light: 0 8px 20px rgba(37, 99, 235, 0.08);
+
+	--text-primary-light: #1a1d21;
+	--text-secondary-light: #5f6a75;
+	--text-highlight-blue-light: #2563eb;
+	--text-highlight-blue-bg-light: rgba(37, 99, 235, 0.07);
+
+	--accent-line-code-light: rgba(37, 99, 235, 0.25);
+	--text-code-comment-light: #8892a0;
+	--nav-overlay-bg-light: rgba(249, 250, 251, 0.9);
+
+	/* --- Dark theme --- */
+	--bg-main-dark: #111827;
+	--bg-noise-texture-dark: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234B5563' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+	--bg-about-me-dark: linear-gradient(135deg, #1f2937 0%, #171e2a 100%);
+	--bg-contact-dark: #1a202c;
+	--bg-technologies-dark: #111827;
+	--bg-skill-card-dark: #1f2937;
+	--bg-experience-card-dark: #1f2937;
+	--bg-section-alt-dark: #161e2e;
+	--bg-formentera-mention-dark: rgba(96, 165, 250, 0.03);
+
+	--border-skill-card-dark: #374151;
+	--border-experience-card-dark: #374151;
+
+	--shadow-experience-card-dark: 0 4px 15px rgba(0, 0, 0, 0.2);
+	--shadow-experience-card-hover-dark: 0 8px 25px rgba(0, 0, 0, 0.3);
+
+	--text-primary-dark: #e5e7eb;
+	--text-secondary-dark: #9ca3af;
+	--text-highlight-blue-dark: #60a5fa;
+	--text-highlight-blue-bg-dark: rgba(96, 165, 250, 0.1);
+
+	--accent-line-code-dark: rgba(96, 165, 250, 0.3);
+	--text-code-comment-dark: #6b7280;
+	--nav-overlay-bg-dark: rgba(17, 24, 39, 0.9);
+
+	/* --- Fonts --- */
+	--font-display: 'Archivo Black', sans-serif;
+	--font-body: 'Inter', sans-serif;
+	--font-mono: 'JetBrains Mono', monospace;
+
+	--line-height-body: 1.7;
+	--line-height-display: 1;
+	--line-height-mono: 1.5;
+
+	/* --- Active theme (defaults to light) --- */
+	--bg-main: var(--bg-main-light);
+	--bg-noise-texture: var(--bg-noise-texture-light);
+	--bg-about-me: var(--bg-about-me-light);
+	--bg-contact: var(--bg-contact-light);
+	--bg-technologies: var(--bg-technologies-light);
+	--bg-skill-card: var(--bg-skill-card-light);
+	--bg-experience-card: var(--bg-experience-card-light);
+	--bg-section-alt: var(--bg-section-alt-light);
+	--bg-formentera-mention: var(--bg-formentera-mention-light);
+
+	--border-skill-card: var(--border-skill-card-light);
+	--border-experience-card: var(--border-experience-card-light);
+
+	--shadow-experience-card: var(--shadow-experience-card-light);
+	--shadow-experience-card-hover: var(--shadow-experience-card-hover-light);
+
+	--text-primary: var(--text-primary-light);
+	--text-secondary: var(--text-secondary-light);
+	--text-highlight-blue: var(--text-highlight-blue-light);
+	--text-highlight-blue-bg: var(--text-highlight-blue-bg-light);
+
+	--accent-line-code: var(--accent-line-code-light);
+	--text-code-comment: var(--text-code-comment-light);
+	--nav-overlay-bg: var(--nav-overlay-bg-light);
+}
+
+html.dark-theme {
+	--bg-main: var(--bg-main-dark);
+	--bg-noise-texture: var(--bg-noise-texture-dark);
+	--bg-about-me: var(--bg-about-me-dark);
+	--bg-contact: var(--bg-contact-dark);
+	--bg-technologies: var(--bg-technologies-dark);
+	--bg-skill-card: var(--bg-skill-card-dark);
+	--bg-experience-card: var(--bg-experience-card-dark);
+	--bg-section-alt: var(--bg-section-alt-dark);
+	--bg-formentera-mention: var(--bg-formentera-mention-dark);
+
+	--border-skill-card: var(--border-skill-card-dark);
+	--border-experience-card: var(--border-experience-card-dark);
+
+	--shadow-experience-card: var(--shadow-experience-card-dark);
+	--shadow-experience-card-hover: var(--shadow-experience-card-hover-dark);
+
+	--text-primary: var(--text-primary-dark);
+	--text-secondary: var(--text-secondary-dark);
+	--text-highlight-blue: var(--text-highlight-blue-dark);
+	--text-highlight-blue-bg: var(--text-highlight-blue-bg-dark);
+
+	--accent-line-code: var(--accent-line-code-dark);
+	--text-code-comment: var(--text-code-comment-dark);
+	--nav-overlay-bg: var(--nav-overlay-bg-dark);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	font-size: 16.5px;
+}
+
+body {
+	font-family: var(--font-body);
+	background-color: var(--bg-main);
+	background-image: var(--bg-noise-texture);
+	color: var(--text-primary);
+	line-height: var(--line-height-body);
+	font-weight: 400;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+	background-color: var(--text-highlight-blue);
+	color: var(--bg-main);
+}
+
+a {
+	color: inherit;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+html:not(.dark-theme) .theme-toggle .icon-moon {
+	display: inline-block;
+}
+html:not(.dark-theme) .theme-toggle .icon-sun {
+	display: none;
+}
+html.dark-theme .theme-toggle .icon-moon {
+	display: none;
+}
+html.dark-theme .theme-toggle .icon-sun {
+	display: inline-block;
+}
+
+.comentari-estilitzat {
+	display: block;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	padding: 0.8em 1em;
+	background-color: var(--bg-formentera-mention);
+	border-left: 3px solid var(--accent-line-code);
+	color: var(--text-secondary);
+	font-size: 0.95em;
+	border-radius: 0 4px 4px 0;
+	font-style: normal;
+}
+
+.comentari-estilitzat::before {
+	content: '/* ';
+	font-family: var(--font-mono);
+	color: var(--text-code-comment);
+	margin-right: 0.5em;
+}
+
+.comentari-estilitzat::after {
+	content: ' */';
+	font-family: var(--font-mono);
+	color: var(--text-code-comment);
+	margin-left: 0.5em;
+}

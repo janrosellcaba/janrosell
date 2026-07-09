@@ -1,0 +1,575 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageNav from '../components/PageNav.astro';
+---
+
+<Layout
+	title="The Terminal - Jan Rosell"
+	description="Explore my skills, experience, and projects through this interactive terminal. A unique feature of Jan Rosell's portfolio, built with Astro."
+>
+	<div class="terminal-page-wrapper">
+		<PageNav items={['blog', 'theme', 'home']} />
+
+		<div class="terminal-page-container">
+			<div class="terminal-window">
+				<div class="terminal-titlebar">
+					<div class="titlebar-placeholder"></div>
+					<div class="titlebar-title">Terminal - jan@portfolio</div>
+					<div class="titlebar-placeholder"></div>
+				</div>
+
+				<div class="terminal-content" id="terminalContent">
+					<div class="commands-container" id="commandsContainer">
+						<div class="command-output help-intro">Type 'help' to see all available commands.</div>
+						<div class="command-line current-input-line" id="currentInputLine">
+							<span class="prompt">
+								<span class="prompt-user-display">user@janrosell.dev:~</span><span
+									class="prompt-symbol-display">$</span
+								>
+							</span>
+							<input
+								id="commandInput"
+								type="text"
+								class="command-input-field"
+								autofocus
+								autocomplete="off"
+								autocorrect="off"
+								autocapitalize="off"
+								spellcheck="false"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	type CommandResult = string | { type: 'link'; url: string; text: string } | void;
+
+	const promptUser = 'user@janrosell.dev:~';
+	const promptSymbol = '$';
+
+	const commandsContainer = document.getElementById('commandsContainer')!;
+	const currentInputLine = document.getElementById('currentInputLine')!;
+	const input = document.getElementById('commandInput') as HTMLInputElement;
+	const terminalContent = document.getElementById('terminalContent')!;
+
+	let history: string[] = [];
+
+	function showContactInfo(): string {
+		return `You can reach me via:
+Email:    jan@janrosell.com (or type 'email')
+LinkedIn: linkedin.com/in/janrosell (or type 'linkedin')
+GitHub:   github.com/janrosellcaba (or type 'github')`;
+	}
+
+	function showEducationDetails(): string {
+		return `Primary Education:
+- B.Sc. Computer Science Engineering - FIB, UPC Barcelona (Expected June 2026)
+  Specialization: Software Engineering.
+  Key areas: Algorithms, Data Structures, AI, Cybersecurity, Distributed Systems.
+
+Complementary Studies:
+- Defense and Security Studies - UPF & other training (Ongoing)
+  Focus: Cybersecurity, technology in modern conflicts, geopolitics of tech.`;
+	}
+
+	function showExperienceSummary(): string {
+		return `Current Role:
+- Software Developer at Lanaccess Telecom (Target Feb 2025 - Present)
+  Focusing on developing and maintaining impactful software solutions.
+
+For more detailed experience, please see my LinkedIn profile (type 'linkedin') or my CV (type 'cv').`;
+	}
+
+	function showSkillsList(): string {
+		const mainSkills = [
+			'C/C++',
+			'Python',
+			'Java',
+			'SQL',
+			'R',
+			'TypeScript',
+			'JavaScript',
+			'HTML/CSS',
+			'Angular',
+			'React',
+			'Vite',
+			'UI/UX Design',
+			'Interface Design',
+			'Figma',
+			'Git',
+			'Linux',
+			'Docker',
+			'Shell Scripting',
+			'Yocto',
+			'REST API Design',
+			'Data Structures',
+			'Algorithms',
+			'UML',
+			'Agile (Scrum)',
+			'Problem Solving',
+		];
+		return 'Key Skills:\n' + mainSkills.map((skill) => `  - ${skill}`).join('\n');
+	}
+
+	function showProjectsList(): string {
+		const projects = [
+			{ name: 'Express My Health', description: 'An assistive communication platform.', linkCmd: 'N/A' },
+			{
+				name: 'Lanaccess Development Projects',
+				description: 'Contributing to an important software solution at Lanaccess. (Details are confidential)',
+				linkCmd: 'N/A',
+			},
+			{
+				name: 'Personal Portfolio (this website!)',
+				description: 'Built with Angular, showcasing my skills and projects. You are here!',
+				linkCmd: 'N/A',
+			},
+			{
+				name: 'University Projects (FIB, UPC)',
+				description:
+					'Various academic projects involving algorithms, data structures, AI, and software engineering principles.',
+				linkCmd: 'N/A',
+			},
+		];
+		let output = 'Featured Projects:\n';
+		projects.forEach((p) => {
+			output += `\n  Project: ${p.name}\n  Description: ${p.description}\n`;
+			if (p.linkCmd !== 'N/A') {
+				output += `  (Type '${p.linkCmd}' for more info/link)\n`;
+			}
+		});
+		return output;
+	}
+
+	function getRandomQuote(): string {
+		const quotes = [
+			'The only way to do great work is to love what you do. - Steve Jobs',
+			'Simplicity is the ultimate sophistication. - Leonardo da Vinci',
+			'The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt',
+			'Strive not to be a success, but rather to be of value. - Albert Einstein',
+			'It is not the strongest of the species that survives, nor the most intelligent; it is the one most adaptable to change. - C. Darwin (paraphrased)',
+			'Perseverance, secret of all triumphs. - Victor Hugo',
+			'The best way to predict the future is to invent it. - Alan Kay',
+		];
+		return quotes[Math.floor(Math.random() * quotes.length)];
+	}
+
+	function showBanner(): string {
+		return `
+             ██╗ █████╗ ███╗   ██╗      ██████╗
+             ██║██╔══██╗████╗  ██║      ██╔══██╗
+             ██║███████║██╔██╗ ██║      ██████╔╝
+        ██   ██║██╔══██║██║╚██╗██║      ██╔══██╗
+        ╚█████╔╝██║  ██║██║ ╚████║      ██║  ██║
+         ╚════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝      ╚═╝  ╚═╝
+
+------------------------------------------------------------
+     Welcome to Jan Rosell's Interactive Portfolio Terminal
+         Type 'help' for a list of available commands.
+------------------------------------------------------------
+  `;
+	}
+
+	function showCommandHistory(): string {
+		const userCommands = history.filter((cmd) => cmd.trim() !== '');
+		if (userCommands.length === 0) {
+			return 'No commands in history yet (besides this one!).';
+		}
+		let historyOutput = 'Command History:\n';
+		userCommands.forEach((cmdInput, index) => {
+			historyOutput += `  ${index + 1}: ${cmdInput}\n`;
+		});
+		return historyOutput.trim();
+	}
+
+	const commands: Record<string, string | ((args: string) => CommandResult)> = {
+		name: 'Jan Rosell',
+		whoami:
+			"A curious Computer Science Engineering student and Software Developer, passionate about technology's role in the world. Always learning, always building.",
+		contact: () => showContactInfo(),
+		email: () => ({ type: 'link', url: 'mailto:jan@janrosell.com', text: 'jan@janrosell.com' }),
+		location: 'Barcelona, Catalonia, Spain.',
+		birthday: 'July 29th, 2004.',
+		languages: 'Catalan (Native)\nEnglish (C1)\nSpanish (Native)',
+		studies:
+			'Currently pursuing a Bachelor\'s Degree in Computer Science Engineering at FIB, UPC. Specializing in Software Engineering.',
+		education: () => showEducationDetails(),
+		job: 'CTO at Express My Health & Software Developer at Lanaccess.',
+		experience: () => showExperienceSummary(),
+		cv: () => ({ type: 'link', url: 'src/assets/Jan_Rosell_CV.pdf', text: 'Download CV (PDF)' }),
+		resume:
+			'A dedicated developer with experience in full-stack development, project managing, and a keen interest in embedded systems. Quick learner, team player, and problem solver. For more details, type \'cv\' or \'experience\'.',
+		linkedin: () => ({ type: 'link', url: 'https://www.linkedin.com/in/janrosell/', text: 'linkedin.com/in/janrosell' }),
+		github: () => ({ type: 'link', url: 'https://github.com/janrosellcaba', text: 'github.com/janrosellcaba' }),
+		skills: () => showSkillsList(),
+		technologies: 'My main stack includes: Python, Angular, TypeScript, JavaScript, HTML/CSS, SQL, C/C++, Docker, and Git.',
+		ide: 'Primarily VS Code. Occasionally VIM or Cursor',
+		os: 'Linux (currently with Fedora and Ubuntu). Proficient with Windows as well.',
+		projects: () => showProjectsList(),
+		hobbies: 'Apart from coding: Sports (Tennis, Gym, Boxing), exploring new technologies, and hanging out with friends.',
+		interests: 'Key interests: AI, Cybersecurity, Software Development, and leading impactful projects.',
+		goals: 'Professionally: To contribute to meaningful tech projects. To continuously learn and master new technologies.',
+		philosophy:
+			"'Code with purpose, design with intent.' Striving for clarity, efficiency, and impact in everything I build.",
+		quote: () => getRandomQuote(),
+		help: () => {},
+		clear: () => {},
+		date: () => `Current system date: ${new Date().toLocaleString()}`,
+		time: () => `Current system time: ${new Date().toLocaleTimeString()}`,
+		pwd: '/home/janrosell/portfolio',
+		ls: () => 'README.md  projects/  skills.txt  contact.info\n(Just kidding, this is a simulated output!)',
+		banner: () => showBanner(),
+		history: () => showCommandHistory(),
+		echo: (args: string) => (args ? args : 'Usage: echo [message]'),
+		exit: () => {
+			window.location.href = '/';
+		},
+	};
+
+	function appendPromptLine(text: string) {
+		const line = document.createElement('div');
+		line.className = 'command-line';
+		line.innerHTML =
+			`<span class="prompt"><span class="prompt-user-display">${promptUser}</span><span class="prompt-symbol-display">${promptSymbol}</span></span><span class="command-input-text"></span>`;
+		line.querySelector('.command-input-text')!.textContent = text;
+		commandsContainer.insertBefore(line, currentInputLine);
+	}
+
+	function appendOutput(text: string) {
+		const out = document.createElement('div');
+		out.className = 'command-output';
+		out.textContent = text;
+		commandsContainer.insertBefore(out, currentInputLine);
+	}
+
+	function appendLinkOutput(url: string, text: string) {
+		const out = document.createElement('div');
+		out.className = 'command-output link';
+		const a = document.createElement('a');
+		a.href = url;
+		a.target = '_blank';
+		a.rel = 'noopener noreferrer';
+		a.textContent = text;
+		out.appendChild(a);
+		commandsContainer.insertBefore(out, currentInputLine);
+	}
+
+	function appendHelpGrid() {
+		const out = document.createElement('div');
+		out.className = 'command-output help-grid';
+		Object.keys(commands)
+			.sort()
+			.forEach((cmdName) => {
+				const span = document.createElement('span');
+				span.className = 'help-command';
+				span.textContent = cmdName;
+				out.appendChild(span);
+			});
+		commandsContainer.insertBefore(out, currentInputLine);
+	}
+
+	function scrollToBottom() {
+		requestAnimationFrame(() => {
+			commandsContainer.scrollTop = commandsContainer.scrollHeight;
+		});
+	}
+
+	function clearTerminal() {
+		commandsContainer.querySelectorAll('.command-line:not(.current-input-line), .command-output:not(.help-intro)')
+			.forEach((el) => el.remove());
+		history = [];
+	}
+
+	function runCommand(raw: string) {
+		const trimmed = raw.trim();
+
+		if (trimmed === '') {
+			appendPromptLine('');
+			scrollToBottom();
+			focusInput();
+			return;
+		}
+
+		const parts = trimmed.split(/\s+/);
+		const name = parts[0].toLowerCase();
+		const args = parts.slice(1).join(' ');
+
+		const handler = commands[name];
+
+		if (handler !== undefined && name === 'clear') {
+			clearTerminal();
+			scrollToBottom();
+			focusInput();
+			return;
+		}
+
+		appendPromptLine(raw);
+		history.push(raw);
+
+		if (handler === undefined) {
+			appendOutput(`bash: command not found: ${raw}`);
+		} else if (typeof handler === 'function') {
+			const result = handler(args);
+			if (typeof result === 'string') {
+				appendOutput(result);
+			} else if (result && typeof result === 'object' && result.type === 'link') {
+				appendLinkOutput(result.url, result.text);
+			}
+			if (name === 'help') {
+				appendHelpGrid();
+			}
+		} else {
+			appendOutput(handler);
+		}
+
+		scrollToBottom();
+		focusInput();
+	}
+
+	function focusInput() {
+		requestAnimationFrame(() => input.focus());
+	}
+
+	input.addEventListener('keyup', (e) => {
+		if (e.key === 'Enter') {
+			const value = input.value;
+			input.value = '';
+			runCommand(value);
+		}
+	});
+
+	input.addEventListener('keydown', (e) => {
+		if (e.key === 'Tab') e.preventDefault();
+	});
+
+	terminalContent.addEventListener('click', (e) => {
+		if ((e.target as HTMLElement).tagName?.toLowerCase() !== 'a') {
+			focusInput();
+		}
+	});
+
+	focusInput();
+	scrollToBottom();
+</script>
+
+<style>
+	.terminal-page-wrapper {
+		padding: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: calc(100vh - 4rem);
+		box-sizing: border-box;
+	}
+
+	@media (max-width: 576px) {
+		.terminal-page-wrapper {
+			padding: 1rem;
+			min-height: calc(100vh - 2rem);
+		}
+	}
+
+	.terminal-page-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.terminal-window {
+		width: 100%;
+		max-width: 900px;
+		height: 40vh;
+		min-height: 400px;
+		font-family: var(--font-mono);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+		display: flex;
+		flex-direction: column;
+
+		background-color: var(--local-bg-terminal-window);
+		color: var(--local-text-terminal-primary);
+		border: 1px solid var(--local-border-terminal);
+
+		--local-bg-terminal-window: rgba(250, 250, 250, 0.95);
+		--local-text-terminal-primary: #1a1d21;
+		--local-text-terminal-prompt: var(--text-highlight-blue);
+		--local-text-terminal-link: var(--text-highlight-blue);
+		--local-text-terminal-link-hover: #1e4a9c;
+		--local-border-terminal: #ccc;
+		--local-titlebar-bg: #e9e9e9;
+		--local-titlebar-text: #555;
+		--local-help-intro-text: var(--text-secondary);
+	}
+
+	:global(html.dark-theme) .terminal-window {
+		--local-bg-terminal-window: rgba(20, 20, 20, 0.9);
+		--local-text-terminal-primary: #00ff41;
+		--local-text-terminal-prompt: var(--text-highlight-blue);
+		--local-text-terminal-link: var(--text-highlight-blue);
+		--local-text-terminal-link-hover: #82ffa1;
+		--local-border-terminal: #444;
+		--local-titlebar-bg: #1e1e1e;
+		--local-titlebar-text: #9e9e9e;
+		--local-help-intro-text: var(--text-secondary);
+	}
+
+	@media (max-width: 576px) {
+		.terminal-window {
+			height: 75vh;
+			min-height: 300px;
+			max-width: 100%;
+		}
+	}
+
+	.terminal-titlebar {
+		background-color: var(--local-titlebar-bg);
+		min-height: 30px;
+		padding: 0 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-bottom: 1px solid var(--local-border-terminal);
+		user-select: none;
+	}
+
+	.titlebar-title {
+		color: var(--local-titlebar-text);
+		font-size: 0.8rem;
+		font-weight: 500;
+		text-align: center;
+		flex-grow: 1;
+	}
+
+	.titlebar-placeholder {
+		min-width: 50px;
+		display: flex;
+		align-items: center;
+	}
+
+	.terminal-content {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		padding: 10px;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		cursor: text;
+	}
+
+	@media (max-width: 576px) {
+		.terminal-content {
+			font-size: 0.8rem;
+			padding: 8px;
+		}
+	}
+
+	.commands-container {
+		flex-grow: 1;
+		overflow-y: auto;
+		word-break: break-all;
+	}
+
+	/* Content items are created at runtime, so they lack Astro's scope
+	   attribute — target them with :global() under the scoped parent. */
+	.terminal-content :global(.command-line) {
+		display: flex;
+		align-items: baseline;
+		min-height: 1.5em;
+		flex-wrap: nowrap;
+	}
+
+	.terminal-content :global(.prompt) {
+		color: var(--local-text-terminal-prompt);
+		font-weight: bold;
+		user-select: none;
+		white-space: nowrap;
+		display: flex;
+		align-items: baseline;
+	}
+
+	.terminal-content :global(.command-input-text) {
+		white-space: pre-wrap;
+		color: var(--local-text-terminal-primary);
+		padding-left: 0.5ch;
+		flex-grow: 1;
+		min-width: 0;
+	}
+
+	.terminal-content :global(.command-input-field) {
+		background: transparent;
+		border: none;
+		color: var(--local-text-terminal-primary);
+		font-family: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		padding: 0;
+		margin: 0;
+		flex-grow: 1;
+		outline: none;
+		caret-color: var(--local-text-terminal-primary);
+		min-width: 1ch;
+		padding-left: 0.5ch;
+	}
+
+	.terminal-content :global(.command-output) {
+		white-space: pre-wrap;
+		color: var(--local-text-terminal-primary);
+		margin-bottom: 0.2em;
+	}
+
+	.terminal-content :global(.command-output.help-intro) {
+		color: var(--local-help-intro-text);
+		font-style: italic;
+		margin-bottom: 0.8em;
+	}
+
+	.terminal-content :global(.command-output.link a) {
+		color: var(--local-text-terminal-link);
+		text-decoration: underline;
+	}
+
+	.terminal-content :global(.command-output.link a:hover) {
+		color: var(--local-text-terminal-link-hover);
+	}
+
+	.terminal-content :global(.help-grid) {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+		gap: 5px 15px;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+	}
+
+	.terminal-content :global(.help-command) {
+		color: var(--local-text-terminal-primary);
+	}
+
+	@media (max-width: 576px) {
+		.terminal-content :global(.help-grid) {
+			grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+		}
+	}
+
+	.commands-container::-webkit-scrollbar {
+		width: 8px;
+	}
+	.commands-container::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	.commands-container::-webkit-scrollbar-thumb {
+		background-color: var(--local-border-terminal);
+		border-radius: 4px;
+		border: 2px solid transparent;
+		background-clip: content-box;
+	}
+	.commands-container::-webkit-scrollbar-thumb:hover {
+		background-color: var(--text-highlight-blue);
+	}
+</style>

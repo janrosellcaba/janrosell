@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageNav from '../../components/PageNav.astro';
+
+const entries = await getCollection('blog');
+const posts = entries
+	.map((entry) => {
+		const wordCount = (entry.body ?? '').trim().split(/\s+/).length;
+		const readingTime = Math.ceil(wordCount / 200);
+		return { ...entry.data, slug: entry.id, readingTime };
+	})
+	.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const currentYear = new Date().getFullYear();
+---
+
+<Layout
+	title="The Journal - Jan Rosell"
+	description="The Prompt: A collection of articles and thoughts by Jan Rosell on software development, technology, and career."
+>
+	<PageNav items={['home', 'theme', 'terminal']} />
+
+	<div class="blog-container">
+		<header class="blog-header">
+			<div class="blog-main-title-wrapper">
+				<h1 class="blog-main-title">The Journal</h1>
+				{posts.length > 0 && (
+					<p class="post-count">{posts.length} post{posts.length !== 1 ? 's' : ''}, more coming soon...</p>
+				)}
+			</div>
+			<p class="blog-subtitle">Thoughts on software, technology, and everything in between.</p>
+		</header>
+
+		<main class="post-list">
+			{
+				posts.length === 0 ? (
+					<p class="no-posts-message">No blog posts published yet. Stay tuned!</p>
+				) : (
+					posts.map((post) => (
+						<a href={`/blog/${post.slug}`} class="post-card-link">
+							<article class="post-card">
+								<h2 class="post-card-title">{post.title}</h2>
+								<p class="post-card-summary">{post.summary}</p>
+								<div class="post-card-footer">
+									<time datetime={post.date.toISOString()} class="post-card-date">
+										{dateFormatter.format(post.date)}
+									</time>
+									<span class="post-card-meta">{post.readingTime} min read</span>
+								</div>
+							</article>
+						</a>
+					))
+				)
+			}
+		</main>
+
+		<footer class="site-footer">
+			<p>&copy; {currentYear} Jan Rosell. All rights reserved.</p>
+		</footer>
+	</div>
+</Layout>
+
+<style>
+	.blog-container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+		padding-top: 4rem;
+	}
+
+	.blog-header {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.blog-main-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 8vw, 4rem);
+		color: var(--text-primary);
+	}
+
+	.blog-main-title::after {
+		content: '_';
+		color: var(--text-highlight-blue);
+		animation: blink 1s step-end infinite;
+	}
+
+	@keyframes blink {
+		50% {
+			opacity: 0;
+		}
+	}
+
+	.post-count {
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		margin-top: 0.5rem;
+	}
+
+	.blog-subtitle {
+		font-family: var(--font-body);
+		font-size: clamp(1rem, 4vw, 1.25rem);
+		color: var(--text-secondary);
+		margin-top: 0.5rem;
+	}
+
+	.post-card-link {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+
+	.post-card {
+		background-color: var(--bg-experience-card);
+		border: 1px solid var(--border-experience-card);
+		padding: 1.5rem 2rem;
+		border-radius: 6px;
+		margin-bottom: 1.5rem;
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+
+	.post-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-experience-card-hover);
+	}
+
+	.post-card-title {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 5vw, 1.6rem);
+		color: var(--text-primary);
+		margin-bottom: 0.75rem;
+	}
+
+	.post-card-summary {
+		font-family: var(--font-body);
+		color: var(--text-secondary);
+		line-height: 1.6;
+		margin-bottom: 1rem;
+	}
+
+	.post-card-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--text-secondary);
+		margin-top: 1rem;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.post-card-date {
+		opacity: 0.9;
+	}
+
+	.post-card-meta {
+		color: var(--text-highlight-blue);
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	.no-posts-message {
+		text-align: center;
+		color: var(--text-secondary);
+	}
+
+	.site-footer {
+		text-align: center;
+		margin-top: 5rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--accent-line-code);
+		color: var(--text-secondary);
+		font-size: 0.9rem;
+	}
+</style>

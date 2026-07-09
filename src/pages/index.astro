@@ -1,0 +1,1169 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const techCategories = [
+	{
+		title: 'Backend & Data',
+		skills: [
+			'C, C++',
+			'Python',
+			'Java',
+			'R',
+			'SQL (PostgreSQL, Oracle)',
+			'RESTful API Design',
+			'Data Structures & Algorithms',
+			'UML',
+		],
+	},
+	{
+		title: 'Frontend & UI/UX',
+		skills: [
+			'HTML5, CSS3, SCSS',
+			'TypeScript',
+			'JavaScript',
+			'React.js',
+			'Angular',
+			'Vite',
+			'UI/UX Design Principles',
+			'Figma',
+			'Interface Design',
+		],
+	},
+	{
+		title: 'DevOps & Tools',
+		skills: [
+			'Git, GitHub, GitLab',
+			'Linux & Shell Scripting',
+			'Docker',
+			'Yocto',
+			'Agile Methodologies (Scrum)',
+			'Analytical Problem-Solving',
+			'English (C1), Catalan & Spanish (Native)',
+		],
+	},
+];
+
+const experience = [
+	{
+		title: 'Co-founder & CTO',
+		organization: 'Express My Health',
+		date: 'Feb 2025 - Present',
+		details: [
+			'Lead the technical vision, architecture and development of a secure assistive communication platform.',
+			'Drive strategic decisions, product design and innovation aligned with user needs and clinical feedback.',
+			'Coordinate client meetings, user testing, and partner collaboration to ensure real-world validation and impact.',
+			'Oversee a cross-functional team, define agile processes and ensure scalable, maintainable codebases across services.',
+		],
+		delay: '0s',
+	},
+	{
+		title: 'Software Developer',
+		organization: 'Lanaccess Telecom',
+		date: 'Feb 2025 - Present',
+		details: [
+			'Develop a full-featured web interface for real-time video visualization and device configuration using modern frontend technologies.',
+			'Design and implement backend components including database schemas, API integrations and system logic.',
+			'Take full ownership of the frontend architecture, UI/UX, and client-side logic for complex workflows.',
+			'Integrate intelligent modules into production systems, including people-counting and analytics features.',
+		],
+		delay: '0.1s',
+	},
+	{
+		title: 'Computer Science Student',
+		organization: 'FIB, UPC Barcelona',
+		date: 'Sep 2022 - Est. June 2026',
+		details: [
+			'Specializing in Software Engineering with a strong foundation in AI, cybersecurity and software development and architecture.',
+		],
+		delay: '0.2s',
+	},
+	{
+		title: 'UNICAT Ambassador',
+		organization: 'EU Careers',
+		date: 'Feb 2024 - Jun 2025',
+		details: ['Promote EU career opportunities to university community through events and student outreach.'],
+		delay: '0.3s',
+	},
+	{
+		title: 'Technical Support Scholar',
+		organization: 'UPC Alumni',
+		date: 'Feb 2024 - Feb 2025',
+		details: ['Provided technical support and contributed to analysis and organization of events.'],
+		delay: '0.4s',
+	},
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<Layout>
+	<div class="nav-controls" id="navControls">
+		<button class="nav-button nav-toggle" id="navToggle" aria-label="Navigation menu" aria-expanded="false" aria-controls="navOverlay">
+			<span class="nav-toggle-icon"></span>
+		</button>
+		<button class="nav-button theme-toggle" aria-label="Change theme">
+			<span class="material-symbols-outlined icon-sun">light_mode</span>
+			<span class="material-symbols-outlined icon-moon">dark_mode</span>
+		</button>
+		<a href="/terminal" class="nav-button terminal-toggle" aria-label="Open Terminal">
+			<span class="material-symbols-outlined">terminal</span>
+		</a>
+		<a href="/blog" class="nav-button blog-link" aria-label="Go to Blog">Blog</a>
+	</div>
+
+	<nav class="nav-overlay" id="navOverlay">
+		<div class="nav-overlay-content-wrapper">
+			<ul>
+				<li><a href="#intro" class="nav-close-link">Home</a></li>
+				<li><a href="#about-me" class="nav-close-link">About Me</a></li>
+				<li><a href="#technologies" class="nav-close-link">Technologies</a></li>
+				<li><a href="#experience-education" class="nav-close-link">Experience</a></li>
+				<li><a href="#contact" class="nav-close-link">Contact</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<main>
+		<section class="content-section" id="intro">
+			<h1 class="intro-title">
+				<span class="line name-jan reveal-on-scroll">Jan</span>
+				<span class="line indent name-rosell reveal-on-scroll">Rosell</span>
+			</h1>
+			<p class="intro-subtitle reveal-on-scroll">
+				<span class="highlight">Co-founder & CTO</span> at Express My Health and
+				<span class="highlight">Computer Science Engineering Student</span> at UPC.
+				<span class="comment-like"
+					>Exploring modern computing to deliver thoughtful software solutions with purpose and precision.</span
+				>
+			</p>
+			<div class="scroll-down-indicator reveal-on-scroll" style="transition-delay: 0.6s;" id="scrollDown">
+				<span class="material-symbols-outlined">south</span>
+			</div>
+		</section>
+
+		<section class="content-section" id="about-me">
+			<div class="content-wrapper">
+				<h2 class="about-me-heading reveal-on-scroll">About Jan</h2>
+				<div class="about-me-text reveal-on-scroll">
+					<p>
+						As <strong>Co-founder & CTO</strong> at Express My Health, a Computer Science Engineering
+						student at <strong>FIB (UPC)</strong> and a <strong>Software Developer</strong> at Lanaccess, I
+						am focused on building robust, well-designed software systems. Driven by curiosity, with a
+						particular interest in understanding complex systems and solving challenging problems.
+					</p>
+					<p>
+						A growing interest in <strong>Project Management</strong> provides a complementary perspective
+						to technical training, especially in aligning technology with strategic outcomes and efficient
+						collaboration.
+						<span class="comentari-estilitzat"
+							>Born and based in Barcelona, with three years spent living in Ireland, bringing a mindset
+							shaped by engineering rigor and a hands-on drive to craft meaningful, lasting solutions.</span
+						>
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="content-section" id="technologies">
+			<div class="technologies-container">
+				<div class="technologies-main-title-container">
+					<h2 class="technologies-main-title reveal-on-scroll">Technologies</h2>
+					<p class="technologies-subtitle reveal-on-scroll">
+						The tools and languages I use to build and innovate in the digital world.
+					</p>
+				</div>
+				<div class="skills-grid-tech">
+					{
+						techCategories.map((cat) => (
+							<div class="skill-category-card reveal-on-scroll">
+								<h3>{cat.title}</h3>
+								<ul>
+									{cat.skills.map((skill) => <li>{skill}</li>)}
+								</ul>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="content-section" id="experience-education">
+			<h2 class="experience-education-title reveal-on-scroll">Experience_&_Education</h2>
+			<div class="experience-education-grid">
+				{
+					experience.map((item) => (
+						<div class="experience-item reveal-on-scroll" style={{ transitionDelay: item.delay }}>
+							<h3>{item.title}</h3>
+							<div class="org-date">
+								<span class="organization">{item.organization}</span> | <span class="date">{item.date}</span>
+							</div>
+							<ul>
+								{item.details.map((detail) => <li>{detail}</li>)}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+		</section>
+
+		<section class="content-section" id="contact">
+			<h2 class="contact-heading reveal-on-scroll">Interested?<br />Let's_Connect</h2>
+			<p class="contact-subheading reveal-on-scroll">
+				Always open to discussing new ideas, challenging projects, or collaboration opportunities.
+			</p>
+
+			<a href="mailto:jan@janrosell.com" class="contact-email-link reveal-on-scroll">jan&#64;janrosell.com</a>
+
+			<div class="contact-socials reveal-on-scroll" style="transition-delay: 0.1s;">
+				<a href="https://github.com/janrosellcaba" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/janrosell/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<p>&copy; {currentYear} Jan Rosell. Code with purpose, design with intent.</p>
+	</footer>
+
+	<script type="application/ld+json" is:inline>
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Jan Rosell Caba",
+			"jobTitle": "Co-founder & CTO",
+			"url": "https://www.janrosell.com",
+			"image": "https://www.janrosell.com/image.png",
+			"sameAs": ["https://www.linkedin.com/in/janrosell/", "https://github.com/janrosellcaba"],
+			"alumniOf": {
+				"@type": "CollegeOrUniversity",
+				"name": "Universitat Politècnica de Catalunya (UPC) - Facultat d'Informàtica de Barcelona (FIB)"
+			},
+			"worksFor": [
+				{ "@type": "Organization", "name": "Express My Health" },
+				{ "@type": "Organization", "name": "Lanaccess" }
+			],
+			"knowsAbout": [
+				"Software Engineering",
+				"Angular",
+				"Python",
+				"C++",
+				"Artificial Intelligence",
+				"Cybersecurity",
+				"Project Management"
+			],
+			"description": "Software Developer and Computer Science Engineering Student passionate about technology. Co-founder & CTO of Express My Health.",
+			"memberOf": { "@type": "Organization", "name": "Express My Health" }
+		}
+	</script>
+</Layout>
+
+<script>
+	const navToggle = document.getElementById('navToggle');
+	const navControls = document.getElementById('navControls');
+	const navOverlay = document.getElementById('navOverlay');
+
+	function closeNav() {
+		navControls?.classList.remove('menu-open');
+		navOverlay?.classList.remove('open');
+		navToggle?.setAttribute('aria-expanded', 'false');
+	}
+
+	navToggle?.addEventListener('click', () => {
+		const isOpen = navOverlay?.classList.toggle('open');
+		navControls?.classList.toggle('menu-open', isOpen);
+		navToggle.setAttribute('aria-expanded', String(!!isOpen));
+	});
+
+	navOverlay?.addEventListener('click', (e) => {
+		if (e.target === navOverlay) closeNav();
+	});
+
+	document.querySelectorAll('.nav-close-link').forEach((link) => {
+		link.addEventListener('click', closeNav);
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeNav();
+	});
+
+	document.getElementById('scrollDown')?.addEventListener('click', () => {
+		document.getElementById('about-me')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	});
+</script>
+
+<style>
+	/* --- Navigation --- */
+	.nav-controls {
+		position: fixed;
+		top: 1.5rem;
+		right: 1.5rem;
+		z-index: 1001;
+		display: flex;
+		gap: 0.6rem;
+		align-items: center;
+		flex-direction: row-reverse;
+	}
+
+	@media (min-width: 768px) {
+		.nav-controls {
+			top: 2.2rem;
+			right: 2.2rem;
+			gap: 0.8rem;
+		}
+	}
+
+	.nav-button {
+		background: none;
+		border: none;
+		padding: 0.4rem;
+		cursor: pointer;
+		color: var(--text-primary);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		font-family: inherit;
+	}
+
+	.nav-button .material-symbols-outlined {
+		font-size: 22px;
+		vertical-align: middle;
+	}
+
+	.nav-button:hover {
+		color: var(--text-highlight-blue);
+	}
+
+	.nav-controls.menu-open .nav-toggle:hover .nav-toggle-icon,
+	.nav-button:hover .nav-toggle-icon,
+	.nav-button:hover .nav-toggle-icon::before,
+	.nav-button:hover .nav-toggle-icon::after {
+		background-color: var(--text-highlight-blue);
+	}
+
+	@media (min-width: 768px) {
+		.nav-button {
+			padding: 0.5rem;
+		}
+		.nav-button .material-symbols-outlined {
+			font-size: 24px;
+		}
+	}
+
+	.blog-link {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.9rem;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		text-decoration-thickness: 1px;
+		color: var(--text-secondary);
+	}
+
+	.blog-link:hover {
+		color: var(--text-highlight-blue) !important;
+	}
+
+	@media (min-width: 768px) {
+		.blog-link {
+			font-size: 1rem;
+		}
+	}
+
+	.nav-toggle-icon {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background-color: var(--text-primary);
+		position: relative;
+	}
+
+	@media (min-width: 768px) {
+		.nav-toggle-icon {
+			width: 26px;
+		}
+	}
+
+	.nav-toggle-icon::before,
+	.nav-toggle-icon::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background-color: var(--text-primary);
+		transition:
+			transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+			top 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+	}
+
+	.nav-toggle-icon::before {
+		top: -6px;
+	}
+	.nav-toggle-icon::after {
+		top: 6px;
+	}
+
+	@media (min-width: 768px) {
+		.nav-toggle-icon::before {
+			top: -7px;
+		}
+		.nav-toggle-icon::after {
+			top: 7px;
+		}
+	}
+
+	.nav-controls.menu-open .nav-toggle .nav-toggle-icon {
+		background-color: transparent !important;
+	}
+	.nav-controls.menu-open .nav-toggle .nav-toggle-icon::before {
+		top: 0;
+		transform: rotate(45deg);
+	}
+	.nav-controls.menu-open .nav-toggle .nav-toggle-icon::after {
+		top: 0;
+		transform: rotate(-45deg);
+	}
+
+	.nav-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--nav-overlay-bg);
+		backdrop-filter: blur(10px);
+		z-index: 1000;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		opacity: 0;
+		visibility: hidden;
+		transition:
+			opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+			visibility 0s linear 0.4s;
+		pointer-events: none;
+	}
+
+	.nav-overlay.open {
+		opacity: 1;
+		visibility: visible;
+		transition-delay: 0s;
+		pointer-events: auto;
+	}
+
+	.nav-overlay-content-wrapper {
+		padding: 1.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.nav-overlay-content-wrapper {
+			padding: 2rem;
+		}
+	}
+
+	.nav-overlay ul {
+		list-style: none;
+		text-align: center;
+		padding: 0;
+	}
+
+	.nav-overlay li {
+		margin-bottom: 1.8rem;
+	}
+
+	@media (min-width: 768px) {
+		.nav-overlay li {
+			margin-bottom: 2.2rem;
+		}
+	}
+
+	.nav-overlay a {
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 6vw, 2.8rem);
+		color: var(--text-primary);
+		text-decoration: none;
+		transition:
+			color 0.3s ease,
+			letter-spacing 0.3s ease;
+		display: inline-block;
+		padding: 0.1em 0;
+	}
+
+	@media (min-width: 768px) {
+		.nav-overlay a {
+			font-size: clamp(2rem, 5.5vw, 3.2rem);
+		}
+	}
+
+	.nav-overlay a:hover {
+		color: var(--text-highlight-blue);
+		letter-spacing: 0.5px;
+	}
+
+	.nav-overlay a::before {
+		content: '> ';
+		font-family: var(--font-mono);
+		color: var(--text-highlight-blue);
+		opacity: 0;
+		transition:
+			opacity 0.3s ease,
+			transform 0.3s ease;
+		display: inline-block;
+		transform: translateX(-10px);
+	}
+
+	.nav-overlay a:hover::before {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	/* --- Main sections --- */
+	.content-section {
+		min-height: 100vh;
+		padding: 15vh 5vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		position: relative;
+		overflow: hidden;
+		transition: background-color 0.3s ease;
+	}
+
+	@media (min-width: 768px) {
+		.content-section {
+			padding: 12vh 5vw;
+		}
+	}
+
+	/* --- Hero / intro --- */
+	#intro {
+		text-align: left;
+	}
+
+	.intro-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.8rem, 10vw, 7.5rem);
+		line-height: var(--line-height-display);
+		color: var(--text-primary);
+		margin: 0;
+	}
+
+	.intro-title .line {
+		display: block;
+	}
+
+	.intro-title .line:nth-child(1) {
+		transition-delay: 0.1s;
+	}
+	.intro-title .line:nth-child(2) {
+		transition-delay: 0.25s;
+	}
+
+	.intro-title .line.name-jan::before {
+		content: '<';
+		color: var(--text-highlight-blue);
+		font-size: 0.7em;
+		margin-right: 0.15em;
+		opacity: 0.8;
+		font-weight: normal;
+	}
+
+	.intro-title .line.name-rosell::after {
+		content: ' />';
+		color: var(--text-highlight-blue);
+		font-size: 0.7em;
+		margin-left: 0.15em;
+		opacity: 0.8;
+		font-weight: normal;
+	}
+
+	.intro-title .indent {
+		margin-left: clamp(0.5rem, 4vw, 3rem);
+	}
+
+	.intro-subtitle {
+		font-family: var(--font-body);
+		font-size: clamp(0.95rem, 4vw, 1.4rem);
+		color: var(--text-secondary);
+		max-width: 55ch;
+		margin-top: 2rem;
+		font-weight: 400;
+		line-height: 1.6;
+		transition-delay: 0.4s;
+	}
+
+	@media (min-width: 768px) {
+		.intro-subtitle {
+			font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+			margin-top: 2.5rem;
+			line-height: 1.65;
+		}
+	}
+
+	.intro-subtitle .highlight {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		color: var(--text-highlight-blue);
+		background-color: var(--text-highlight-blue-bg);
+		padding: 0.05em 0.3em;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+
+	@media (min-width: 768px) {
+		.intro-subtitle .highlight {
+			font-size: 0.95em;
+		}
+	}
+
+	.intro-subtitle .comment-like {
+		display: block;
+		margin-top: 1em;
+		font-family: var(--font-mono);
+		color: var(--text-code-comment);
+		font-size: 0.85em;
+		opacity: 0.9;
+	}
+
+	@media (min-width: 768px) {
+		.intro-subtitle .comment-like {
+			font-size: 0.9em;
+		}
+	}
+
+	.intro-subtitle .comment-like::before {
+		content: '// ';
+	}
+
+	.scroll-down-indicator {
+		position: absolute;
+		bottom: 1.5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 10;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	@media (min-width: 768px) {
+		.scroll-down-indicator {
+			bottom: 2rem;
+		}
+	}
+
+	.scroll-down-indicator .material-symbols-outlined {
+		font-size: 1.8rem;
+		color: var(--text-highlight-blue);
+		animation: bounceArrow 2.5s infinite cubic-bezier(0.5, 0.05, 0.5, 0.95);
+		opacity: 0.7;
+		transition: color 0.3s ease;
+	}
+
+	@media (min-width: 768px) {
+		.scroll-down-indicator .material-symbols-outlined {
+			font-size: 2rem;
+		}
+	}
+
+	.scroll-down-indicator:hover .material-symbols-outlined {
+		color: var(--text-highlight-blue);
+		opacity: 1;
+	}
+
+	@keyframes bounceArrow {
+		0%,
+		20%,
+		50%,
+		80%,
+		100% {
+			transform: translateY(0);
+		}
+		40% {
+			transform: translateY(-10px);
+		}
+		60% {
+			transform: translateY(-5px);
+		}
+	}
+
+	/* --- About me --- */
+	#about-me {
+		background-image: var(--bg-about-me);
+	}
+
+	#about-me .content-wrapper {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.about-me-heading {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 7vw, 4rem);
+		color: var(--text-primary);
+		margin-bottom: 2rem;
+		line-height: 1.1;
+	}
+
+	@media (min-width: 768px) {
+		.about-me-heading {
+			font-size: clamp(2.5rem, 5.5vw, 4rem);
+			margin-bottom: 2.5rem;
+			line-height: 1.15;
+		}
+	}
+
+	.about-me-heading::after {
+		content: ';';
+		color: var(--text-highlight-blue);
+	}
+
+	.about-me-text {
+		font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+		line-height: 1.7;
+		color: var(--text-primary);
+		font-weight: 400;
+	}
+
+	@media (min-width: 768px) {
+		.about-me-text {
+			font-size: clamp(1.05rem, 1.55vw, 1.25rem);
+			line-height: 1.8;
+		}
+	}
+
+	.about-me-text p {
+		margin-bottom: 1.2em;
+	}
+
+	@media (min-width: 768px) {
+		.about-me-text p {
+			margin-bottom: 1.5em;
+		}
+	}
+
+	.about-me-text strong {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		color: var(--text-highlight-blue);
+	}
+
+	/* --- Technologies --- */
+	#technologies {
+		background-color: var(--bg-technologies);
+	}
+
+	.technologies-main-title-container {
+		text-align: center;
+		margin-bottom: 3rem;
+		position: relative;
+	}
+
+	@media (min-width: 768px) {
+		.technologies-main-title-container {
+			margin-bottom: 4rem;
+		}
+	}
+
+	.technologies-main-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 8vw, 5.5rem);
+		line-height: 1;
+		text-transform: uppercase;
+		margin-bottom: 0.5rem;
+		display: inline-flex;
+		white-space: normal;
+		color: var(--text-primary);
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media (min-width: 576px) {
+		.technologies-main-title {
+			white-space: nowrap;
+		}
+	}
+
+	.technologies-main-title::before {
+		content: '{ ';
+		color: var(--text-highlight-blue);
+	}
+	.technologies-main-title::after {
+		content: ' }';
+		color: var(--text-highlight-blue);
+	}
+
+	.technologies-subtitle {
+		font-family: var(--font-body);
+		font-size: clamp(0.9rem, 3.5vw, 1.25rem);
+		color: var(--text-secondary);
+		max-width: 60ch;
+		margin: 0 auto;
+	}
+
+	.skills-grid-tech {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1.2rem;
+		margin-top: 2.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.skills-grid-tech {
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 1.5rem;
+			margin-top: 3rem;
+		}
+	}
+
+	.skills-grid-tech .skill-category-card:nth-child(2) {
+		transition-delay: 0.15s;
+	}
+	.skills-grid-tech .skill-category-card:nth-child(3) {
+		transition-delay: 0.3s;
+	}
+
+	.skill-category-card {
+		background-color: var(--bg-skill-card);
+		border: 1px solid var(--border-skill-card);
+		padding: 1.5rem 1.2rem;
+		border-radius: 6px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+	}
+
+	@media (min-width: 768px) {
+		.skill-category-card {
+			padding: 1.8rem 1.5rem;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	.skill-category-card h3 {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: clamp(1rem, 4vw, 1.3rem);
+		color: var(--text-highlight-blue);
+		margin-bottom: 1rem;
+		letter-spacing: 0.5px;
+	}
+
+	@media (min-width: 768px) {
+		.skill-category-card h3 {
+			font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+			margin-bottom: 1.2rem;
+		}
+	}
+
+	.skill-category-card ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.skill-category-card li {
+		font-family: var(--font-body);
+		font-size: clamp(0.85rem, 3vw, 1.05rem);
+		color: var(--text-secondary);
+		margin-bottom: 0.5rem;
+		line-height: 1.5;
+		padding-left: 1.2em;
+		position: relative;
+	}
+
+	@media (min-width: 768px) {
+		.skill-category-card li {
+			font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+			margin-bottom: 0.6rem;
+			line-height: 1.6;
+		}
+	}
+
+	.skill-category-card li::before {
+		content: '>';
+		position: absolute;
+		left: 0;
+		font-family: var(--font-mono);
+		color: var(--text-highlight-blue);
+		opacity: 0.7;
+	}
+
+	/* --- Experience & Education --- */
+	#experience-education {
+		background-color: var(--bg-section-alt);
+	}
+
+	.experience-education-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 8vw, 5.5rem);
+		color: var(--text-primary);
+		margin-bottom: 3rem;
+		line-height: 1;
+		text-transform: uppercase;
+		white-space: normal;
+		word-break: break-word;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media (min-width: 768px) {
+		.experience-education-title {
+			font-size: clamp(3rem, 7vw, 5.5rem);
+			margin-bottom: 4rem;
+			text-align: left;
+			justify-content: flex-start;
+		}
+	}
+
+	.experience-education-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		max-width: 800px;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	@media (min-width: 800px) {
+		.experience-education-grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 2.5rem;
+			max-width: 1100px;
+		}
+	}
+
+	.experience-item {
+		padding: 1.5rem;
+		background-color: var(--bg-experience-card);
+		border: 1px solid var(--border-experience-card);
+		box-shadow: var(--shadow-experience-card);
+		border-radius: 6px;
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+
+	@media (min-width: 768px) {
+		.experience-item {
+			padding: 2rem;
+		}
+	}
+
+	.experience-item:hover {
+		transform: translateY(-4px) scale(1.01);
+		box-shadow: var(--shadow-experience-card-hover);
+	}
+
+	.experience-item h3 {
+		font-family: var(--font-display);
+		font-weight: normal;
+		font-size: clamp(1.1rem, 4.5vw, 1.7rem);
+		color: var(--text-primary);
+		margin-bottom: 0.4rem;
+	}
+
+	@media (min-width: 768px) {
+		.experience-item h3 {
+			font-size: clamp(1.25rem, 2vw, 1.7rem);
+		}
+	}
+
+	.experience-item .org-date {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--text-secondary);
+		margin-bottom: 1rem;
+		display: block;
+		line-height: var(--line-height-mono);
+	}
+
+	@media (min-width: 768px) {
+		.experience-item .org-date {
+			font-size: 0.9rem;
+		}
+	}
+
+	.experience-item .org-date .organization {
+		font-weight: 700;
+		color: var(--text-highlight-blue);
+	}
+
+	.experience-item ul {
+		font-size: clamp(0.9rem, 3.2vw, 1.05rem);
+		color: var(--text-secondary);
+		margin-bottom: 0.5rem;
+		padding-left: 1.2rem;
+	}
+
+	@media (min-width: 768px) {
+		.experience-item ul {
+			font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+		}
+	}
+
+	.experience-item ul li {
+		margin-bottom: 0.3rem;
+	}
+
+	.experience-item ul li::marker {
+		color: var(--text-highlight-blue);
+		font-size: 0.9em;
+	}
+
+	/* --- Contact --- */
+	#contact {
+		background-color: var(--bg-contact);
+		background-image: var(--bg-noise-texture);
+		text-align: center;
+	}
+
+	.contact-heading {
+		font-family: var(--font-display);
+		font-size: clamp(2.2rem, 7vw, 5.5rem);
+		color: var(--text-primary);
+		margin-bottom: 1.5rem;
+		line-height: 1.1;
+	}
+
+	.contact-subheading {
+		font-family: var(--font-body);
+		font-size: clamp(1rem, 3.8vw, 1.3rem);
+		color: var(--text-secondary);
+		max-width: 600px;
+		margin: 0 auto 2.5rem auto;
+	}
+
+	@media (min-width: 768px) {
+		.contact-subheading {
+			margin: 0 auto 3rem auto;
+		}
+	}
+
+	.contact-email-link {
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: clamp(1.1rem, 5vw, 2rem);
+		color: var(--text-highlight-blue);
+		text-decoration: none;
+		padding: 0.5em 1em;
+		border: 1px solid var(--accent-line-code);
+		border-radius: 4px;
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease,
+			transform 0.2s ease;
+		display: inline-block;
+		word-break: break-all;
+	}
+
+	@media (min-width: 768px) {
+		.contact-email-link {
+			font-size: clamp(1.4rem, 3vw, 2.4rem);
+			padding: 0.4em 0.8em;
+		}
+	}
+
+	.contact-email-link:hover {
+		background-color: var(--text-highlight-blue);
+		color: var(--bg-main);
+		transform: translateY(-2px);
+	}
+
+	.contact-socials {
+		margin-top: 3rem;
+	}
+
+	@media (min-width: 768px) {
+		.contact-socials {
+			margin-top: 4rem;
+		}
+	}
+
+	.contact-socials a {
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.85rem;
+		color: var(--text-secondary);
+		text-decoration: none;
+		margin: 0 0.8rem 0.5rem;
+		transition:
+			color 0.3s ease,
+			transform 0.3s ease;
+		display: inline-block;
+		letter-spacing: 0.5px;
+	}
+
+	@media (min-width: 768px) {
+		.contact-socials a {
+			font-size: 0.9rem;
+			margin: 0 1.2rem;
+		}
+	}
+
+	.contact-socials a:hover {
+		color: var(--text-highlight-blue);
+		transform: translateY(-2px);
+	}
+
+	.contact-socials a::before {
+		content: '[';
+		color: var(--accent-line-code);
+		margin-right: 0.3em;
+		font-weight: normal;
+	}
+	.contact-socials a::after {
+		content: ']';
+		color: var(--accent-line-code);
+		margin-left: 0.3em;
+		font-weight: normal;
+	}
+
+	/* --- Reveal-on-scroll animation --- */
+	.reveal-on-scroll {
+		opacity: 0;
+		transform: translateY(20px);
+		transition-property: opacity, transform;
+		transition-duration: 0.8s;
+		transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+	}
+
+	.reveal-on-scroll.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* --- Footer --- */
+	.site-footer {
+		padding: 2.5rem 5vw;
+		text-align: center;
+		font-size: 0.85rem;
+		color: var(--text-secondary);
+		opacity: 0.8;
+		background-color: var(--bg-main);
+		position: relative;
+	}
+
+	@media (min-width: 768px) {
+		.site-footer {
+			padding: 3.5rem 5vw;
+			font-size: 0.9rem;
+		}
+	}
+
+	.site-footer::before {
+		content: '';
+		display: block;
+		width: 50px;
+		height: 1px;
+		background-color: var(--accent-line-code);
+		margin: 0 auto 1.5rem auto;
+		opacity: 0.7;
+	}
+
+	@media (min-width: 768px) {
+		.site-footer::before {
+			margin: 0 auto 2rem auto;
+		}
+	}
+</style>

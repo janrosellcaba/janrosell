@@ -1,0 +1,249 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageNav from '../../components/PageNav.astro';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('blog');
+	return entries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { title, subtitle, date, summary } = entry.data;
+const { Content } = await render(entry);
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const wordCount = (entry.body ?? '').trim().split(/\s+/).length;
+const readingTime = Math.ceil(wordCount / 200);
+---
+
+<Layout title={`The Journal - Jan Rosell`} description={summary}>
+	<div class="reading-progress-bar" id="readingProgress"></div>
+
+	<PageNav items={['home', 'theme', 'terminal']} />
+
+	<div class="post-container">
+		<article class="post-content">
+			<a href="/blog" class="back-to-blog">&larr; Back to all posts</a>
+			<header class="post-header">
+				<h1 class="post-title">{title}</h1>
+				{subtitle && <p class="post-subtitle">{subtitle}</p>}
+				<p class="post-meta">
+					Published on <time datetime={date.toISOString()}>{dateFormatter.format(date)}</time>
+					<span class="meta-separator">&bull;</span>
+					<span>{readingTime} min read</span>
+				</p>
+			</header>
+			<div class="post-body">
+				<Content />
+			</div>
+		</article>
+	</div>
+
+	<script type="application/ld+json" is:inline set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: title,
+		description: summary,
+		datePublished: date.toISOString(),
+		author: { '@type': 'Person', name: 'Jan Rosell', url: 'https://www.janrosell.com' },
+	})} />
+</Layout>
+
+<script>
+	const bar = document.getElementById('readingProgress');
+	function updateProgress() {
+		const scrollY = window.scrollY || document.documentElement.scrollTop;
+		const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		const progress = totalHeight > 0 ? (scrollY / totalHeight) * 100 : 0;
+		if (bar) bar.style.width = `${progress}%`;
+	}
+	window.addEventListener('scroll', updateProgress);
+	updateProgress();
+</script>
+
+<style>
+	.reading-progress-bar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 4px;
+		background: var(--text-highlight-blue);
+		z-index: 9999;
+		width: 0%;
+		transition: width 0.1s ease-out;
+	}
+
+	.post-container {
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 2rem;
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+	}
+
+	@media (max-width: 576px) {
+		.post-container {
+			padding-top: 4rem;
+		}
+	}
+
+	.back-to-blog {
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		color: var(--text-highlight-blue);
+		text-decoration: none;
+		display: inline-block;
+		margin-bottom: 2.5rem;
+		transition: transform 0.2s ease;
+	}
+
+	.back-to-blog:hover {
+		transform: translateX(-4px);
+	}
+
+	.post-header {
+		margin-bottom: 3rem;
+		border-bottom: 1px solid var(--border-experience-card);
+		padding-bottom: 2rem;
+	}
+
+	.post-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.2rem, 7vw, 3.5rem);
+		line-height: 1.1;
+		margin-bottom: 1rem;
+	}
+
+	.post-subtitle {
+		font-family: var(--font-body);
+		font-size: clamp(1.1rem, 3vw, 1.4rem);
+		line-height: 1.4;
+		color: var(--text-secondary);
+		margin-bottom: 1.2rem;
+	}
+
+	.post-meta {
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		color: var(--text-secondary);
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.meta-separator {
+		color: var(--accent-line-code);
+	}
+
+	.post-body {
+		font-family: var(--font-body);
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--text-primary);
+	}
+
+	@media (max-width: 576px) {
+		.post-body {
+			font-size: 1rem;
+			line-height: 1.7;
+		}
+	}
+
+	.post-body :global(h1),
+	.post-body :global(h2),
+	.post-body :global(h3),
+	.post-body :global(h4),
+	.post-body :global(h5),
+	.post-body :global(h6) {
+		font-family: var(--font-display);
+		line-height: 1.4;
+		margin-top: 2.5em;
+		margin-bottom: 1.2em;
+		color: var(--text-primary);
+	}
+
+	.post-body :global(h1) {
+		font-size: 2.2em;
+	}
+	.post-body :global(h2) {
+		font-size: 1.8em;
+	}
+	.post-body :global(h3) {
+		font-size: 1.4em;
+	}
+
+	.post-body :global(h1),
+	.post-body :global(h2) {
+		border-bottom: 1px solid var(--border-experience-card);
+		padding-bottom: 0.4em;
+	}
+
+	.post-body :global(p) {
+		margin-bottom: 1.5em;
+	}
+
+	.post-body :global(a) {
+		color: var(--text-highlight-blue);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease;
+	}
+
+	.post-body :global(a:hover) {
+		color: var(--text-primary);
+	}
+
+	.post-body :global(ul),
+	.post-body :global(ol) {
+		margin-bottom: 1.5em;
+		padding-left: 2em;
+	}
+
+	.post-body :global(li) {
+		margin-bottom: 0.75em;
+	}
+
+	.post-body :global(blockquote) {
+		margin: 0 0 1.5em 0;
+		padding: 0.5em 1.2em;
+		border-left: 4px solid var(--accent-line-code);
+		background-color: var(--bg-experience-card);
+		color: var(--text-secondary);
+		font-style: italic;
+	}
+
+	.post-body :global(blockquote p) {
+		margin-bottom: 0;
+	}
+
+	.post-body :global(hr) {
+		border: 0;
+		height: 1px;
+		background-color: var(--border-experience-card);
+		margin: 3em 0;
+	}
+
+	.post-body :global(:not(pre) > code) {
+		font-family: var(--font-mono);
+		background-color: var(--text-highlight-blue-bg);
+		color: var(--text-highlight-blue);
+		padding: 0.2em 0.4em;
+		border-radius: 4px;
+		font-size: 0.85em;
+	}
+
+	.post-body :global(pre) {
+		margin-top: 2em;
+		margin-bottom: 2em;
+		padding: 1.25em 1.5em;
+		border-radius: 8px;
+		overflow-x: auto;
+		font-family: var(--font-mono);
+		font-size: 0.9em;
+	}
+</style>
