@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 import keystatic from '@keystatic/astro';
 
 // https://astro.build/config
@@ -12,7 +12,5 @@ export default defineConfig({
 
   output: 'static',
 
-  adapter: node({
-    mode: 'standalone'
-  })
+  adapter: vercel(),
 });

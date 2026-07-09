@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
 	title?: string;
@@ -59,6 +60,8 @@ const {
 	</head>
 	<body>
 		<slot />
+
+		<Analytics />
 
 		<script>
 			function applyTheme(theme: 'light' | 'dark') {
