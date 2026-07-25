@@ -1,6 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageNav from '../components/PageNav.astro';
+import { getHome, getExperience } from '../lib/keystatic';
+
+const home = await getHome();
+const experience = await getExperience();
+const currentJobs = experience.filter((item) => item.current);
+
+const terminalData = {
+	job: currentJobs.map((item) => `${item.role} at ${item.organization}`).join(' & ') + '.',
+	experienceSummary:
+		currentJobs
+			.map((item) => `- ${item.role} at ${item.organization} (${item.dateRange})\n  ${item.details[0] ?? ''}`)
+			.join('\n\n') +
+		`\n\nFor more detailed experience, please see my LinkedIn profile (type 'linkedin') or my CV (type 'cv').`,
+	skills: home.technologies.categories.flatMap((cat) => cat.skills),
+	projects: currentJobs.map((item) => ({
+		name: item.organization,
+		description: `Contributing to ${item.organization}'s work. (${item.role})`,
+	})),
+};
 ---
 
 <Layout
@@ -45,8 +64,21 @@ import PageNav from '../components/PageNav.astro';
 	</div>
 </Layout>
 
+<script type="application/json" id="terminal-data" is:inline set:html={JSON.stringify(terminalData).replace(/</g, '\\u003c')} />
+
 <script>
 	type CommandResult = string | { type: 'link'; url: string; text: string } | void;
+
+	type TerminalData = {
+		job: string;
+		experienceSummary: string;
+		skills: string[];
+		projects: { name: string; description: string }[];
+	};
+
+	const terminalData: TerminalData = JSON.parse(
+		document.getElementById('terminal-data')?.textContent || '{}',
+	);
 
 	const promptUser = 'user@janrosell.dev:~';
 	const promptSymbol = '$';
@@ -77,70 +109,29 @@ Complementary Studies:
 	}
 
 	function showExperienceSummary(): string {
-		return `Current Role:
-- Software Developer at Lanaccess Telecom (Target Feb 2025 - Present)
-  Focusing on developing and maintaining impactful software solutions.
-
-For more detailed experience, please see my LinkedIn profile (type 'linkedin') or my CV (type 'cv').`;
+		return terminalData.experienceSummary;
 	}
 
 	function showSkillsList(): string {
-		const mainSkills = [
-			'C/C++',
-			'Python',
-			'Java',
-			'SQL',
-			'R',
-			'TypeScript',
-			'JavaScript',
-			'HTML/CSS',
-			'Angular',
-			'React',
-			'Vite',
-			'UI/UX Design',
-			'Interface Design',
-			'Figma',
-			'Git',
-			'Linux',
-			'Docker',
-			'Shell Scripting',
-			'Yocto',
-			'REST API Design',
-			'Data Structures',
-			'Algorithms',
-			'UML',
-			'Agile (Scrum)',
-			'Problem Solving',
-		];
-		return 'Key Skills:\n' + mainSkills.map((skill) => `  - ${skill}`).join('\n');
+		return 'Key Skills:\n' + terminalData.skills.map((skill) => `  - ${skill}`).join('\n');
 	}
 
 	function showProjectsList(): string {
 		const projects = [
-			{ name: 'Express My Health', description: 'An assistive communication platform.', linkCmd: 'N/A' },
-			{
-				name: 'Lanaccess Development Projects',
-				description: 'Contributing to an important software solution at Lanaccess. (Details are confidential)',
-				linkCmd: 'N/A',
-			},
+			...terminalData.projects,
 			{
 				name: 'Personal Portfolio (this website!)',
-				description: 'Built with Angular, showcasing my skills and projects. You are here!',
-				linkCmd: 'N/A',
+				description: 'Built with Astro, showcasing my skills and projects. You are here!',
 			},
 			{
 				name: 'University Projects (FIB, UPC)',
 				description:
 					'Various academic projects involving algorithms, data structures, AI, and software engineering principles.',
-				linkCmd: 'N/A',
 			},
 		];
 		let output = 'Featured Projects:\n';
 		projects.forEach((p) => {
 			output += `\n  Project: ${p.name}\n  Description: ${p.description}\n`;
-			if (p.linkCmd !== 'N/A') {
-				output += `  (Type '${p.linkCmd}' for more info/link)\n`;
-			}
 		});
 		return output;
 	}
@@ -198,7 +189,7 @@ For more detailed experience, please see my LinkedIn profile (type 'linkedin') o
 		studies:
 			'Currently pursuing a Bachelor\'s Degree in Computer Science Engineering at FIB, UPC. Specializing in Software Engineering.',
 		education: () => showEducationDetails(),
-		job: 'CTO at Express My Health & Software Developer at Lanaccess.',
+		job: terminalData.job,
 		experience: () => showExperienceSummary(),
 		cv: () => ({ type: 'link', url: 'src/assets/Jan_Rosell_CV.pdf', text: 'Download CV (PDF)' }),
 		resume:

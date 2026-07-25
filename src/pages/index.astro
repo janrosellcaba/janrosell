@@ -1,102 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getHome, getExperience } from '../lib/keystatic';
 
-const techCategories = [
-	{
-		title: 'Backend & Data',
-		skills: [
-			'C, C++',
-			'Python',
-			'Java',
-			'R',
-			'SQL (PostgreSQL, Oracle)',
-			'RESTful API Design',
-			'Data Structures & Algorithms',
-			'UML',
-		],
-	},
-	{
-		title: 'Frontend & UI/UX',
-		skills: [
-			'HTML5, CSS3, SCSS',
-			'TypeScript',
-			'JavaScript',
-			'React.js',
-			'Angular',
-			'Vite',
-			'UI/UX Design Principles',
-			'Figma',
-			'Interface Design',
-		],
-	},
-	{
-		title: 'DevOps & Tools',
-		skills: [
-			'Git, GitHub, GitLab',
-			'Linux & Shell Scripting',
-			'Docker',
-			'Yocto',
-			'Agile Methodologies (Scrum)',
-			'Analytical Problem-Solving',
-			'English (C1), Catalan & Spanish (Native)',
-		],
-	},
-];
-
-const experience = [
-	{
-		title: 'Co-founder & CTO',
-		organization: 'Express My Health',
-		date: 'Feb 2025 - Present',
-		details: [
-			'Lead the technical vision, architecture and development of a secure assistive communication platform.',
-			'Drive strategic decisions, product design and innovation aligned with user needs and clinical feedback.',
-			'Coordinate client meetings, user testing, and partner collaboration to ensure real-world validation and impact.',
-			'Oversee a cross-functional team, define agile processes and ensure scalable, maintainable codebases across services.',
-		],
-		delay: '0s',
-	},
-	{
-		title: 'Software Developer',
-		organization: 'Lanaccess Telecom',
-		date: 'Feb 2025 - Present',
-		details: [
-			'Develop a full-featured web interface for real-time video visualization and device configuration using modern frontend technologies.',
-			'Design and implement backend components including database schemas, API integrations and system logic.',
-			'Take full ownership of the frontend architecture, UI/UX, and client-side logic for complex workflows.',
-			'Integrate intelligent modules into production systems, including people-counting and analytics features.',
-		],
-		delay: '0.1s',
-	},
-	{
-		title: 'Computer Science Student',
-		organization: 'FIB, UPC Barcelona',
-		date: 'Sep 2022 - Est. June 2026',
-		details: [
-			'Specializing in Software Engineering with a strong foundation in AI, cybersecurity and software development and architecture.',
-		],
-		delay: '0.2s',
-	},
-	{
-		title: 'UNICAT Ambassador',
-		organization: 'EU Careers',
-		date: 'Feb 2024 - Jun 2025',
-		details: ['Promote EU career opportunities to university community through events and student outreach.'],
-		delay: '0.3s',
-	},
-	{
-		title: 'Technical Support Scholar',
-		organization: 'UPC Alumni',
-		date: 'Feb 2024 - Feb 2025',
-		details: ['Provided technical support and contributed to analysis and organization of events.'],
-		delay: '0.4s',
-	},
-];
+const home = await getHome();
+const experience = await getExperience();
+const currentJobs = experience.filter((item) => item.current);
 
 const currentYear = new Date().getFullYear();
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Jan Rosell Caba',
+	jobTitle: currentJobs[0]?.role ?? home.hero.role1,
+	url: 'https://www.janrosell.com',
+	image: 'https://www.janrosell.com/image.png',
+	sameAs: [home.contact.linkedinUrl, home.contact.githubUrl],
+	alumniOf: {
+		'@type': 'CollegeOrUniversity',
+		name: "Universitat Politècnica de Catalunya (UPC) - Facultat d'Informàtica de Barcelona (FIB)",
+	},
+	worksFor: currentJobs.map((job) => ({ '@type': 'Organization', name: job.organization })),
+	knowsAbout: [
+		'Software Engineering',
+		'Angular',
+		'Python',
+		'C++',
+		'Artificial Intelligence',
+		'Cybersecurity',
+		'Project Management',
+	],
+	description: home.seo.description,
+	memberOf: { '@type': 'Organization', name: home.hero.org1 },
+};
 ---
 
-<Layout>
+<Layout title={home.seo.title} description={home.seo.description}>
 	<div class="nav-controls" id="navControls">
 		<button class="nav-button nav-toggle" id="navToggle" aria-label="Navigation menu" aria-expanded="false" aria-controls="navOverlay">
 			<span class="nav-toggle-icon"></span>
@@ -126,15 +65,13 @@ const currentYear = new Date().getFullYear();
 	<main>
 		<section class="content-section" id="intro">
 			<h1 class="intro-title">
-				<span class="line name-jan reveal-on-scroll">Jan</span>
-				<span class="line indent name-rosell reveal-on-scroll">Rosell</span>
+				<span class="line name-jan reveal-on-scroll">{home.hero.firstName}</span>
+				<span class="line indent name-rosell reveal-on-scroll">{home.hero.lastName}</span>
 			</h1>
 			<p class="intro-subtitle reveal-on-scroll">
-				<span class="highlight">Co-founder & CTO</span> at Express My Health and
-				<span class="highlight">Computer Science Engineering Student</span> at UPC.
-				<span class="comment-like"
-					>Exploring modern computing to deliver thoughtful software solutions with purpose and precision.</span
-				>
+				<span class="highlight">{home.hero.role1}</span> at {home.hero.org1} and
+				<span class="highlight">{home.hero.role2}</span> at {home.hero.org2}.
+				<span class="comment-like">{home.hero.comment}</span>
 			</p>
 			<div class="scroll-down-indicator reveal-on-scroll" style="transition-delay: 0.6s;" id="scrollDown">
 				<span class="material-symbols-outlined">south</span>
@@ -143,22 +80,12 @@ const currentYear = new Date().getFullYear();
 
 		<section class="content-section" id="about-me">
 			<div class="content-wrapper">
-				<h2 class="about-me-heading reveal-on-scroll">About Jan</h2>
+				<h2 class="about-me-heading reveal-on-scroll">{home.about.heading}</h2>
 				<div class="about-me-text reveal-on-scroll">
+					<p set:html={home.about.paragraph1} />
 					<p>
-						As <strong>Co-founder & CTO</strong> at Express My Health, a Computer Science Engineering
-						student at <strong>FIB (UPC)</strong> and a <strong>Software Developer</strong> at Lanaccess, I
-						am focused on building robust, well-designed software systems. Driven by curiosity, with a
-						particular interest in understanding complex systems and solving challenging problems.
-					</p>
-					<p>
-						A growing interest in <strong>Project Management</strong> provides a complementary perspective
-						to technical training, especially in aligning technology with strategic outcomes and efficient
-						collaboration.
-						<span class="comentari-estilitzat"
-							>Born and based in Barcelona, with three years spent living in Ireland, bringing a mindset
-							shaped by engineering rigor and a hands-on drive to craft meaningful, lasting solutions.</span
-						>
+						<Fragment set:html={home.about.paragraph2} />
+						<span class="comentari-estilitzat">{home.about.paragraph2Comment}</span>
 					</p>
 				</div>
 			</div>
@@ -167,14 +94,14 @@ const currentYear = new Date().getFullYear();
 		<section class="content-section" id="technologies">
 			<div class="technologies-container">
 				<div class="technologies-main-title-container">
-					<h2 class="technologies-main-title reveal-on-scroll">Technologies</h2>
+					<h2 class="technologies-main-title reveal-on-scroll">{home.technologies.heading}</h2>
 					<p class="technologies-subtitle reveal-on-scroll">
-						The tools and languages I use to build and innovate in the digital world.
+						{home.technologies.subtitle}
 					</p>
 				</div>
 				<div class="skills-grid-tech">
 					{
-						techCategories.map((cat) => (
+						home.technologies.categories.map((cat) => (
 							<div class="skill-category-card reveal-on-scroll">
 								<h3>{cat.title}</h3>
 								<ul>
@@ -188,14 +115,14 @@ const currentYear = new Date().getFullYear();
 		</section>
 
 		<section class="content-section" id="experience-education">
-			<h2 class="experience-education-title reveal-on-scroll">Experience_&_Education</h2>
+			<h2 class="experience-education-title reveal-on-scroll">{home.experienceSection.heading}</h2>
 			<div class="experience-education-grid">
 				{
-					experience.map((item) => (
-						<div class="experience-item reveal-on-scroll" style={{ transitionDelay: item.delay }}>
-							<h3>{item.title}</h3>
+					experience.map((item, index) => (
+						<div class="experience-item reveal-on-scroll" style={{ transitionDelay: `${index * 0.1}s` }}>
+							<h3>{item.role}</h3>
 							<div class="org-date">
-								<span class="organization">{item.organization}</span> | <span class="date">{item.date}</span>
+								<span class="organization">{item.organization}</span> | <span class="date">{item.dateRange}</span>
 							</div>
 							<ul>
 								{item.details.map((detail) => <li>{detail}</li>)}
@@ -207,54 +134,27 @@ const currentYear = new Date().getFullYear();
 		</section>
 
 		<section class="content-section" id="contact">
-			<h2 class="contact-heading reveal-on-scroll">Interested?<br />Let's_Connect</h2>
+			<h2 class="contact-heading reveal-on-scroll" set:html={home.contact.heading.replace('\n', '<br />')} />
 			<p class="contact-subheading reveal-on-scroll">
-				Always open to discussing new ideas, challenging projects, or collaboration opportunities.
+				{home.contact.subheading}
 			</p>
 
-			<a href="mailto:jan@janrosell.com" class="contact-email-link reveal-on-scroll">jan&#64;janrosell.com</a>
+			<a href={`mailto:${home.contact.email}`} class="contact-email-link reveal-on-scroll">
+				{home.contact.email}
+			</a>
 
 			<div class="contact-socials reveal-on-scroll" style="transition-delay: 0.1s;">
-				<a href="https://github.com/janrosellcaba" target="_blank" rel="noopener noreferrer">GitHub</a>
-				<a href="https://www.linkedin.com/in/janrosell/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href={home.contact.githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href={home.contact.linkedinUrl} target="_blank" rel="noopener noreferrer">LinkedIn</a>
 			</div>
 		</section>
 	</main>
 
 	<footer class="site-footer">
-		<p>&copy; {currentYear} Jan Rosell. Code with purpose, design with intent.</p>
+		<p>&copy; {currentYear} Jan Rosell. {home.footer.tagline}</p>
 	</footer>
 
-	<script type="application/ld+json" is:inline>
-		{
-			"@context": "https://schema.org",
-			"@type": "Person",
-			"name": "Jan Rosell Caba",
-			"jobTitle": "Co-founder & CTO",
-			"url": "https://www.janrosell.com",
-			"image": "https://www.janrosell.com/image.png",
-			"sameAs": ["https://www.linkedin.com/in/janrosell/", "https://github.com/janrosellcaba"],
-			"alumniOf": {
-				"@type": "CollegeOrUniversity",
-				"name": "Universitat Politècnica de Catalunya (UPC) - Facultat d'Informàtica de Barcelona (FIB)"
-			},
-			"worksFor": [
-				{ "@type": "Organization", "name": "Express My Health" },
-				{ "@type": "Organization", "name": "Lanaccess" }
-			],
-			"knowsAbout": [
-				"Software Engineering",
-				"Angular",
-				"Python",
-				"C++",
-				"Artificial Intelligence",
-				"Cybersecurity",
-				"Project Management"
-			],
-			"description": "Software Developer and Computer Science Engineering Student passionate about technology. Co-founder & CTO of Express My Health.",
-			"memberOf": { "@type": "Organization", "name": "Express My Health" }
-		}
-	</script>
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 </Layout>
 
 <script>

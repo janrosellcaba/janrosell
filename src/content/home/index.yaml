@@ -1,0 +1,76 @@
+seo:
+  title: "Jan Rosell - Co-founder & CTO | Software Developer | Computer Science at UPC"
+  description: >-
+    Personal portfolio of Jan Rosell, Co-founder & CTO at Express my Health, Software Developer,
+    and Computer Science Engineering student at UPC-FIB. Discover my projects, experience, and
+    skills in Angular, Python, and C++.
+hero:
+  firstName: Jan
+  lastName: Rosell
+  role1: Co-founder & CTO
+  org1: Express My Health
+  role2: Computer Science Engineering Student
+  org2: UPC
+  comment: >-
+    Exploring modern computing to deliver thoughtful software solutions with purpose and precision.
+about:
+  heading: About Jan
+  paragraph1: >-
+    As <strong>Co-founder & CTO</strong> at Express My Health, a Computer Science Engineering
+    student at <strong>FIB (UPC)</strong> and a <strong>Software Developer</strong> at Lanaccess, I
+    am focused on building robust, well-designed software systems. Driven by curiosity, with a
+    particular interest in understanding complex systems and solving challenging problems.
+  paragraph2: >-
+    A growing interest in <strong>Project Management</strong> provides a complementary perspective
+    to technical training, especially in aligning technology with strategic outcomes and efficient
+    collaboration.
+  paragraph2Comment: >-
+    Born and based in Barcelona, with three years spent living in Ireland, bringing a mindset
+    shaped by engineering rigor and a hands-on drive to craft meaningful, lasting solutions.
+technologies:
+  heading: Technologies
+  subtitle: The tools and languages I use to build and innovate in the digital world.
+  categories:
+    - title: Backend & Data
+      skills:
+        - "C, C++"
+        - Python
+        - Java
+        - R
+        - "SQL (PostgreSQL, Oracle)"
+        - RESTful API Design
+        - Data Structures & Algorithms
+        - UML
+    - title: Frontend & UI/UX
+      skills:
+        - "HTML5, CSS3, SCSS"
+        - TypeScript
+        - JavaScript
+        - React.js
+        - Angular
+        - Vite
+        - UI/UX Design Principles
+        - Figma
+        - Interface Design
+    - title: DevOps & Tools
+      skills:
+        - "Git, GitHub, GitLab"
+        - Linux & Shell Scripting
+        - Docker
+        - Yocto
+        - Agile Methodologies (Scrum)
+        - Analytical Problem-Solving
+        - "English (C1), Catalan & Spanish (Native)"
+experienceSection:
+  heading: Experience_&_Education
+contact:
+  heading: |-
+    Interested?
+    Let's_Connect
+  subheading: >-
+    Always open to discussing new ideas, challenging projects, or collaboration opportunities.
+  email: jan@janrosell.com
+  githubUrl: https://github.com/janrosellcaba
+  linkedinUrl: https://www.linkedin.com/in/janrosell/
+footer:
+  tagline: Code with purpose, design with intent.

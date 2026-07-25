@@ -64,7 +64,19 @@
       "Bash(node -e \"const e=require\\('./node_modules/@vercel/analytics/package.json'\\).exports; console.log\\(JSON.stringify\\(e['./astro'], null, 1\\)\\)\")",
       "Bash(timeout 300 pnpm build)",
       "Bash(curl -s -o /dev/null -w 'keystatic admin: %{http_code}\\\\n' http://localhost:4321/keystatic)",
-      "Bash(timeout 200 pnpm build)"
+      "Bash(timeout 200 pnpm build)",
+      "Bash(vercel --version)",
+      "Bash(vercel whoami *)",
+      "Bash(find node_modules/.pnpm/@keystatic+core@0.5.50_@react-spectrum+provider@3.11.1_react-dom@19.2.7_react@19.2.7__r_910c5a2b66568fe81b5cc59331f9e0fb/node_modules/@keystatic/core -iname *generic*)",
+      "Bash(openssl rand *)",
+      "Bash(grep -rli \"lanaccess\" --include=\"*.*\" -not -path \"*/node_modules/*\" .)",
+      "Bash(astro dev *)",
+      "Bash(curl -s -o /tmp/home.html -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:4321/)",
+      "Bash(curl -s -o /tmp/keystatic.html -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:4321/keystatic)",
+      "Bash(curl -s -o /tmp/terminal.html -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:4321/terminal)",
+      "Bash(curl -s http://127.0.0.1:4321/api/keystatic/github/local/reader/singleton/home)",
+      "Bash(curl -s http://127.0.0.1:4321/keystatic/api-client-config)",
+      "Bash(pnpm build *)"
     ],
     "additionalDirectories": [
       "/home/jan/janrosell2/public",

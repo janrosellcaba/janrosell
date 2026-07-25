@@ -1,0 +1,10 @@
+role: Software Developer
+organization: Lanaccess Telecom
+dateRange: Feb 2025 - Present
+current: true
+order: 1
+details:
+  - Develop a full-featured web interface for real-time video visualization and device configuration using modern frontend technologies.
+  - Design and implement backend components including database schemas, API integrations and system logic.
+  - Take full ownership of the frontend architecture, UI/UX, and client-side logic for complex workflows.
+  - Integrate intelligent modules into production systems, including people-counting and analytics features.

@@ -1,4 +1,3 @@
-keystatic
 seo
 formulari de contacte
 actualitzar dades - dot
