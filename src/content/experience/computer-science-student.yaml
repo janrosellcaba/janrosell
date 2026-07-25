@@ -1,7 +1,9 @@
 role: Computer Science Student
 organization: FIB, UPC Barcelona
-dateRange: Sep 2022 - Est. June 2026
+dateRange: Sep 2022 - June 2026
 current: false
 order: 2
 details:
-  - Specializing in Software Engineering with a strong foundation in AI, cybersecurity and software development and architecture.
+  - >-
+    Specializing in Software Engineering with a strong foundation in AI,
+    cybersecurity and software development and architecture.
