@@ -1,3 +1,3 @@
 # Jan Rosell
 
-Jan's personal portfolio. Find it a [janrosell.com](janrosell.com)
+Jan's personal portfolio. Find it at [janrosell.com](janrosell.com)
