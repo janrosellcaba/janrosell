@@ -1,0 +1,222 @@
+---
+interface Props {
+	email: string;
+}
+
+const { email } = Astro.props;
+---
+
+<form class="contact-form reveal-on-scroll" id="contactForm" novalidate>
+	<p class="contact-form-or">
+		or send a message
+		<span class="comment-like">quick & direct</span>
+	</p>
+
+	<div class="form-field">
+		<label for="contact-name">Name</label>
+		<input type="text" id="contact-name" name="name" required autocomplete="name" placeholder="Your name" />
+	</div>
+
+	<div class="form-field">
+		<label for="contact-email">Email</label>
+		<input type="email" id="contact-email" name="email" required autocomplete="email" placeholder={email} />
+	</div>
+
+	<div class="form-field">
+		<label for="contact-message">Message</label>
+		<textarea id="contact-message" name="message" required rows="4" placeholder="What's on your mind?"></textarea>
+	</div>
+
+	<button type="submit" class="contact-form-submit">
+		<span class="submit-label">Send message</span>
+		<span class="submit-loading" hidden>Sending…</span>
+	</button>
+
+	<p class="contact-form-status" id="contactFormStatus" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+	const form = document.getElementById('contactForm') as HTMLFormElement | null;
+	const statusEl = document.getElementById('contactFormStatus');
+	const submitBtn = form?.querySelector('.contact-form-submit') as HTMLButtonElement | null;
+	const submitLabel = form?.querySelector('.submit-label') as HTMLSpanElement | null;
+	const submitLoading = form?.querySelector('.submit-loading') as HTMLSpanElement | null;
+
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		if (!statusEl || !submitBtn || !submitLabel || !submitLoading) return;
+
+		const formData = new FormData(form);
+		const name = (formData.get('name') as string)?.trim();
+		const email = (formData.get('email') as string)?.trim();
+		const message = (formData.get('message') as string)?.trim();
+
+		statusEl.textContent = '';
+		statusEl.className = 'contact-form-status';
+
+		if (!name || !email || !message) {
+			statusEl.textContent = 'Please fill in all fields.';
+			statusEl.classList.add('error');
+			return;
+		}
+
+		submitBtn.disabled = true;
+		submitLabel.hidden = true;
+		submitLoading.hidden = false;
+
+		try {
+			const res = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name, email, message }),
+			});
+
+			const data = await res.json();
+
+			if (!res.ok) {
+				statusEl.textContent = data.error ?? 'Something went wrong. Please try again.';
+				statusEl.classList.add('error');
+				return;
+			}
+
+			statusEl.textContent = 'Message sent — thanks for reaching out!';
+			statusEl.classList.add('success');
+			form.reset();
+		} catch {
+			statusEl.textContent = 'Network error. Please try again.';
+			statusEl.classList.add('error');
+		} finally {
+			submitBtn.disabled = false;
+			submitLabel.hidden = false;
+			submitLoading.hidden = true;
+		}
+	});
+</script>
+
+<style>
+	.contact-form {
+		max-width: 480px;
+		margin: 3rem auto 0;
+		text-align: left;
+	}
+
+	@media (min-width: 768px) {
+		.contact-form {
+			margin-top: 3.5rem;
+		}
+	}
+
+	.contact-form-or {
+		font-family: var(--font-body);
+		font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+		color: var(--text-secondary);
+		text-align: center;
+		margin-bottom: 1.8rem;
+	}
+
+	.contact-form-or .comment-like {
+		display: block;
+		margin-top: 0.4em;
+		font-family: var(--font-mono);
+		color: var(--text-code-comment);
+		font-size: 0.85em;
+		opacity: 0.9;
+	}
+
+	.contact-form-or .comment-like::before {
+		content: '// ';
+	}
+
+	.form-field {
+		margin-bottom: 1.2rem;
+	}
+
+	.form-field label {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		font-weight: 500;
+		color: var(--text-highlight-blue);
+		margin-bottom: 0.4rem;
+		letter-spacing: 0.3px;
+	}
+
+	.form-field label::before {
+		content: '> ';
+		opacity: 0.7;
+	}
+
+	.form-field input,
+	.form-field textarea {
+		width: 100%;
+		padding: 0.75rem 1rem;
+		font-family: var(--font-body);
+		font-size: 0.95rem;
+		color: var(--text-primary);
+		background-color: var(--bg-experience-card);
+		border: 1px solid var(--border-experience-card);
+		border-radius: 4px;
+		transition:
+			border-color 0.2s ease,
+			box-shadow 0.2s ease;
+		resize: vertical;
+	}
+
+	.form-field input::placeholder,
+	.form-field textarea::placeholder {
+		color: var(--text-code-comment);
+		opacity: 0.8;
+	}
+
+	.form-field input:focus,
+	.form-field textarea:focus {
+		outline: none;
+		border-color: var(--text-highlight-blue);
+		box-shadow: 0 0 0 2px var(--text-highlight-blue-bg);
+	}
+
+	.contact-form-submit {
+		width: 100%;
+		padding: 0.85rem 1.5rem;
+		font-family: var(--font-mono);
+		font-weight: 700;
+		font-size: 0.9rem;
+		color: var(--bg-main);
+		background-color: var(--text-highlight-blue);
+		border: 1px solid var(--text-highlight-blue);
+		border-radius: 4px;
+		cursor: pointer;
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease,
+			transform 0.2s ease;
+		margin-top: 0.5rem;
+	}
+
+	.contact-form-submit:hover:not(:disabled) {
+		background-color: transparent;
+		color: var(--text-highlight-blue);
+		transform: translateY(-2px);
+	}
+
+	.contact-form-submit:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.contact-form-status {
+		margin-top: 1rem;
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		text-align: center;
+		min-height: 1.2em;
+	}
+
+	.contact-form-status.success {
+		color: var(--text-highlight-blue);
+	}
+
+	.contact-form-status.error {
+		color: #ef4444;
+	}
+</style>

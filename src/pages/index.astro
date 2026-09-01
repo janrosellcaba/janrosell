@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
 import { getHome, getExperience } from '../lib/keystatic';
 
 const home = await getHome();
@@ -142,6 +143,8 @@ const jsonLd = {
 			<a href={`mailto:${home.contact.email}`} class="contact-email-link reveal-on-scroll">
 				{home.contact.email}
 			</a>
+
+			<ContactForm email={home.contact.email} />
 
 			<div class="contact-socials reveal-on-scroll" style="transition-delay: 0.1s;">
 				<a href={home.contact.githubUrl} target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -943,7 +946,7 @@ const jsonLd = {
 	.contact-email-link {
 		font-family: var(--font-mono);
 		font-weight: 700;
-		font-size: clamp(1.1rem, 5vw, 2rem);
+		font-size: clamp(1.4rem, 6vw, 2.6rem);
 		color: var(--text-highlight-blue);
 		text-decoration: none;
 		padding: 0.5em 1em;
@@ -959,7 +962,7 @@ const jsonLd = {
 
 	@media (min-width: 768px) {
 		.contact-email-link {
-			font-size: clamp(1.4rem, 3vw, 2.4rem);
+			font-size: clamp(1.8rem, 4vw, 3.2rem);
 			padding: 0.4em 0.8em;
 		}
 	}
