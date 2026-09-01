@@ -1,12 +1,15 @@
 import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
 
 export const prerender = false;
 
+function getEnv(name: string, fallback = ''): string {
+	return process.env[name] ?? import.meta.env[name] ?? fallback;
+}
+
 export const POST: APIRoute = async ({ request }) => {
-	const apiKey = import.meta.env.RESEND_API_KEY;
-	const toEmail = import.meta.env.CONTACT_EMAIL ?? 'jan@janrosell.com';
-	const fromEmail = import.meta.env.RESEND_FROM ?? 'onboarding@resend.dev';
+	const apiKey = getEnv('RESEND_API_KEY');
+	const toEmail = getEnv('CONTACT_EMAIL', 'jan@janrosell.com');
+	const fromEmail = getEnv('RESEND_FROM', 'onboarding@resend.dev');
 
 	if (!apiKey) {
 		return new Response(JSON.stringify({ error: 'Email service not configured.' }), {
@@ -44,17 +47,28 @@ export const POST: APIRoute = async ({ request }) => {
 		});
 	}
 
+	const { Resend } = await import('resend');
 	const resend = new Resend(apiKey);
+
+	const safeName = escapeHtml(name);
+	const safeEmail = escapeHtml(email);
+	const safeMessage = escapeHtml(message).replace(/\n/g, '<br />');
 
 	const { error } = await resend.emails.send({
 		from: fromEmail,
 		to: toEmail,
 		replyTo: email,
-		subject: `Contact form: ${name}`,
+		subject: `[${email}] Contact from ${name}`,
+		text: `From: ${name} <${email}>\n\n${message}`,
 		html: `
-			<p><strong>From:</strong> ${escapeHtml(name)} &lt;${escapeHtml(email)}&gt;</p>
-			<p><strong>Message:</strong></p>
-			<p>${escapeHtml(message).replace(/\n/g, '<br />')}</p>
+			<p style="font-size:18px;margin:0 0 16px;">
+				<strong>Reply to:</strong>
+				<a href="mailto:${safeEmail}">${safeEmail}</a>
+			</p>
+			<p style="margin:0 0 8px;"><strong>Name:</strong> ${safeName}</p>
+			<p style="margin:0 0 16px;"><strong>Email:</strong> ${safeEmail}</p>
+			<p style="margin:0 0 8px;"><strong>Message:</strong></p>
+			<p style="margin:0;">${safeMessage}</p>
 		`,
 	});
 

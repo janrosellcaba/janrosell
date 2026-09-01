@@ -1,0 +1,17 @@
+[Unit]
+Description=Jan Rosell Portfolio
+After=network.target
+
+[Service]
+Type=simple
+User=jan
+WorkingDirectory=/home/jan/janrosell
+EnvironmentFile=/home/jan/janrosell/.env.production
+Environment=HOST=0.0.0.0
+Environment=PORT=4321
+ExecStart=/usr/bin/node /home/jan/janrosell/dist/server/entry.mjs
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
