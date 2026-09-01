@@ -49,6 +49,8 @@ npm install
 echo "🏗️  Building the app..."
 npm run build
 
+chmod +x scripts/start.sh
+
 echo "⚙️  Updating systemd service..."
 sudo cp deploy/janrosell.service /etc/systemd/system/janrosell.service
 sudo systemctl daemon-reload

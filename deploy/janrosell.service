@@ -6,10 +6,7 @@ After=network.target
 Type=simple
 User=jan
 WorkingDirectory=/home/jan/janrosell
-EnvironmentFile=/home/jan/janrosell/.env.production
-Environment=HOST=0.0.0.0
-Environment=PORT=4321
-ExecStart=/usr/bin/node /home/jan/janrosell/dist/server/entry.mjs
+ExecStart=/home/jan/janrosell/scripts/start.sh
 Restart=on-failure
 RestartSec=5
 
