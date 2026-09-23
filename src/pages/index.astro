@@ -157,7 +157,7 @@ const jsonLd = {
 			</h1>
 			<p class="intro-subtitle reveal-on-scroll">
 				<span class="highlight">{home.hero.role1}</span> at {home.hero.org1} and
-				<span class="highlight">{home.hero.role2}</span> at {home.hero.org2}.
+				{' '}<span class="highlight">{home.hero.role2}</span> at {home.hero.org2}.
 				<span class="comment-like">{home.hero.comment}</span>
 			</p>
 			<div class="scroll-down-indicator reveal-on-scroll" style="transition-delay: 0.6s;" id="scrollDown">
@@ -818,7 +818,7 @@ const jsonLd = {
 		font-weight: 500;
 		color: var(--text-highlight-blue);
 		background-color: var(--text-highlight-blue-bg);
-		padding: 0.05em 0.3em;
+		padding: 0.05em 0.32em;
 		border-radius: 6px;
 		font-size: 0.9em;
 	}
@@ -848,27 +848,37 @@ const jsonLd = {
 		content: '// ';
 	}
 
-	.scroll-down-indicator {
+	#intro > .scroll-down-indicator {
 		position: absolute;
-		bottom: 1.5rem;
+		bottom: 2.25rem;
 		left: 50%;
-		transform: translateX(-50%);
 		z-index: 10;
 		opacity: 0;
+		cursor: default;
+		transform: translateX(-50%);
 	}
 
 	@media (min-width: 768px) {
-		.scroll-down-indicator {
-			bottom: 2rem;
+		#intro > .scroll-down-indicator {
+			bottom: 2.75rem;
 		}
 	}
 
+	#intro > .scroll-down-indicator.is-visible {
+		opacity: 1;
+		transform: translateX(-50%);
+	}
+
 	.scroll-down-indicator .material-symbols-outlined {
+		display: block;
 		font-size: 1.8rem;
 		color: var(--text-highlight-blue);
 		animation: bounceArrow 2.5s infinite cubic-bezier(0.5, 0.05, 0.5, 0.95);
 		opacity: 0.7;
-		transition: color 0.3s ease;
+		cursor: default;
+		transition:
+			opacity 0.15s ease,
+			transform 0.15s ease;
 	}
 
 	@media (min-width: 768px) {
@@ -878,8 +888,9 @@ const jsonLd = {
 	}
 
 	.scroll-down-indicator:hover .material-symbols-outlined {
-		color: var(--text-highlight-blue);
+		animation: none;
 		opacity: 1;
+		transform: translateY(3px);
 	}
 
 	@keyframes bounceArrow {
