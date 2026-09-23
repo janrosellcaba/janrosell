@@ -3,4 +3,7 @@ organization: Dot Consulting
 dateRange: July 2026 - Present
 current: true
 order: 1
-details: []
+details:
+  - Integrate AI tools into consulting workflows to speed up analysis, research and delivery.
+  - Design and maintain data pipelines that turn raw sources into reliable, queryable datasets.
+  - Build Business Intelligence models and reports that help teams make clearer decisions.

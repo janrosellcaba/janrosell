@@ -1,32 +1,34 @@
 seo:
-  title: Jan Rosell - Co-founder & CTO | Software Developer | Computer Science at UPC
+  title: Jan Rosell - Data Engineer | Co-founder & CTO
   description: >-
-    Personal portfolio of Jan Rosell, Co-founder & CTO at Express my Health,
-    Software Developer, and Computer Science Engineering Alumni at UPC-FIB.
-    Discover my projects, experience, and skills in Angular, Python, and C++.
+    Personal portfolio of Jan Rosell, Data Engineer & BIA at Dot Consulting,
+    Co-founder & CTO at Express My Health. Discover my projects, experience,
+    and skills in TypeScript, Node.js, and Data/AI.
 hero:
   firstName: Jan
   lastName: Rosell
-  role1: Co-founder & CTO
-  org1: Express My Health
-  role2: Computer Science Engineering Graduate
-  org2: UPC
+  role1: Data Engineer & BIA
+  org1: Dot Consulting
+  role2: Co-founder & CTO
+  org2: Express My Health
   comment: >-
     Exploring modern computing to deliver thoughtful software solutions with
     purpose and precision.
 about:
   heading: About Jan
   paragraph1: >-
-    As <strong>Co-founder & CTO</strong> at Express My Health, a Computer
-    Science Engineering student at <strong>FIB (UPC)</strong> and a
-    <strong>Software Developer</strong> at Lanaccess, I am focused on building
-    robust, well-designed software systems. Driven by curiosity, with a
-    particular interest in understanding complex systems and solving challenging
-    problems.
+    Computer Science Engineering graduate from the <strong>UPC</strong>, working
+    at the intersection of product, data and technology. As
+    <strong>Co-founder & CTO</strong> at Express My Health, I lead the technical
+    vision, architecture and product direction of a secure assistive
+    communication platform. At Dot Consulting I work as
+    <strong>Data Engineer & BIA</strong>, turning data and AI into analyses
+    and tools the business can actually use.
   paragraph2: >-
-    A growing interest in <strong>Project Management</strong> provides a
-    complementary perspective to technical training, especially in aligning
-    technology with strategic outcomes and efficient collaboration.
+    Beyond software, I share my take on markets and personal finance at
+    <a href="https://fin.janrosell.com" target="_blank" rel="noopener noreferrer">fin.janrosell.com</a>
+    and my passion for training and sport at
+    <a href="https://sport.janrosell.com" target="_blank" rel="noopener noreferrer">sport.janrosell.com</a>.
   paragraph2Comment: >-
     Born and based in Barcelona, with three years spent living in Ireland,
     bringing a mindset shaped by engineering rigor and a hands-on drive to craft
@@ -35,36 +37,38 @@ technologies:
   heading: Technologies
   subtitle: The tools and languages I use to build and innovate in the digital world.
   categories:
-    - title: Backend & Data
+    - title: Backend, Data & Infra
       skills:
-        - C, C++
         - Python
-        - Java
-        - R
-        - SQL (PostgreSQL, Oracle)
+        - Node.js
+        - NestJS
+        - PostgreSQL
+        - Business Intelligence
+        - Linux (Arch/Debian)
+        - VPS
+        - Docker
+        - Self-hosting
+        - C, C++
         - RESTful API Design
-        - Data Structures & Algorithms
-        - UML
-    - title: Frontend & UI/UX
+    - title: Frontend & AI
       skills:
-        - HTML5, CSS3, SCSS
         - TypeScript
-        - JavaScript
-        - React.js
+        - Next.js
+        - Astro
+        - React
         - Angular
-        - Vite
+        - HTML5, CSS3, SCSS
+        - AI-assisted development
         - UI/UX Design Principles
         - Figma
-        - Interface Design
-    - title: DevOps & Tools
+    - title: Leadership & Soft Skills
       skills:
-        - Git, GitHub, GitLab
-        - Linux & Shell Scripting
-        - Docker
-        - Yocto
-        - Agile Methodologies (Scrum)
-        - Analytical Problem-Solving
-        - English (C1), Catalan & Spanish (Native)
+        - Entrepreneurship
+        - Technical Leadership
+        - Startup Management
+        - Strategic business vision
+        - Analytical thinking
+        - Problem-Solving
 experienceSection:
   heading: Experience_&_Education
 contact:

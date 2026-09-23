@@ -99,7 +99,7 @@ GitHub:   github.com/janrosellcaba (or type 'github')`;
 
 	function showEducationDetails(): string {
 		return `Primary Education:
-- B.Sc. Computer Science Engineering - FIB, UPC Barcelona (Expected June 2026)
+- B.Sc. Computer Science Engineering - UPC Barcelona (Graduated June 2026)
   Specialization: Software Engineering.
   Key areas: Algorithms, Data Structures, AI, Cybersecurity, Distributed Systems.
 
@@ -123,17 +123,19 @@ Complementary Studies:
 				name: 'Personal Portfolio (this website!)',
 				description: 'Built with Astro, showcasing my skills and projects. You are here!',
 			},
-			{
-				name: 'University Projects (FIB, UPC)',
-				description:
-					'Various academic projects involving algorithms, data structures, AI, and software engineering principles.',
-			},
 		];
 		let output = 'Featured Projects:\n';
 		projects.forEach((p) => {
 			output += `\n  Project: ${p.name}\n  Description: ${p.description}\n`;
 		});
 		return output;
+	}
+
+	function showSites(): string {
+		return `Beyond software, I also write and share elsewhere:
+
+  Finance:  fin.janrosell.com   (type 'fin')
+  Sport:    sport.janrosell.com (type 'sport')`;
 	}
 
 	function getRandomQuote(): string {
@@ -180,20 +182,20 @@ Complementary Studies:
 	const commands: Record<string, string | ((args: string) => CommandResult)> = {
 		name: 'Jan Rosell',
 		whoami:
-			"A curious Computer Science Engineering student and Software Developer, passionate about technology's role in the world. Always learning, always building.",
+			'A Computer Science Engineering graduate, Data Engineer & BIA, and Co-founder & CTO at Express My Health. I build products, work with data, and lead technical teams. Always learning, always building.',
 		contact: () => showContactInfo(),
 		email: () => ({ type: 'link', url: 'mailto:jan@janrosell.com', text: 'jan@janrosell.com' }),
 		location: 'Barcelona, Catalonia, Spain.',
 		birthday: 'July 29th, 2004.',
 		languages: 'Catalan (Native)\nEnglish (C1)\nSpanish (Native)',
 		studies:
-			'Currently pursuing a Bachelor\'s Degree in Computer Science Engineering at FIB, UPC. Specializing in Software Engineering.',
+			'Computer Science Engineering graduate from the UPC (Barcelona). Specialized in Software Engineering.',
 		education: () => showEducationDetails(),
 		job: terminalData.job,
 		experience: () => showExperienceSummary(),
 		cv: () => ({ type: 'link', url: 'src/assets/Jan_Rosell_CV.pdf', text: 'Download CV (PDF)' }),
 		resume:
-			'A dedicated developer with experience in full-stack development, project managing, and a keen interest in embedded systems. Quick learner, team player, and problem solver. For more details, type \'cv\' or \'experience\'.',
+			'Data Engineer & BIA at Dot Consulting and Co-founder & CTO at Express My Health. Full-stack background, a focus on data and AI, and a habit of shipping. For more details, type \'cv\' or \'experience\'.',
 		linkedin: () => ({ type: 'link', url: 'https://www.linkedin.com/in/janrosell/', text: 'linkedin.com/in/janrosell' }),
 		github: () => ({ type: 'link', url: 'https://github.com/janrosellcaba', text: 'github.com/janrosellcaba' }),
 		skills: () => showSkillsList(),
@@ -201,6 +203,9 @@ Complementary Studies:
 		ide: 'Primarily VS Code. Occasionally VIM or Cursor',
 		os: 'Linux (currently with Fedora and Ubuntu). Proficient with Windows as well.',
 		projects: () => showProjectsList(),
+		sites: () => showSites(),
+		fin: () => ({ type: 'link', url: 'https://fin.janrosell.com', text: 'fin.janrosell.com' }),
+		sport: () => ({ type: 'link', url: 'https://sport.janrosell.com', text: 'sport.janrosell.com' }),
 		hobbies: 'Apart from coding: Sports (Tennis, Gym, Boxing), exploring new technologies, and hanging out with friends.',
 		interests: 'Key interests: AI, Cybersecurity, Software Development, and leading impactful projects.',
 		goals: 'Professionally: To contribute to meaningful tech projects. To continuously learn and master new technologies.',
