@@ -174,11 +174,11 @@ summary,
 	background-color: var(--bg-card);
 	background-image:
 		radial-gradient(
-			120% 80% at 50% -8%,
-			color-mix(in srgb, var(--surface-accent) 10%, transparent),
-			transparent 62%
+			140% 90% at 50% -14%,
+			color-mix(in srgb, var(--surface-accent) 5%, transparent),
+			transparent 78%
 		),
-		linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 4%, transparent), transparent 42%);
+		linear-gradient(180deg, color-mix(in srgb, var(--text-primary) 2.5%, transparent), transparent 38%);
 	border: 1px solid var(--border-subtle);
 	border-radius: var(--radius-card);
 	box-shadow: var(--shadow-card);

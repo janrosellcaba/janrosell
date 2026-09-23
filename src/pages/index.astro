@@ -16,7 +16,6 @@ const projects = [
 	{
 		slug: 'emh',
 		featured: true,
-		accent: '#22A18C',
 		name: 'Express My Health',
 		url: 'https://expressmyhealth.com',
 		tagline: 'Assistive communication for care',
@@ -27,7 +26,6 @@ const projects = [
 	{
 		slug: 'finance',
 		featured: false,
-		accent: '#1f7a54',
 		name: 'Finance',
 		url: 'https://fin.janrosell.com',
 		tagline: 'Personal finance, at a glance',
@@ -37,7 +35,6 @@ const projects = [
 	{
 		slug: 'sport',
 		featured: false,
-		accent: '#84cc16',
 		name: 'Sport',
 		url: 'https://sport.janrosell.com',
 		tagline: 'Training, logged',
@@ -47,12 +44,11 @@ const projects = [
 	{
 		slug: 'canina',
 		featured: false,
-		accent: '#3C9E91',
 		name: 'Solución Canina',
 		url: 'https://www.solucioncanina.es',
 		tagline: 'Behaviour, education, wellbeing',
 		description: 'Canine behaviour and education — a living knowledge base for dog professionals and owners.',
-		icon: `<svg ${iconStroke}><circle cx="8.2" cy="7.4" r="1.55" /><circle cx="15.8" cy="7.4" r="1.55" /><circle cx="5.6" cy="12" r="1.55" /><circle cx="18.4" cy="12" r="1.55" /><ellipse cx="12" cy="16.6" rx="4.1" ry="3.05" /></svg>`,
+		icon: `<svg ${iconStroke}><circle cx="9.35" cy="6.9" r="1.3" /><circle cx="14.65" cy="6.9" r="1.3" /><circle cx="5.85" cy="10.3" r="1.15" /><circle cx="18.15" cy="10.3" r="1.15" /><ellipse cx="12" cy="16.5" rx="3.5" ry="2.75" /></svg>`,
 	},
 ];
 
@@ -148,6 +144,10 @@ const jsonLd = {
 
 	<main>
 		<section class="content-section" id="intro">
+			<div class="ambient" aria-hidden="true">
+				<span class="ambient-orb is-lg is-ne is-slow"></span>
+				<span class="ambient-orb is-md is-sw is-slower is-path-b"></span>
+			</div>
 			<h1 class="intro-title">
 				<span class="line name-jan reveal-on-scroll">{home.hero.firstName}</span>
 				<span class="line indent name-rosell reveal-on-scroll">{home.hero.lastName}</span>
@@ -163,8 +163,18 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="about-me">
+			<div class="ambient" aria-hidden="true">
+				<span class="ambient-orb is-lg is-nw is-slower"></span>
+				<span class="ambient-orb is-sm is-se is-slow is-path-b"></span>
+			</div>
 			<div class="content-wrapper">
 				<h2 class="about-me-heading reveal-on-scroll">{home.about.heading}</h2>
+				<ul class="about-facts reveal-on-scroll">
+					<li>Barcelona</li>
+					<li>Ireland, 3 yrs</li>
+					<li>UPC · FIB</li>
+					<li>CS 2026</li>
+				</ul>
 				<div class="about-me-text reveal-on-scroll">
 					<p set:html={home.about.paragraph1} />
 					<p>
@@ -176,6 +186,10 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="technologies">
+			<div class="ambient" aria-hidden="true">
+				<span class="ambient-orb is-md is-e is-slow is-path-b"></span>
+				<span class="ambient-orb is-sm is-nw is-slower"></span>
+			</div>
 			<div class="technologies-container">
 				<div class="technologies-main-title-container">
 					<h2 class="technologies-main-title reveal-on-scroll">{home.technologies.heading}</h2>
@@ -199,6 +213,10 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="experience-education">
+			<div class="ambient" aria-hidden="true">
+				<span class="ambient-orb is-lg is-nw is-slower"></span>
+				<span class="ambient-orb is-sm is-se is-slow is-path-b"></span>
+			</div>
 			<h2 class="experience-education-title reveal-on-scroll">{home.experienceSection.heading}</h2>
 			<div class="experience-education-grid">
 				{
@@ -218,51 +236,60 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="projects">
-			<h2 class="projects-title reveal-on-scroll">
-				<span>Projects_&_</span>
-				<span>Ecosystem</span>
-			</h2>
+			<div class="ambient" aria-hidden="true">
+				<span class="ambient-orb is-md is-ne is-slow"></span>
+				<span class="ambient-orb is-sm is-w is-slower is-path-b"></span>
+			</div>
+			<div class="projects-wrapper">
+				<h2 class="projects-title reveal-on-scroll">
+					<span>Projects_&_</span>
+					<span>Ecosystem</span>
+				</h2>
 
-			<a
-				class="project-card surface-card is-featured reveal-on-scroll"
-				href={featuredProject.url}
-				target="_blank"
-				rel="noopener noreferrer"
-				style={`--project-accent: ${featuredProject.accent}`}
-			>
-				<div class="project-symbol" aria-hidden="true" set:html={featuredProject.icon} />
-				<div class="project-copy">
-					<p class="project-kicker">Hero project</p>
-					<h3>{featuredProject.name}</h3>
-					<p class="project-tagline">{featuredProject.tagline}</p>
-					<p class="project-description">{featuredProject.description}</p>
-					<span class="project-url">{displayUrl(featuredProject.url)} ↗</span>
+				<a
+					class="project-card surface-card is-featured reveal-on-scroll"
+					href={featuredProject.url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<div class="project-symbol" aria-hidden="true" set:html={featuredProject.icon} />
+					<div class="project-copy">
+						<p class="project-kicker">Hero project</p>
+						<h3>{featuredProject.name}</h3>
+						<p class="project-tagline">{featuredProject.tagline}</p>
+						<p class="project-description">{featuredProject.description}</p>
+						<span class="project-url">{displayUrl(featuredProject.url)} ↗</span>
+					</div>
+				</a>
+
+				<div class="project-grid">
+					{
+						sideProjects.map((project, index) => (
+							<a
+								class="project-card surface-card reveal-on-scroll"
+								href={project.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								style={`--reveal-delay: ${index * 0.1}s`}
+							>
+								<div class="project-symbol" aria-hidden="true" set:html={project.icon} />
+								<div class="project-copy">
+									<h3>{project.name}</h3>
+									<p class="project-tagline">{project.tagline}</p>
+									<span class="project-url">{displayUrl(project.url)} ↗</span>
+								</div>
+							</a>
+						))
+					}
 				</div>
-			</a>
-
-			<div class="project-grid">
-				{
-					sideProjects.map((project, index) => (
-						<a
-							class="project-card surface-card reveal-on-scroll"
-							href={project.url}
-							target="_blank"
-							rel="noopener noreferrer"
-							style={`--project-accent: ${project.accent}; --reveal-delay: ${index * 0.1}s`}
-						>
-							<div class="project-symbol" aria-hidden="true" set:html={project.icon} />
-							<div class="project-copy">
-								<h3>{project.name}</h3>
-								<p class="project-tagline">{project.tagline}</p>
-								<span class="project-url">{displayUrl(project.url)} ↗</span>
-							</div>
-						</a>
-					))
-				}
 			</div>
 		</section>
 
 		<section class="content-section" id="contact">
+			<div class="ambient" aria-hidden="true">
+				<span class="ambient-orb is-lg is-se is-slow"></span>
+				<span class="ambient-orb is-sm is-nw is-slower is-path-b"></span>
+			</div>
 			<h2 class="contact-heading reveal-on-scroll" set:html={home.contact.heading.replace('\n', '<br />')} />
 			<p class="contact-subheading reveal-on-scroll">
 				{home.contact.subheading}
@@ -567,14 +594,46 @@ const jsonLd = {
 
 	/* --- Main sections --- */
 	.content-section {
+		--section-bg: var(--bg-main);
 		min-height: 100vh;
 		padding: 15vh 5vw;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
-		overflow: hidden;
-		transition: background-color 0.3s ease;
+		overflow: visible;
+		isolation: isolate;
+		background: transparent;
+	}
+
+	.content-section + .content-section {
+		margin-top: -8px;
+	}
+
+	.content-section > *:not(.ambient) {
+		position: relative;
+		z-index: 1;
+	}
+
+	.content-section::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 0;
+		background: linear-gradient(
+			to bottom,
+			rgb(from var(--section-bg) r g b / 0) 0%,
+			rgb(from var(--section-bg) r g b / 0.2) 12%,
+			rgb(from var(--section-bg) r g b / 0.55) 24%,
+			rgb(from var(--section-bg) r g b / 0.88) 36%,
+			var(--section-bg) 48%,
+			var(--section-bg) 52%,
+			rgb(from var(--section-bg) r g b / 0.88) 64%,
+			rgb(from var(--section-bg) r g b / 0.55) 76%,
+			rgb(from var(--section-bg) r g b / 0.2) 88%,
+			rgb(from var(--section-bg) r g b / 0) 100%
+		);
 	}
 
 	@media (min-width: 768px) {
@@ -586,6 +645,140 @@ const jsonLd = {
 	/* --- Hero / intro --- */
 	#intro {
 		text-align: left;
+	}
+
+	.ambient {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 0;
+		overflow: visible;
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			transparent 0%,
+			#000 24vh,
+			#000 calc(100% - 24vh),
+			transparent 100%
+		);
+		mask-image: linear-gradient(
+			to bottom,
+			transparent 0%,
+			#000 24vh,
+			#000 calc(100% - 24vh),
+			transparent 100%
+		);
+	}
+
+	#intro .ambient {
+		-webkit-mask-image: linear-gradient(
+			to bottom,
+			#000 0%,
+			#000 calc(100% - 28vh),
+			transparent 100%
+		);
+		mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 28vh), transparent 100%);
+	}
+
+	#contact .ambient {
+		-webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22vh, #000 100%);
+		mask-image: linear-gradient(to bottom, transparent 0%, #000 22vh, #000 100%);
+	}
+
+	.ambient-orb {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(90px);
+		background: color-mix(in srgb, var(--text-highlight-blue) 26%, transparent);
+		opacity: 0.5;
+		will-change: transform;
+		animation: orb-drift 24s ease-in-out infinite;
+	}
+
+	.ambient-orb.is-lg {
+		width: min(52vw, 560px);
+		height: min(52vw, 560px);
+	}
+
+	.ambient-orb.is-md {
+		width: min(36vw, 380px);
+		height: min(36vw, 380px);
+		opacity: 0.4;
+	}
+
+	.ambient-orb.is-sm {
+		width: min(26vw, 280px);
+		height: min(26vw, 280px);
+		opacity: 0.32;
+	}
+
+	.ambient-orb.is-ne {
+		top: -18%;
+		right: -12%;
+	}
+
+	.ambient-orb.is-nw {
+		top: -14%;
+		left: -16%;
+	}
+
+	.ambient-orb.is-se {
+		bottom: -18%;
+		right: -12%;
+	}
+
+	.ambient-orb.is-sw {
+		bottom: -16%;
+		left: 4%;
+	}
+
+	.ambient-orb.is-e {
+		top: 22%;
+		right: -18%;
+	}
+
+	.ambient-orb.is-w {
+		top: 28%;
+		left: -16%;
+	}
+
+	.ambient-orb.is-slow {
+		animation-duration: 22s;
+	}
+
+	.ambient-orb.is-slower {
+		animation-duration: 32s;
+		animation-direction: reverse;
+	}
+
+	.ambient-orb.is-path-b {
+		animation-name: orb-drift-b;
+	}
+
+	html:not(.dark-theme) .ambient-orb {
+		opacity: 0.2;
+	}
+
+	@keyframes orb-drift {
+		0%,
+		100% {
+			transform: translate(0, 0) scale(1);
+		}
+		50% {
+			transform: translate(-5%, 7%) scale(1.06);
+		}
+	}
+
+	@keyframes orb-drift-b {
+		0%,
+		100% {
+			transform: translate(0, 0) scale(1);
+		}
+		33% {
+			transform: translate(6%, -5%) scale(1.05);
+		}
+		66% {
+			transform: translate(-4%, 6%) scale(0.97);
+		}
 	}
 
 	.intro-title {
@@ -740,12 +933,14 @@ const jsonLd = {
 
 	/* --- About me --- */
 	#about-me {
-		background-color: var(--bg-about-me);
+		--section-bg: var(--bg-about-me);
 	}
 
 	#about-me .content-wrapper {
 		max-width: 800px;
 		margin: 0 auto;
+		position: relative;
+		z-index: 1;
 	}
 
 	.about-me-heading {
@@ -753,14 +948,14 @@ const jsonLd = {
 		font-size: clamp(2rem, 7vw, 4rem);
 		font-weight: 400;
 		color: var(--text-primary);
-		margin-bottom: 2rem;
+		margin-bottom: 1.15rem;
 		line-height: 1.1;
 	}
 
 	@media (min-width: 768px) {
 		.about-me-heading {
 			font-size: clamp(2.5rem, 5.5vw, 4rem);
-			margin-bottom: 2.5rem;
+			margin-bottom: 1.35rem;
 			line-height: 1.15;
 		}
 	}
@@ -768,6 +963,34 @@ const jsonLd = {
 	.about-me-heading::after {
 		content: ';';
 		color: var(--text-highlight-blue);
+	}
+
+	.about-facts {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.8rem;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.04em;
+		color: var(--text-secondary);
+		gap: 0.35rem 0;
+	}
+
+	@media (min-width: 768px) {
+		.about-facts {
+			font-size: 0.82rem;
+			margin-bottom: 2.2rem;
+		}
+	}
+
+	.about-facts li:not(:last-child)::after {
+		content: '/';
+		margin: 0 0.75rem;
+		color: var(--text-code-comment);
+		opacity: 0.75;
 	}
 
 	.about-me-text {
@@ -814,7 +1037,7 @@ const jsonLd = {
 
 	/* --- Technologies --- */
 	#technologies {
-		background-color: var(--bg-technologies);
+		--section-bg: var(--bg-technologies);
 	}
 
 	.technologies-main-title-container {
@@ -950,7 +1173,7 @@ const jsonLd = {
 
 	/* --- Experience & Education --- */
 	#experience-education {
-		background-color: var(--bg-section-alt);
+		--section-bg: var(--bg-section-alt);
 	}
 
 	.experience-education-title {
@@ -1056,12 +1279,17 @@ const jsonLd = {
 
 	/* --- Projects & Ecosystem --- */
 	#projects {
-		background-color: var(--bg-main);
-		overflow: visible;
+		--section-bg: var(--bg-main);
 		min-height: 0;
 		padding-top: 8vh;
 		padding-bottom: 8vh;
 		justify-content: flex-start;
+	}
+
+	.projects-wrapper {
+		width: 100%;
+		max-width: 1100px;
+		margin: 0 auto;
 	}
 
 	.projects-title {
@@ -1090,8 +1318,6 @@ const jsonLd = {
 	}
 
 	.project-card {
-		--project-accent: var(--text-highlight-blue);
-		--surface-accent: var(--project-accent);
 		display: flex;
 		flex-direction: column;
 		text-decoration: none;
@@ -1225,8 +1451,7 @@ const jsonLd = {
 
 	/* --- Contact --- */
 	#contact {
-		background-color: var(--bg-contact);
-		background-image: var(--bg-noise-texture);
+		--section-bg: var(--bg-section-alt);
 		text-align: center;
 		min-height: 0;
 		padding-top: 10vh;
@@ -1387,6 +1612,10 @@ const jsonLd = {
 			opacity: 1;
 			transform: none;
 			transition: none;
+		}
+
+		.ambient-orb {
+			animation: none;
 		}
 	}
 
