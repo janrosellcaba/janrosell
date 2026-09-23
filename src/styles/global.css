@@ -1,7 +1,6 @@
 :root {
 	/* --- Dark theme (native default) --- */
 	--bg-main-dark: #111113;
-	--bg-noise-texture-dark: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23A1A1AA' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 	--bg-about-me-dark: #16161a;
 	--bg-contact-dark: #111113;
 	--bg-technologies-dark: #111113;
@@ -24,16 +23,15 @@
 	--shadow-card-hover-dark: 0 8px 24px rgba(0, 0, 0, 0.4);
 
 	/* --- Light theme --- */
-	--bg-main-light: #fafafa;
-	--bg-noise-texture-light: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2371717A' fill-opacity='0.035'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-	--bg-about-me-light: #f4f4f5;
-	--bg-contact-light: #fafafa;
-	--bg-technologies-light: #fafafa;
-	--bg-section-alt-light: #f4f4f5;
+	--bg-main-light: #f3f0ea;
+	--bg-about-me-light: #ebe7df;
+	--bg-contact-light: #f3f0ea;
+	--bg-technologies-light: #f3f0ea;
+	--bg-section-alt-light: #ebe7df;
 	--bg-formentera-mention-light: rgba(2, 132, 199, 0.06);
 
-	--bg-card-light: #ffffff;
-	--border-subtle-light: #eaeaea;
+	--bg-card-light: #fffcf7;
+	--border-subtle-light: #e2ddd4;
 
 	--text-primary-light: #18181b;
 	--text-secondary-light: #52525b;
@@ -42,7 +40,7 @@
 
 	--accent-line-code-light: rgba(2, 132, 199, 0.28);
 	--text-code-comment-light: #71717a;
-	--nav-overlay-bg-light: rgba(250, 250, 250, 0.9);
+	--nav-overlay-bg-light: rgba(243, 240, 234, 0.92);
 
 	--shadow-card-light: 0 1px 2px rgba(0, 0, 0, 0.06);
 	--shadow-card-hover-light: 0 8px 24px rgba(0, 0, 0, 0.08);
@@ -60,8 +58,9 @@
 
 	/* --- Active theme (dark-native) --- */
 	--bg-main: var(--bg-main-dark);
-	--bg-noise-texture: var(--bg-noise-texture-dark);
 	--bg-about-me: var(--bg-about-me-dark);
+	--glow-soft: color-mix(in srgb, var(--text-highlight-blue-dark) 26%, transparent);
+	--glow-hero: color-mix(in srgb, var(--text-highlight-blue-dark) 44%, transparent);
 	--bg-contact: var(--bg-contact-dark);
 	--bg-technologies: var(--bg-technologies-dark);
 	--bg-section-alt: var(--bg-section-alt-dark);
@@ -94,8 +93,9 @@
 
 html:not(.dark-theme) {
 	--bg-main: var(--bg-main-light);
-	--bg-noise-texture: var(--bg-noise-texture-light);
 	--bg-about-me: var(--bg-about-me-light);
+	--glow-soft: color-mix(in srgb, var(--text-highlight-blue-light) 40%, transparent);
+	--glow-hero: color-mix(in srgb, var(--text-highlight-blue-light) 56%, transparent);
 	--bg-contact: var(--bg-contact-light);
 	--bg-technologies: var(--bg-technologies-light);
 	--bg-section-alt: var(--bg-section-alt-light);
@@ -140,7 +140,6 @@ html {
 body {
 	font-family: var(--font-body);
 	background-color: var(--bg-main);
-	background-image: var(--bg-noise-texture);
 	color: var(--text-primary);
 	line-height: var(--line-height-body);
 	font-weight: 400;

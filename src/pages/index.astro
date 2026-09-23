@@ -143,11 +143,14 @@ const jsonLd = {
 	</nav>
 
 	<main>
+		<div class="atmosphere" aria-hidden="true">
+			<span class="atmosphere-veil"></span>
+			<span class="atmosphere-aurora is-a"></span>
+			<span class="atmosphere-aurora is-b"></span>
+			<span class="atmosphere-aurora is-c"></span>
+			<span class="atmosphere-sweep"></span>
+		</div>
 		<section class="content-section" id="intro">
-			<div class="ambient" aria-hidden="true">
-				<span class="ambient-orb is-lg is-ne is-slow"></span>
-				<span class="ambient-orb is-md is-sw is-slower is-path-b"></span>
-			</div>
 			<h1 class="intro-title">
 				<span class="line name-jan reveal-on-scroll">{home.hero.firstName}</span>
 				<span class="line indent name-rosell reveal-on-scroll">{home.hero.lastName}</span>
@@ -163,18 +166,8 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="about-me">
-			<div class="ambient" aria-hidden="true">
-				<span class="ambient-orb is-lg is-nw is-slower"></span>
-				<span class="ambient-orb is-sm is-se is-slow is-path-b"></span>
-			</div>
 			<div class="content-wrapper">
 				<h2 class="about-me-heading reveal-on-scroll">{home.about.heading}</h2>
-				<ul class="about-facts reveal-on-scroll">
-					<li>Barcelona</li>
-					<li>Ireland, 3 yrs</li>
-					<li>UPC · FIB</li>
-					<li>CS 2026</li>
-				</ul>
 				<div class="about-me-text reveal-on-scroll">
 					<p set:html={home.about.paragraph1} />
 					<p>
@@ -186,10 +179,6 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="technologies">
-			<div class="ambient" aria-hidden="true">
-				<span class="ambient-orb is-md is-e is-slow is-path-b"></span>
-				<span class="ambient-orb is-sm is-nw is-slower"></span>
-			</div>
 			<div class="technologies-container">
 				<div class="technologies-main-title-container">
 					<h2 class="technologies-main-title reveal-on-scroll">{home.technologies.heading}</h2>
@@ -213,10 +202,6 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="experience-education">
-			<div class="ambient" aria-hidden="true">
-				<span class="ambient-orb is-lg is-nw is-slower"></span>
-				<span class="ambient-orb is-sm is-se is-slow is-path-b"></span>
-			</div>
 			<h2 class="experience-education-title reveal-on-scroll">{home.experienceSection.heading}</h2>
 			<div class="experience-education-grid">
 				{
@@ -236,10 +221,6 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="projects">
-			<div class="ambient" aria-hidden="true">
-				<span class="ambient-orb is-md is-ne is-slow"></span>
-				<span class="ambient-orb is-sm is-w is-slower is-path-b"></span>
-			</div>
 			<div class="projects-wrapper">
 				<h2 class="projects-title reveal-on-scroll">
 					<span>Projects_&_</span>
@@ -286,10 +267,6 @@ const jsonLd = {
 		</section>
 
 		<section class="content-section" id="contact">
-			<div class="ambient" aria-hidden="true">
-				<span class="ambient-orb is-lg is-se is-slow"></span>
-				<span class="ambient-orb is-sm is-nw is-slower is-path-b"></span>
-			</div>
 			<h2 class="contact-heading reveal-on-scroll" set:html={home.contact.heading.replace('\n', '<br />')} />
 			<p class="contact-subheading reveal-on-scroll">
 				{home.contact.subheading}
@@ -601,39 +578,14 @@ const jsonLd = {
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
+		z-index: 1;
 		overflow: visible;
-		isolation: isolate;
 		background: transparent;
 	}
 
-	.content-section + .content-section {
-		margin-top: -8px;
-	}
-
-	.content-section > *:not(.ambient) {
+	.content-section > * {
 		position: relative;
 		z-index: 1;
-	}
-
-	.content-section::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		z-index: 0;
-		background: linear-gradient(
-			to bottom,
-			rgb(from var(--section-bg) r g b / 0) 0%,
-			rgb(from var(--section-bg) r g b / 0.2) 12%,
-			rgb(from var(--section-bg) r g b / 0.55) 24%,
-			rgb(from var(--section-bg) r g b / 0.88) 36%,
-			var(--section-bg) 48%,
-			var(--section-bg) 52%,
-			rgb(from var(--section-bg) r g b / 0.88) 64%,
-			rgb(from var(--section-bg) r g b / 0.55) 76%,
-			rgb(from var(--section-bg) r g b / 0.2) 88%,
-			rgb(from var(--section-bg) r g b / 0) 100%
-		);
 	}
 
 	@media (min-width: 768px) {
@@ -647,137 +599,152 @@ const jsonLd = {
 		text-align: left;
 	}
 
-	.ambient {
-		position: absolute;
+	/* --- Atmosphere --- */
+	.atmosphere {
+		position: fixed;
 		inset: 0;
 		pointer-events: none;
 		z-index: 0;
-		overflow: visible;
-		-webkit-mask-image: linear-gradient(
-			to bottom,
-			transparent 0%,
-			#000 24vh,
-			#000 calc(100% - 24vh),
-			transparent 100%
-		);
-		mask-image: linear-gradient(
-			to bottom,
-			transparent 0%,
-			#000 24vh,
-			#000 calc(100% - 24vh),
-			transparent 100%
-		);
+		overflow: hidden;
 	}
 
-	#intro .ambient {
-		-webkit-mask-image: linear-gradient(
-			to bottom,
-			#000 0%,
-			#000 calc(100% - 28vh),
-			transparent 100%
+	.atmosphere-veil {
+		position: absolute;
+		inset: -45%;
+		background: conic-gradient(
+			from 180deg at 48% 40%,
+			transparent 0deg,
+			color-mix(in srgb, var(--text-highlight-blue) 8%, transparent) 52deg,
+			transparent 118deg,
+			color-mix(in srgb, var(--text-primary) 4%, transparent) 198deg,
+			transparent 270deg,
+			color-mix(in srgb, var(--text-highlight-blue) 6%, transparent) 328deg,
+			transparent 360deg
 		);
-		mask-image: linear-gradient(to bottom, #000 0%, #000 calc(100% - 28vh), transparent 100%);
+		opacity: 0.5;
+		animation: veil-turn 96s linear infinite;
 	}
 
-	#contact .ambient {
-		-webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22vh, #000 100%);
-		mask-image: linear-gradient(to bottom, transparent 0%, #000 22vh, #000 100%);
-	}
-
-	.ambient-orb {
+	.atmosphere-aurora {
 		position: absolute;
 		border-radius: 50%;
-		filter: blur(90px);
-		background: color-mix(in srgb, var(--text-highlight-blue) 26%, transparent);
-		opacity: 0.5;
+		filter: blur(100px);
+		background: color-mix(in srgb, var(--text-highlight-blue) 24%, transparent);
+		opacity: 0.48;
 		will-change: transform;
-		animation: orb-drift 24s ease-in-out infinite;
 	}
 
-	.ambient-orb.is-lg {
-		width: min(52vw, 560px);
-		height: min(52vw, 560px);
+	.atmosphere-aurora.is-a {
+		width: min(118vw, 1480px);
+		height: min(36vh, 320px);
+		top: -10%;
+		left: -22%;
+		animation: aurora-a 46s ease-in-out infinite;
 	}
 
-	.ambient-orb.is-md {
-		width: min(36vw, 380px);
-		height: min(36vw, 380px);
-		opacity: 0.4;
+	.atmosphere-aurora.is-b {
+		width: min(72vw, 920px);
+		height: min(58vh, 540px);
+		top: 16%;
+		right: -24%;
+		opacity: 0.3;
+		animation: aurora-b 58s ease-in-out infinite;
 	}
 
-	.ambient-orb.is-sm {
-		width: min(26vw, 280px);
-		height: min(26vw, 280px);
-		opacity: 0.32;
+	.atmosphere-aurora.is-c {
+		width: min(96vw, 1180px);
+		height: min(28vh, 260px);
+		bottom: -12%;
+		left: 8%;
+		opacity: 0.26;
+		animation: aurora-c 52s ease-in-out infinite;
 	}
 
-	.ambient-orb.is-ne {
-		top: -18%;
-		right: -12%;
+	.atmosphere-sweep {
+		position: absolute;
+		left: -18%;
+		width: 136%;
+		height: 24vh;
+		background: linear-gradient(
+			180deg,
+			transparent,
+			color-mix(in srgb, var(--text-highlight-blue) 16%, transparent),
+			transparent
+		);
+		filter: blur(32px);
+		opacity: 0;
+		animation: sweep-pass 68s ease-in-out infinite;
 	}
 
-	.ambient-orb.is-nw {
-		top: -14%;
-		left: -16%;
+	html:not(.dark-theme) .atmosphere-veil {
+		opacity: 0.22;
 	}
 
-	.ambient-orb.is-se {
-		bottom: -18%;
-		right: -12%;
+	html:not(.dark-theme) .atmosphere-aurora {
+		opacity: 0.18;
 	}
 
-	.ambient-orb.is-sw {
-		bottom: -16%;
-		left: 4%;
+	html:not(.dark-theme) .atmosphere-aurora.is-b,
+	html:not(.dark-theme) .atmosphere-aurora.is-c {
+		opacity: 0.12;
 	}
 
-	.ambient-orb.is-e {
-		top: 22%;
-		right: -18%;
+	@keyframes veil-turn {
+		to {
+			transform: rotate(1turn);
+		}
 	}
 
-	.ambient-orb.is-w {
-		top: 28%;
-		left: -16%;
-	}
-
-	.ambient-orb.is-slow {
-		animation-duration: 22s;
-	}
-
-	.ambient-orb.is-slower {
-		animation-duration: 32s;
-		animation-direction: reverse;
-	}
-
-	.ambient-orb.is-path-b {
-		animation-name: orb-drift-b;
-	}
-
-	html:not(.dark-theme) .ambient-orb {
-		opacity: 0.2;
-	}
-
-	@keyframes orb-drift {
+	@keyframes aurora-a {
 		0%,
 		100% {
-			transform: translate(0, 0) scale(1);
+			transform: rotate(-18deg) translate(0, 0) scale(1);
 		}
 		50% {
-			transform: translate(-5%, 7%) scale(1.06);
+			transform: rotate(-11deg) translate(5%, 7%) scale(1.06);
 		}
 	}
 
-	@keyframes orb-drift-b {
+	@keyframes aurora-b {
 		0%,
 		100% {
-			transform: translate(0, 0) scale(1);
+			transform: rotate(22deg) translate(0, 0) scale(1);
 		}
-		33% {
-			transform: translate(6%, -5%) scale(1.05);
+		40% {
+			transform: rotate(16deg) translate(-6%, 5%) scale(1.05);
 		}
-		66% {
-			transform: translate(-4%, 6%) scale(0.97);
+		70% {
+			transform: rotate(26deg) translate(4%, -4%) scale(0.97);
+		}
+	}
+
+	@keyframes aurora-c {
+		0%,
+		100% {
+			transform: rotate(-8deg) translate(0, 0) scale(1);
+		}
+		50% {
+			transform: rotate(-3deg) translate(-7%, -6%) scale(1.08);
+		}
+	}
+
+	@keyframes sweep-pass {
+		0%,
+		16% {
+			transform: translateY(-30vh);
+			opacity: 0;
+		}
+		26% {
+			opacity: 0.5;
+		}
+		58% {
+			transform: translateY(92vh);
+			opacity: 0.32;
+		}
+		70%,
+		100% {
+			transform: translateY(125vh);
+			opacity: 0;
 		}
 	}
 
@@ -933,7 +900,7 @@ const jsonLd = {
 
 	/* --- About me --- */
 	#about-me {
-		--section-bg: var(--bg-about-me);
+		--section-bg: var(--bg-main);
 	}
 
 	#about-me .content-wrapper {
@@ -963,34 +930,6 @@ const jsonLd = {
 	.about-me-heading::after {
 		content: ';';
 		color: var(--text-highlight-blue);
-	}
-
-	.about-facts {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		list-style: none;
-		padding: 0;
-		margin: 0 0 1.8rem;
-		font-family: var(--font-mono);
-		font-size: 0.78rem;
-		letter-spacing: 0.04em;
-		color: var(--text-secondary);
-		gap: 0.35rem 0;
-	}
-
-	@media (min-width: 768px) {
-		.about-facts {
-			font-size: 0.82rem;
-			margin-bottom: 2.2rem;
-		}
-	}
-
-	.about-facts li:not(:last-child)::after {
-		content: '/';
-		margin: 0 0.75rem;
-		color: var(--text-code-comment);
-		opacity: 0.75;
 	}
 
 	.about-me-text {
@@ -1037,7 +976,7 @@ const jsonLd = {
 
 	/* --- Technologies --- */
 	#technologies {
-		--section-bg: var(--bg-technologies);
+		--section-bg: var(--bg-main);
 	}
 
 	.technologies-main-title-container {
@@ -1173,7 +1112,7 @@ const jsonLd = {
 
 	/* --- Experience & Education --- */
 	#experience-education {
-		--section-bg: var(--bg-section-alt);
+		--section-bg: var(--bg-main);
 	}
 
 	.experience-education-title {
@@ -1451,7 +1390,7 @@ const jsonLd = {
 
 	/* --- Contact --- */
 	#contact {
-		--section-bg: var(--bg-section-alt);
+		--section-bg: var(--bg-main);
 		text-align: center;
 		min-height: 0;
 		padding-top: 10vh;
@@ -1614,8 +1553,14 @@ const jsonLd = {
 			transition: none;
 		}
 
-		.ambient-orb {
+		.atmosphere-veil,
+		.atmosphere-aurora,
+		.atmosphere-sweep {
 			animation: none;
+		}
+
+		.atmosphere-sweep {
+			display: none;
 		}
 	}
 
@@ -1628,7 +1573,7 @@ const jsonLd = {
 		letter-spacing: 0.03em;
 		color: var(--text-secondary);
 		opacity: 0.8;
-		background-color: var(--bg-main);
+		background: transparent;
 		position: relative;
 	}
 
