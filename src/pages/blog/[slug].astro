@@ -100,22 +100,23 @@ const readingTime = Math.ceil(wordCount / 200);
 		text-decoration: none;
 		display: inline-block;
 		margin-bottom: 2.5rem;
-		transition: transform 0.2s ease;
+		transition: color 0.15s ease;
 	}
 
 	.back-to-blog:hover {
-		transform: translateX(-4px);
+		color: var(--text-primary);
 	}
 
 	.post-header {
 		margin-bottom: 3rem;
-		border-bottom: 1px solid var(--border-experience-card);
+		border-bottom: 1px solid var(--border-subtle);
 		padding-bottom: 2rem;
 	}
 
 	.post-title {
 		font-family: var(--font-display);
 		font-size: clamp(2.2rem, 7vw, 3.5rem);
+		font-weight: 400;
 		line-height: 1.1;
 		margin-bottom: 1rem;
 	}
@@ -162,8 +163,10 @@ const readingTime = Math.ceil(wordCount / 200);
 	.post-body :global(h4),
 	.post-body :global(h5),
 	.post-body :global(h6) {
-		font-family: var(--font-display);
-		line-height: 1.4;
+		font-family: var(--font-body);
+		line-height: 1.25;
+		font-weight: 600;
+		letter-spacing: -0.025em;
 		margin-top: 2.5em;
 		margin-bottom: 1.2em;
 		color: var(--text-primary);
@@ -181,7 +184,7 @@ const readingTime = Math.ceil(wordCount / 200);
 
 	.post-body :global(h1),
 	.post-body :global(h2) {
-		border-bottom: 1px solid var(--border-experience-card);
+		border-bottom: 1px solid var(--border-subtle);
 		padding-bottom: 0.4em;
 	}
 
@@ -214,7 +217,7 @@ const readingTime = Math.ceil(wordCount / 200);
 		margin: 0 0 1.5em 0;
 		padding: 0.5em 1.2em;
 		border-left: 4px solid var(--accent-line-code);
-		background-color: var(--bg-experience-card);
+		background: var(--bg-card);
 		color: var(--text-secondary);
 		font-style: italic;
 	}
@@ -226,7 +229,7 @@ const readingTime = Math.ceil(wordCount / 200);
 	.post-body :global(hr) {
 		border: 0;
 		height: 1px;
-		background-color: var(--border-experience-card);
+		background-color: var(--border-subtle);
 		margin: 3em 0;
 	}
 
@@ -243,7 +246,9 @@ const readingTime = Math.ceil(wordCount / 200);
 		margin-top: 2em;
 		margin-bottom: 2em;
 		padding: 1.25em 1.5em;
-		border-radius: 8px;
+		border-radius: var(--radius-card);
+		border: 1px solid var(--border-subtle);
+		background: var(--bg-card);
 		overflow-x: auto;
 		font-family: var(--font-mono);
 		font-size: 0.9em;

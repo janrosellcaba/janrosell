@@ -6,7 +6,7 @@ interface Props {
 const { email } = Astro.props;
 ---
 
-<form class="contact-form reveal-on-scroll" id="contactForm" novalidate>
+<form class="contact-form surface-card reveal-on-scroll" id="contactForm" novalidate>
 	<p class="contact-form-or">
 		or send a message
 		<span class="comment-like">quick & direct</span>
@@ -95,14 +95,17 @@ const { email } = Astro.props;
 
 <style>
 	.contact-form {
-		max-width: 480px;
-		margin: 3rem auto 0;
+		width: 100%;
+		max-width: 520px;
+		margin: 2.4rem auto 0;
+		padding: 1.6rem 1.4rem 1.7rem;
 		text-align: left;
 	}
 
 	@media (min-width: 768px) {
 		.contact-form {
-			margin-top: 3.5rem;
+			margin-top: 2.8rem;
+			padding: 1.85rem 1.75rem 1.9rem;
 		}
 	}
 
@@ -110,8 +113,8 @@ const { email } = Astro.props;
 		font-family: var(--font-body);
 		font-size: clamp(0.95rem, 3.5vw, 1.1rem);
 		color: var(--text-secondary);
-		text-align: center;
-		margin-bottom: 1.8rem;
+		text-align: left;
+		margin-bottom: 1.5rem;
 	}
 
 	.contact-form-or .comment-like {
@@ -153,9 +156,9 @@ const { email } = Astro.props;
 		font-family: var(--font-body);
 		font-size: 0.95rem;
 		color: var(--text-primary);
-		background-color: var(--bg-experience-card);
-		border: 1px solid var(--border-experience-card);
-		border-radius: 4px;
+		background: var(--bg-main);
+		border: 1px solid var(--border-subtle);
+		border-radius: var(--radius-card);
 		transition:
 			border-color 0.2s ease,
 			box-shadow 0.2s ease;
@@ -172,36 +175,35 @@ const { email } = Astro.props;
 	.form-field textarea:focus {
 		outline: none;
 		border-color: var(--text-highlight-blue);
-		box-shadow: 0 0 0 2px var(--text-highlight-blue-bg);
+		box-shadow: 0 0 0 3px var(--text-highlight-blue-bg);
 	}
 
 	.contact-form-submit {
 		width: 100%;
 		padding: 0.85rem 1.5rem;
-		font-family: var(--font-mono);
-		font-weight: 700;
-		font-size: 0.9rem;
+		font-family: var(--font-body);
+		font-weight: 600;
+		font-size: 0.95rem;
 		color: var(--bg-main);
 		background-color: var(--text-highlight-blue);
 		border: 1px solid var(--text-highlight-blue);
-		border-radius: 4px;
-		cursor: pointer;
+		border-radius: var(--radius-card);
+		cursor: default;
 		transition:
-			background-color 0.3s ease,
-			color 0.3s ease,
-			transform 0.2s ease;
+			background-color 0.15s ease,
+			color 0.15s ease,
+			border-color 0.15s ease;
 		margin-top: 0.5rem;
 	}
 
 	.contact-form-submit:hover:not(:disabled) {
-		background-color: transparent;
-		color: var(--text-highlight-blue);
-		transform: translateY(-2px);
+		background-color: color-mix(in srgb, var(--text-highlight-blue) 88%, white);
+		border-color: color-mix(in srgb, var(--text-highlight-blue) 88%, white);
 	}
 
 	.contact-form-submit:disabled {
 		opacity: 0.6;
-		cursor: not-allowed;
+		cursor: default;
 	}
 
 	.contact-form-status {
