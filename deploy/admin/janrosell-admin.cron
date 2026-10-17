@@ -1,0 +1,6 @@
+# Refresh web + server reports once a day, after logrotate (~06:25 UTC).
+# Root, because the logs are not world-readable.
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+40 7 * * * root /usr/local/sbin/janrosell-admin-refresh >>/var/log/janrosell/refresh.log 2>&1

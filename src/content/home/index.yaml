@@ -1,13 +1,13 @@
 seo:
-  title: Jan Rosell - Data Engineer | Co-founder & CTO
+  title: Jan Rosell - AI Systems & Solutions Engineer | Co-founder & CTO
   description: >-
-    Personal portfolio of Jan Rosell, Data Engineer & BIA at Dot Consulting,
+    Personal portfolio of Jan Rosell, AI Systems & Solutions Engineer at Dot Consulting,
     Co-founder & CTO at Express My Health. Discover my projects, experience,
     and skills in TypeScript, Node.js, and Data/AI.
 hero:
   firstName: Jan
   lastName: Rosell
-  role1: Data Engineer & BIA
+  role1: AI Systems & Solutions Engineer
   org1: Dot Consulting
   role2: Co-founder & CTO
   org2: Express My Health
@@ -22,8 +22,8 @@ about:
     <strong>Co-founder & CTO</strong> at Express My Health, I lead the technical
     vision, architecture and product direction of a secure assistive
     communication platform. At Dot Consulting I work as
-    <strong>Data Engineer & BIA</strong>, turning data and AI into analyses
-    and tools the business can actually use.
+    <strong>AI Systems & Solutions Engineer</strong>, building AI agents,
+    automations and the tools the business can actually use.
   paragraph2: >-
     Beyond software, I'm into <strong>finance and investments</strong>, and
     just as much into <strong>sport</strong>.
@@ -33,40 +33,43 @@ about:
     meaningful, lasting solutions.
 technologies:
   heading: Technologies
-  subtitle: The tools and languages I use to build and innovate in the digital world.
+  subtitle: >-
+    Engineering depth, AI systems, and a business head — the rare mix.
   categories:
-    - title: Backend, Data & Infra
+    - title: AI & Engineering
       skills:
         - Python
+        - TypeScript
         - Node.js
         - NestJS
+        - AI agents & automations
+        - LLM workflows
+        - Timbal AI
         - PostgreSQL
-        - Business Intelligence
-        - Linux (Arch/Debian)
-        - VPS
+        - Power BI / Excel
         - Docker
-        - Self-hosting
+        - Linux, Nginx & VPS
         - C, C++
-        - RESTful API Design
-    - title: Frontend & AI
+    - title: Product & Interfaces
       skills:
-        - TypeScript
         - Next.js
-        - Astro
         - React
-        - Angular
-        - HTML5, CSS3, SCSS
-        - AI-assisted development
-        - UI/UX Design Principles
+        - Astro
+        - HTML, CSS, SCSS
+        - UI/UX
         - Figma
-    - title: Leadership & Soft Skills
+        - Vercel
+        - Supabase
+        - Cloudflare
+        - Linear
+    - title: Business & Leadership
       skills:
         - Entrepreneurship
         - Technical Leadership
+        - Business Development
         - Startup Management
-        - Strategic business vision
-        - Analytical thinking
-        - Problem-Solving
+        - Strategic Business Vision
+        - Client & Partner Relations
 experienceSection:
   heading: Experience_&_Education
 contact:

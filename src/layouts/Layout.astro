@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-	title = 'Jan Rosell - Data Engineer | Co-founder & CTO',
-	description = 'Personal portfolio of Jan Rosell, Data Engineer & BIA at Dot Consulting, Co-founder & CTO at Express My Health. Discover my projects, experience, and skills in TypeScript, Node.js, and Data/AI.',
+	title = 'Jan Rosell - AI Systems & Solutions Engineer | Co-founder & CTO',
+	description = 'Personal portfolio of Jan Rosell, AI Systems & Solutions Engineer at Dot Consulting, Co-founder & CTO at Express My Health. Discover my projects, experience, and skills in TypeScript, Node.js, and Data/AI.',
 } = Astro.props;
 ---
 
@@ -60,6 +60,123 @@ const {
 		<slot />
 
 		<Analytics />
+
+		<script is:inline>
+			(function () {
+				var key = 'jr-visit';
+				var sid = sessionStorage.getItem(key);
+				if (!sid) {
+					sid = Math.random().toString(36).slice(2, 10) + Math.random().toString(36).slice(2, 6);
+					sessionStorage.setItem(key, sid);
+				}
+				var started = Date.now();
+				var maxScroll = 0;
+				var lastDepth = -1;
+				var scrollTimer = 0;
+				var queue = [];
+				var left = false;
+				var page = location.pathname;
+
+				function depth() {
+					var el = document.documentElement;
+					var full = el.scrollHeight - el.clientHeight;
+					if (full <= 0) return 100;
+					return Math.max(0, Math.min(100, Math.round((el.scrollTop / full) * 100)));
+				}
+
+				function fieldLabel(el) {
+					var id = el.id || '';
+					var lab = id ? document.querySelector('label[for="' + id.replace(/"/g, '') + '"]') : null;
+					var text = lab ? lab.textContent : el.getAttribute('aria-label') || el.getAttribute('name');
+					return (text || 'field').replace(/\s+/g, ' ').trim().slice(0, 80);
+				}
+
+				function clickLabel(el) {
+					if (!el || !el.tagName) return '';
+					var tag = el.tagName;
+					if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || el.isContentEditable) {
+						return fieldLabel(el);
+					}
+					return (el.innerText || el.getAttribute('aria-label') || tag)
+						.replace(/\s+/g, ' ')
+						.trim()
+						.slice(0, 80);
+				}
+
+				function send(events, beacon) {
+					if (!events.length) return;
+					var body = JSON.stringify({ sid: sid, path: page, events: events });
+					if (beacon && navigator.sendBeacon) {
+						navigator.sendBeacon('/api/visit', new Blob([body], { type: 'application/json' }));
+						return;
+					}
+					fetch('/api/visit', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: body,
+						keepalive: true,
+					}).catch(function () {});
+				}
+
+				function push(event) {
+					event.t = Date.now();
+					queue.push(event);
+				}
+
+				function flush(beacon) {
+					if (!queue.length) return;
+					send(queue.splice(0, 20), beacon);
+				}
+
+				push({
+					type: 'enter',
+					referrer: document.referrer || '',
+					w: window.innerWidth,
+					h: window.innerHeight,
+				});
+
+				addEventListener('scroll', function () {
+					var d = depth();
+					if (d > maxScroll) maxScroll = d;
+					clearTimeout(scrollTimer);
+					scrollTimer = setTimeout(function () {
+						if (d === lastDepth) return;
+						lastDepth = d;
+						push({ type: 'scroll', depth: d });
+						flush(false);
+					}, 800);
+				}, { passive: true });
+
+				addEventListener('click', function (event) {
+					var el = event.target;
+					if (el && el.nodeType !== 1) el = el.parentElement;
+					if (el && el.closest) {
+						el = el.closest('a, button, input, textarea, select, label, [role="button"]') || el;
+					}
+					if (!el || !el.tagName) return;
+					var isField = el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable;
+					var item = { type: 'click', target: clickLabel(el) };
+					if (isField) item.kind = 'field';
+					if (el.tagName === 'A') item.href = el.getAttribute('href') || '';
+					push(item);
+					flush(false);
+				}, true);
+
+				function leave() {
+					if (left) return;
+					left = true;
+					push({ type: 'leave', depth: maxScroll, ms: Date.now() - started });
+					flush(true);
+				}
+
+				addEventListener('pagehide', leave);
+				document.addEventListener('visibilitychange', function () {
+					if (document.visibilityState === 'hidden') leave();
+					else left = false;
+				});
+				setInterval(function () { flush(false); }, 5000);
+			})();
+		</script>
 
 		<script>
 			function applyTheme(theme: 'light' | 'dark') {
