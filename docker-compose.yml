@@ -1,0 +1,12 @@
+services:
+  janrosell:
+    image: ghcr.io/janrosellcaba/janrosell:latest
+    container_name: janrosell
+    restart: unless-stopped
+    networks:
+      - vps_network
+
+networks:
+  vps_network:
+    external: true
+    name: ion_network
